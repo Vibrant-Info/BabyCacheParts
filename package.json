@@ -1,0 +1,17 @@
+{
+  "name": "Munire_comply",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.14.1",
+    "ejs": "*",
+    "express": "3.3.5",
+    "mysql": "^2.9.0",
+    "passport": "*",
+    "passport-local": "*"
+  }
+}

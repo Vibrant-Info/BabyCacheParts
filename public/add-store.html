@@ -1,0 +1,119 @@
+<div ng-include="'header.html'"></div>
+		
+		
+		
+		<div id="content" ng-controller="storeCtrl">
+			
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="alert alert-success" role="alert" ng-show="successmsgshow">Successfully Inserted</div>
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="fa fa-align-justify"></i>									
+								</span>
+								<h5>Add Store</h5>
+									
+							</div>
+							<div class="widget-content nopadding">
+								<form class="form-horizontal" name="myForm" id="basic_validate" novalidate="novalidate">
+								<div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Code:<span style="color:red">*</span></label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"   ng-model="store.code" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Name:<span style="color:red">*</span></label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"  ng-model="store.name" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Address:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"  ng-model="store.address">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">City:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"   ng-model="store.city">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">State:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"   ng-model="store.state">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Zip Code/ Pin Code:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"   ng-model="store.zipcode">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Country:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"   ng-model="store.country">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email ID:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"  ng-model="store.emailid">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Phone No.:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm"  ng-model="store.Phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Fax:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" ng-model="store.fax">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Manager Name:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" >
+                                        </div>
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                   
+                                    
+                                    <div class="form-actions col-md-12"> 
+                                      <button  class="btn btn-primary" ng-click="addStore()" ng-disabled="!myForm.$valid"> Add Store</button>
+                                    </div>
+                                </form>
+							</div>
+                           
+						</div>			
+					</div>
+                    
+				</div>
+				
+				
+		</div>
+		
+		</div>
+            
+         
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.icheck.min.js"></script>
+            <script src="js/select2.min.js"></script>
+            <script src="js/jquery.validate.js"></script>
+            
+            <script src="js/jquery.nicescroll.min.js"></script>
+            <script src="js/babycache.js"></script>
+            <script src="js/babycache.form_validation.js"></script>
+	</body>
+</html>

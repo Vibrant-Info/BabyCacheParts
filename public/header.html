@@ -1,0 +1,53 @@
+
+  	
+	<div id="wrapper" ng-controller="navCtrl">
+			<div id="header">
+			<div >
+            <h1><a href="#/home"><img src="img"></a></h1>
+            <p class="munire-logo-resp"><a title="" href="#/home"><img src="img/logo-baby.png"></a></p>
+            <p class="logout-respo"><a title="" href="#/" ng-click="logout()"><i class="fa fa-share"></i> {{uname}} Logout</a></p>
+            </div>
+            
+			<a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>	
+           		
+		</div>
+		
+		<div id="sidebar" >
+					
+				<ul>
+					<li  ng-class="{active:isActive('/home')}"><a href="#/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                    <li ng-class="{active:isActive('/product')}"><a href="#/product"><i class="fa fa-shopping-basket"></i> <span>Products</span></a></li>
+                    <li ng-class="{active:isActive('/product-par-list')}"><a href="#/product-par-list"><i class="fa fa-cubes"></i> <span>Parts</span></a></li>
+					<li  class="submenu">
+						<a ><i class="fa fa-flask"></i> <span>Orders</span> <i class="arrow fa fa-chevron-right"></i></a>
+						<ul>
+							<li  ng-class="{active:isActive('/orders-order-parts')}"><a href="#/orders-order-parts">Create Orders</a></li>
+							<li  ng-class="{active:isActive('/order-status')}"><a href="#/order-status">Order History</a></li>	</ul>
+					</li>
+					<li  class="submenu">
+						<a ><i class="fa fa-th-list"></i> <span>Stores</span> <i class="arrow fa fa-chevron-right"></i></a>
+						<ul>
+							<li  ng-class="{active:isActive('/store-list')}"><a href="#/store-list">Modify Store</a></li>
+							<li  ng-class="{active:isActive('/add-store')}"><a href="#/add-store">Add store</a></li>
+							
+						</ul>
+					</li>
+                    <li class="submenu">
+						<a ><i class="fa fa-users"></i> <span>Staffs</span> <i class="arrow fa fa-chevron-right"></i></a>
+						<ul>
+							<li  ng-class="{active:isActive('/staff-list')}"><a href="#/staff-list">Modify Staff</a></li>
+							<li  ng-class="{active:isActive('/add-staff')}"><a href="#/add-staff">Add Staff</a></li>
+							
+						</ul>
+					</li>
+					<li ng-class="{active:isActive('/productclassificationlist')}"><a href="#/productclassificationlist"><i class="fa fa-align-left"></i> <span>Classifications</span></a></li>
+					<li ng-class="{active:isActive('/problemtypelist')}"><a href="#/problemtypelist"><i class="fa fa-exclamation-triangle"></i> <span>Problem Types</span></a></li>
+					
+					<li ng-class="{active:isActive('/shipping-type-list')}">
+						<a href="#/shipping-type-list"><i class="fa fa-shopping-bag"></i> <span>Shipping&nbsp;Types</span></a>
+					</li>
+					
+				</ul>
+			
+			</div>
+	
