@@ -6,7 +6,15 @@
 			
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="alert alert-success" role="alert" ng-show="successmsgshow">Successfully Inserted</div>
+						<div class="row">
+							<div class="alert alert-success" role="alert" ng-show="successmsgshow" style="text-align: center;">{{successmsg}}</div>
+							<div class="alert alert-danger" role="alert" ng-show="errmsgshow" style="text-align: center;">{{errmsg}}</div>
+						</div>
+					<div class="row">
+					<div class="col-sm-3 col-md-3 col-lg-3 col-xs-3">
+						
+						</div>
+						</div>
 						<div class="widget-box">
 							<div class="widget-title">
 								<span class="icon">
@@ -21,7 +29,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Code:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm"   ng-model="store.code" required>
+                                            <input type="text" class="form-control input-sm" name="storecode"  ng-model="store.code" ng-pattern="/^[0-9]{1,7}$/" required>
+											<span  ng-show="myForm.storecode.$error.pattern" style="color:red">Please Enter only numbers</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
