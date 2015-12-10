@@ -33,7 +33,7 @@
 						</ul>
 					</li>
                     <li class="submenu">
-						<a ><i class="fa fa-users"></i> <span>Staffs</span> <i class="arrow fa fa-chevron-right"></i></a>
+						<a class="test"><i class="fa fa-users"></i> <span>Staffs</span> <i class="arrow fa fa-chevron-right"></i></a>
 						<ul>
 							<li  ng-class="{active:isActive('/staff-list')}"><a href="#/staff-list">Modify Staff</a></li>
 							<li  ng-class="{active:isActive('/add-staff')}"><a href="#/add-staff">Add Staff</a></li>
@@ -50,4 +50,12 @@
 				</ul>
 			
 			</div>
-	
+		</div>	
+			
+			<script>
+				$(".submenu").click(function(){		
+					//$(this).addClass("open");
+					//console.log($(this).addClass("open"));
+				});
+			</script>
+		

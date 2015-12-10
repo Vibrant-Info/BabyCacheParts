@@ -58,17 +58,10 @@ module.exports=function(app,passport){
 					res.send(result);
 					});
 				}
-				})
-		 });
-		 
-		/* var insert=	connection.query("insert into store set ?",storevalues,function(err,result){
-			if(err){
-				console.log("Error="+err);
-				return err;
+				});
 			}
-			res.send(result);
-			});
-			console.log("query="+insert.sql);  */
+		 });
+		
 	})
 
 }
