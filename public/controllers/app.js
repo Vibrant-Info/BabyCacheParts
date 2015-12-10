@@ -138,20 +138,23 @@ var app = angular.module('app', ['ngResource', 'ngRoute'])
 
   }) 
   .run(function($rootScope, $http,$location){
-	  console.log("a");
+	
     $rootScope.message = '';
 	$rootScope.uname='';
-	/* var rootpermission=['/dashboard'];
+	/*  var rootpermission=['/home','/product','/product-par-list','/orders-order-parts','/order-status','/store-list','/add-store','/staff-list','/add-staff','/productclassificationlist','/problemtypelist','/shipping-type-list'];
 		$rootScope.$on('$routeChangeStart',function(){
-			
+			var page=rootpermission[rootpermission.indexOf($location.path())];
 			if(rootpermission.indexOf($location.path())==-1 ){
 				console.log(rootpermission.indexOf($location.path()));
 					$http.get('/loggedin').success(function(user){
-						
+						console.log(user);
+						console.log(typeof user   );
 						// Authenticated
 						if (user !== '0')
-							$location.url('/dashboard');
+						{
+							$location.url('/'+page);
 
+						}
 						// Not Authenticated
 						else {
 						  console.log("no login");
@@ -160,7 +163,7 @@ var app = angular.module('app', ['ngResource', 'ngRoute'])
 			
 			
 			}
-		} )  */
+		} )   */
     // Logout function is available in any pages
     $rootScope.logout = function(){
      sessionStorage.removeItem('user');
