@@ -1,37 +1,8 @@
 
 module.exports=function(app,passport,connection){
-
-	app.get('/', function(req, res){
-	  res.render('index', { title: 'Munire_Comply' });
-	});
-
-	app.get('/loggedin', function(req, res) {
-	  res.send(req.isAuthenticated() ? "1" : '0');
-	});
-
-	// route to log in
-	app.post('/login', passport.authenticate('local'), function(req, res) {
-		//console.log(req.user);
-	  res.send(req.user);
-	});
-
-	// route to log out
-	app.post('/logout', function(req, res){
-	  req.logOut();
-	  res.send(200);
-	});
-	
-	app.get('/productskn',function(req,res){
+	//Adding Store Details
+	app.post('/addstore',function(req,res){
 		
-		connection.query("select skn from product",function(err,rows){
-			if(err)
-				return err;
-			res.send(rows);
-		});
-	});
-	
-<<<<<<< HEAD
-	app.post('/addstore',function(req,res){		
 		 var storevalues=req.body;
 		 var codereuse="0";
 		 var namereuse="1";
@@ -62,16 +33,22 @@ module.exports=function(app,passport,connection){
 				});
 			}
 		 });
+
+		
 	});
-=======
+	//Get Store list
+	app.get('/storelist',function(req,res){
+		connection.query("select * from store",function(err,rows){
+			res.send(rows);
+			});
+		});
+		app.post('/storestatus',function(req,res){
+			
+		var up=	connection.query("update store set enabled="+req.body.st+" where code="+req.body.id,function(err,result){
+				console.log(up.sql);
+			res.send(result);
+			}); 
+		});
 	
->>>>>>> refs/remotes/origin/master
 
 }
-
-var auth = function(req, res, next){
-  if (!req.isAuthenticated()) 
-  	res.send(401);
-  else
-  	next();
-};
