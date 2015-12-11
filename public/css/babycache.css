@@ -5986,4 +5986,17 @@ html{ height:100%; }
 	top:30px;
 	}
 	}
+.red{
+	color: red;	
+}
+.green{	color: green;
 	
+}
+.red i{	
+	font-size: 23px;
+	cursor: pointer;
+}
+.green i{	
+	font-size: 23px;
+	cursor: pointer;
+}

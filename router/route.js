@@ -29,8 +29,7 @@ module.exports=function(app,passport,connection){
 			res.send(rows);
 		});
 	});
-	
-<<<<<<< HEAD
+
 	app.post('/addstore',function(req,res){		
 		 var storevalues=req.body;
 		 var codereuse="0";
@@ -63,10 +62,6 @@ module.exports=function(app,passport,connection){
 			}
 		 });
 	});
-=======
-	
->>>>>>> refs/remotes/origin/master
-
 }
 
 var auth = function(req, res, next){
