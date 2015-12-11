@@ -67,14 +67,12 @@ module.exports=function(app,passport){
 				});
 			}
 		 });
-<<<<<<< HEAD
+
 		
-	})
-=======
+	
+
 		 
 	});
-	
->>>>>>> origin/Babycache_branch
 
 }
 
