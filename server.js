@@ -32,6 +32,7 @@ if ('development' == app.get('env')) {
 require('./config/dbconfig');
 require('./config/passport')(passport);
 require('./router/route')(app,passport);
+require('./router/problemType')(app,passport);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('listening on port ' + app.get('port'));

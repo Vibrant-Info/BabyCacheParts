@@ -35,8 +35,7 @@ module.exports=function(app,passport){
 		});
 	});
 	
-	app.post('/addstore',function(req,res){
-		
+	app.post('/addstore',function(req,res){		
 		 var storevalues=req.body;
 		 var codereuse="0";
 		 var namereuse="1";
@@ -67,11 +66,6 @@ module.exports=function(app,passport){
 				});
 			}
 		 });
-
-		
-	
-
-		 
 	});
 
 }
