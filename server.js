@@ -6,7 +6,7 @@ var bodyParser=require('body-parser');
 
 // Start express application
 var app = express();
-
+var mysql = require('mysql');
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views',path.resolve(__dirname,'public','views'));
@@ -29,11 +29,20 @@ app.use(app.router);
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-require('./config/dbconfig');
+
+
+var dbconfig = require('./config/dbconfig');
+var connection = mysql.createConnection(dbconfig.connection);
+
+connection.query('USE ' + dbconfig.database);
+
 require('./config/passport')(passport);
-require('./router/route')(app,passport);
+require('./router/route')(app,passport,connection);
+require('./router/storeroute')(app,passport,connection);
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('listening on port ' + app.get('port'));
-  console.log('listening on port ' + app.get('port'));
+ 
 });

@@ -3,9 +3,9 @@
 	
 		
 		
-		<div id="content">
+		<div id="content" ng-controller="storelistCtrl">
 			
-				<div class="row">
+				<div class="row" >
 					<div class="col-xs-12">
 						<div class="widget-box">
 							<div class="widget-title">
@@ -14,37 +14,39 @@
 								</span>
 								<h5>Store List</h5>
 									
+										<span class="btn btn-info pull-right" data-toggle="collapse" data-target="#collapse2"><i class="fa fa-search">  Search </i></span>		
+									  
 							</div>
-							<div class="widget-content nopadding">
-								<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">						<div class="col-md-6">
+							<div class="widget-content nopadding collapse" id="collapse2" >
+								<form class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate"><div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Address Containing</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="address" ng-model="search.address">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">City</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="city" id="city" ng-model="search.city">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">State/Province</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="date" id="date" ng-model="search.city">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Country</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="url" id="url">
+                                            <input type="text" class="form-control input-sm" name="url" id="url" ng-model="search.city">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Postal Code</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="url" id="url">
+                                            <input type="text" class="form-control input-sm" name="url" id="url" ng-model="search.city">
                                         </div>
                                     </div>
                                     
@@ -54,14 +56,12 @@
                                     <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Code
-</label>
+										</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9 ">
                                         	<div class="selecting-option">
-                                            <select class="" id="sel1">
+                                            <select class="" id="sel1" ng-model="search.city">
                                                 <option> 7520</option>
-                                                <option>5806</option>
-                                                <option>0001</option>
-                                                <option>1111</option>
+                                               
                                               </select>
                                               </div>
                                         </div>
@@ -69,13 +69,13 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Phone</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="date" id="date" ng-model="search.city">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Fax</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="date" id="date" ng-model="search.city">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -83,18 +83,18 @@
                                         <div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
                                             <label class="">
                                             <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
+                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;"  ng-model="search.enabled">
                                             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
                                             </div> Enabled</label>
                                             <label class="">
                                             <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
+                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;" ng-model="search.enabled">
                                             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);">
                                             </ins>
                                             </div> Disabled</label>
                                             <label class="">
                                             <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
+                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;" ng-model="search.enabled">
                                             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
                                             </div> Both</label>
                                         </div>
@@ -102,7 +102,8 @@
                                     
                                   </div>
                                     <div class="form-actions col-md-12">
-                                        <input type="submit" value="Search" class="btn btn-primary"> <input type="submit" value="Reset" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary">Search
+										<input type="submit" value="Reset" class="btn btn-primary">
                                     </div>
                                 </form>
 							</div>
@@ -111,7 +112,7 @@
 					</div>
                     
 				</div>
-				<div class="row">
+				<div class="row" ng-init="getValues()">
                 	<div class="col-lg-12">
                     	<div class="table-responsive">
 										<table class="table table-bordered table-striped table-hover">
@@ -150,195 +151,30 @@
                                                 <th>
 													 Email
 												</th>
+												<th>
+													 Options
+												</th>
 												
 											</tr>
 										</thead>
+										<tbody>
+											<tr ng-repeat="store in values">
+											<td ng-if="store.enabled==0">Inactive</td>
+											<td ng-if="store.enabled==1">Active</i></td>
+											<td>{{store.name}}</td>
+											<td>{{store.code}}</td>
+											<td>{{store.address}}</td>
+											<td>{{store.city}}</td>
+											<td>{{store.state}}</td>
+											<td>{{store.country}}</td>
+											<td>{{store.zipcode}}</td>
+											<td>{{store.phone}}</td>
+											<td>{{store.fax}}</td>
+											<td>{{store.emailid}}</td>
+											<td ng-if="store.enabled==0"><span ng-click="checkActive(1,store.code)"><i class="fa fa-check" style="color:green"></span></td>
+											<td ng-if="store.enabled==1"><span ng-click="checkActive(0,store.code)"><i class="fa fa-times" style="color:red"></span></td>
 										
-										<tr>
-											<td>Enabled
-												
-											</td>
-											<td>Name
-												 
-											</td>
-											<td>5806
-												 
-											</td>
-                                            <td>Address Containing
-												
-											</td>
-											<td>washington
-												 
-											</td>
-											<td>North America
-												 
-											</td>
-                                            <td>USA
-												
-											</td>
-											<td>503444
-												 
-											</td>
-                                            <td>+255 56556 21
-												 
-											</td>
-                                            <td>+255 56556 21
-												 
-											</td>
-                                            <td>ng@vibrant-info.com
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>Enabled
-												
-											</td>
-											<td>Name
-												 
-											</td>
-											<td>5806
-												 
-											</td>
-                                            <td>Address Containing
-												
-											</td>
-											<td>washington
-												 
-											</td>
-											<td>North America
-												 
-											</td>
-                                            <td>USA
-												
-											</td>
-											<td>503444
-												 
-											</td>
-                                            <td>+255 56556 21
-												 
-											</td>
-                                            <td>+255 56556 21
-												 
-											</td>
-                                            <td>ng@vibrant-info.com
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
+											</tr>
 										</tbody>
 										</table>
 									</div>

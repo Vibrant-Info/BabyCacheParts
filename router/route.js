@@ -1,17 +1,12 @@
-var mysql = require('mysql');
 
-var dbconfig = require('../config/dbconfig.js');
-var connection = mysql.createConnection(dbconfig.connection);
-
-connection.query('USE ' + dbconfig.database);
-module.exports=function(app,passport){
+module.exports=function(app,passport,connection){
 
 	app.get('/', function(req, res){
 	  res.render('index', { title: 'Munire_Comply' });
 	});
 
 	app.get('/loggedin', function(req, res) {
-	  res.send(req.isAuthenticated() ? req.user : '0');
+	  res.send(req.isAuthenticated() ? "1" : '0');
 	});
 
 	// route to log in
@@ -35,41 +30,7 @@ module.exports=function(app,passport){
 		});
 	});
 	
-	app.post('/addstore',function(req,res){
-		
-		 var storevalues=req.body;
-		 var codereuse="Store Code already Exist";
-		 var namereuse="Store name already Exist";
-		connection.query("select code from store where code="+storevalues.code,function(err,rows){
-			if(rows.length>0){
-				res.send(codereuse);
-			}
-			else {
-				connection.query("select name from store where name='"+storevalues.name+"'",function(err,rows){
-					if(rows.length>0){
-				res.send(namereuse);
-				}
-				else{
-					connection.query("insert into store set ?",storevalues,function(err,result){
-					if(err){
-						console.log("Error="+err);
-						return err;
-					}
-					res.send(result);
-					});
-				}
-				})
-		 });
-		 
-		/* var insert=	connection.query("insert into store set ?",storevalues,function(err,result){
-			if(err){
-				console.log("Error="+err);
-				return err;
-			}
-			res.send(result);
-			});
-			console.log("query="+insert.sql);  */
-	})
+	
 
 }
 
