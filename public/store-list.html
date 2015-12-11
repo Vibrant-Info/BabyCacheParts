@@ -14,15 +14,21 @@
 								</span>
 								<h5>Store List</h5>
 									
-										<span class="btn btn-info pull-right" data-toggle="collapse" data-target="#collapse2"><i class="fa fa-search">  Search </i></span>		
+										<span class="btn btn-info pull-right" ng-click="datasearch()"data-toggle="collapse" data-target="#collapse2"><i class="fa fa-search">  Search </i></span>		
 									  
 							</div>
 							<div class="widget-content nopadding collapse" id="collapse2" >
-								<form class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate"><div class="col-md-6">
+							<div class="row"ng-show="errmsgshow">
+								<div class="col-md-12">
+									<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+								</div>
+							</div>
+								<form class="form-horizontal"  name="myForm" id="basic_validate" novalidate="novalidate">
+								<div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Address Containing</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="address" ng-model="search.address">
+                                            <input type="text" class="form-control input-sm" name="address" ng-model="search.address" >
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -34,19 +40,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">State/Province</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date" ng-model="search.city">
+                                            <input type="text" class="form-control input-sm" name="state" id="state" ng-model="search.state">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Country</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="url" id="url" ng-model="search.city">
+                                            <input type="text" class="form-control input-sm" name="country" id="country" ng-model="search.country">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Postal Code</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="url" id="url" ng-model="search.city">
+                                            <input type="text" class="form-control input-sm" name="zipcode" id="zipcode" ng-model="search.zipcode" ui-mask="99999">
                                         </div>
                                     </div>
                                     
@@ -59,23 +65,24 @@
 										</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9 ">
                                         	<div class="selecting-option">
-                                            <select class="" id="sel1" ng-model="search.city">
-                                                <option> 7520</option>
-                                               
-                                              </select>
+                                            <select class="selectcode" id="sel1" ng-model="search.code">
+												
+                                                <option ng-repeat="store in values" value="{{store.code}}"> {{store.code}}</option>
+                                                </select>
                                               </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Phone</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date" ng-model="search.city">
+										<input type="hidden" class="form-control input-sm" name="phone" id="c_phone">
+                                            <input type="text" class="form-control input-sm " name="phone" id="phone" ui-mask="999-999-9999" ng-model="search.phone">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Fax</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date" ng-model="search.city">
+                                            <input type="text" class="form-control input-sm" name="fax" id="fax" ng-model="search.fax" ui-mask="999-999-9999" >
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -83,27 +90,28 @@
                                         <div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
                                             <label class="">
                                             <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;"  ng-model="search.enabled">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                            <input type="radio" name="enabled"  style="position: absolute; opacity: 0;"  ng-model="search.enabled" value=0>
+                                           
                                             </div> Enabled</label>
                                             <label class="">
                                             <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;" ng-model="search.enabled">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);">
-                                            </ins>
+                                            <input type="radio" name="enabled"  style="position: absolute; opacity: 0;"  ng-model="search.enabled" value=1 >
+                                       
                                             </div> Disabled</label>
                                             <label class="">
                                             <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;" ng-model="search.enabled">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                            <input type="radio" name="enabled"  style="position: absolute; opacity: 0;" ng-model="search.enabled" value="both" >
+                                        
                                             </div> Both</label>
                                         </div>
+	
+										
                                     </div>
                                     
                                   </div>
                                     <div class="form-actions col-md-12">
-                                        <button type="submit" class="btn btn-primary">Search
-										<input type="submit" value="Reset" class="btn btn-primary">
+                                        <button  class="btn btn-primary" ng-click="searchValues()" >Search</button>
+										<button value="Reset" class="btn btn-primary" ng-click="Reset()">Reset</button>
                                     </div>
                                 </form>
 							</div>
@@ -112,7 +120,7 @@
 					</div>
                     
 				</div>
-				<div class="row" ng-init="getValues()">
+				<div class="row" ng-init="getValues()" ng-show="tablevaluesshow">
                 	<div class="col-lg-12">
                     	<div class="table-responsive">
 										<table class="table table-bordered table-striped table-hover">
@@ -157,10 +165,10 @@
 												
 											</tr>
 										</thead>
-										<tbody>
-											<tr ng-repeat="store in values">
-											<td ng-if="store.enabled==0">Inactive</td>
-											<td ng-if="store.enabled==1">Active</i></td>
+										<tbody >
+											<tr ng-repeat="store in values | filter:searchQuery | startFrom:(currentPage-1)*pageSize |limitTo:pageSize">
+											<td ng-if="store.enabled==0" class="red">Inactive {{store.enabled}}</td>
+											<td ng-if="store.enabled==1" class="green">Active  {{store.enabled}}</i></td>
 											<td>{{store.name}}</td>
 											<td>{{store.code}}</td>
 											<td>{{store.address}}</td>
@@ -171,28 +179,35 @@
 											<td>{{store.phone}}</td>
 											<td>{{store.fax}}</td>
 											<td>{{store.emailid}}</td>
-											<td ng-if="store.enabled==0"><span ng-click="checkActive(1,store.code)"><i class="fa fa-check" style="color:green"></span></td>
-											<td ng-if="store.enabled==1"><span ng-click="checkActive(0,store.code)"><i class="fa fa-times" style="color:red"></span></td>
+											<td ng-if="store.enabled==0"><span ng-click="checkActive(1,store.code)"><i class="fa fa-check" class="green" data-toggle="tooltip" data-placement="bottom" title="Enable store"></i></span></td>
+											<td ng-if="store.enabled==1"><span ng-click="checkActive(0,store.code)"><i class="fa fa-times" class="red" title="Disable store"></span></td>
 										
 											</tr>
 										</tbody>
 										</table>
 									</div>
+									<uib-pagination total-items="values.length" ng-model="currentPage" items-per-page="pageSize"></uib-pagination>
                     </div>
                 </div>
 				
 		</div>
 		
-		</div>
             
            
             <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.icheck.min.js"></script>
+             <script src="js/jquery.icheck.min.js"></script> 
             <script src="js/select2.min.js"></script>
             <script src="js/jquery.validate.js"></script>
             
             <script src="js/jquery.nicescroll.min.js"></script>
             <script src="js/babycache.js"></script>
-            <script src="js/babycache.form_validation.js"></script>
+
+			<script>
+					$(document).ready(function(){
+						$("select").select2();
+					});
+			</script>
+			
+			</div>
 	</body>
 </html>

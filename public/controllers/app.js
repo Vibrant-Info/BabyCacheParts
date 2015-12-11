@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngResource', 'ngRoute'])
+var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.utils'])
   .config(function($routeProvider, $locationProvider, $httpProvider) {
     
     var checkLoggedin = function($q, $timeout, $http, $location, $rootScope){
@@ -171,7 +171,13 @@ var app = angular.module('app', ['ngResource', 'ngRoute'])
     };
   });
 
-
+app.filter('startFrom',function(){
+	return function(data,start){
+		 if (!data || !data.length) { return; }
+		start=0+start;
+		return data.slice(start);
+	}
+})
 
 
 

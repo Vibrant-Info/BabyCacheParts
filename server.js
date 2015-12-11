@@ -25,7 +25,8 @@ app.use(passport.session());    // Add passport initialization
 app.use(app.router);
 
 
-// development only
+// development only	
+
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
@@ -37,17 +38,12 @@ var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
 
 require('./config/passport')(passport);
-<<<<<<< HEAD
-require('./router/route')(app,passport);
-require('./router/problemType')(app,passport);
-=======
 require('./router/route')(app,passport,connection);
 require('./router/storeroute')(app,passport,connection);
 
 
->>>>>>> refs/remotes/origin/master
 
-http.createServer(app).listen(app.get('port'), function(){
+ http.createServer(app).listen(app.get('port'), function(){
   console.log('listening on port ' + app.get('port'));
  
-});
+}); 
