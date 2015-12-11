@@ -67,14 +67,23 @@ module.exports=function(app,passport){
 				});
 			}
 		 });
-<<<<<<< HEAD
+
 		
-	})
-=======
-		 
 	});
+	app.get('/storelist',function(req,res){
+		connection.query("select * from store",function(err,rows){
+			res.send(rows);
+			});
+		});
+		app.post('/storestatus',function(req,res){
+			
+		var up=	connection.query("update store set enabled="+req.body.st+" where code="+req.body.id,function(err,result){
+				console.log(up.sql);
+			res.send(result);
+			}); 
+		});
 	
->>>>>>> origin/Babycache_branch
+
 
 }
 

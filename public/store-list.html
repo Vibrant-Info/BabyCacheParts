@@ -109,7 +109,7 @@
 					</div>
                     
 				</div>
-				<div class="row">
+				<div class="row" ng-init="getValues()">
                 	<div class="col-lg-12">
                     	<div class="table-responsive">
 										<table class="table table-bordered table-striped table-hover">
@@ -148,195 +148,30 @@
                                                 <th>
 													 Email
 												</th>
+												<th>
+													 Options
+												</th>
 												
 											</tr>
 										</thead>
+										<tbody>
+											<tr ng-repeat="store in values">
+											<td ng-if="store.enabled==0">Inactive</td>
+											<td ng-if="store.enabled==1">Active</i></td>
+											<td>{{store.name}}</td>
+											<td>{{store.code}}</td>
+											<td>{{store.address}}</td>
+											<td>{{store.city}}</td>
+											<td>{{store.state}}</td>
+											<td>{{store.country}}</td>
+											<td>{{store.zipcode}}</td>
+											<td>{{store.phone}}</td>
+											<td>{{store.fax}}</td>
+											<td>{{store.emailid}}</td>
+											<td ng-if="store.enabled==0"><span ng-click="checkActive(1,store.code)"><i class="fa fa-check"></span></td>
+											<td ng-if="store.enabled==1"><span ng-click="checkActive(0,store.code)"><i class="fa fa-times"></span></td>
 										
-										<tr>
-											<td>Enabled
-												
-											</td>
-											<td>Name
-												 
-											</td>
-											<td>5806
-												 
-											</td>
-                                            <td>Address Containing
-												
-											</td>
-											<td>washington
-												 
-											</td>
-											<td>North America
-												 
-											</td>
-                                            <td>USA
-												
-											</td>
-											<td>503444
-												 
-											</td>
-                                            <td>+255 56556 21
-												 
-											</td>
-                                            <td>+255 56556 21
-												 
-											</td>
-                                            <td>ng@vibrant-info.com
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>Enabled
-												
-											</td>
-											<td>Name
-												 
-											</td>
-											<td>5806
-												 
-											</td>
-                                            <td>Address Containing
-												
-											</td>
-											<td>washington
-												 
-											</td>
-											<td>North America
-												 
-											</td>
-                                            <td>USA
-												
-											</td>
-											<td>503444
-												 
-											</td>
-                                            <td>+255 56556 21
-												 
-											</td>
-                                            <td>+255 56556 21
-												 
-											</td>
-                                            <td>ng@vibrant-info.com
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
+											</tr>
 										</tbody>
 										</table>
 									</div>
