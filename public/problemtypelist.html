@@ -1,133 +1,55 @@
-<div ng-include="'header.html'"></div>
-		
-		
-			<div id="content" ng-controller="problemTypeCtrl">
-			
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon">
-									<i class="fa fa-align-justify"></i>									
-								</span>
-								<h5>Problem Type List</h5>
-									
-							</div>
-							
-                    				<div class="table-responsive">
-										<table class="table table-bordered table-striped table-hover">
-										<thead>
-											<tr>
-												<th>
-													 Status
-												</th>
-												<th>
-													 Name
-												</th>
-												
-											</tr>
-										</thead>
-										
-										<tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Drawers
-												 
-											</td>
-											
-										</tr>
-										<tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Missing Knobs
-												 
-											</td>
-											
-										</tr>
-										<tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Other
-												 
-											</td>
-											
-										</tr>
-										<tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Missing Hardware
-												 
-											</td>
-											
-										</tr>
-										<tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Missing Part
-												 
-											</td>
-											
-										</tr>
-										<tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Paint/Finish
-												 
-											</td>
-											
-										</tr>
-                                        <tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Scratched
-												 
-											</td>
-											
-										</tr>
-                                        <tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Hardware-tracks
-												 
-											</td>
-											
-										</tr>
-                                        <tr>
-											<td><button class="btn btn-dark-blue">Enabled</button>
-												
-											</td>
-											<td>Cracked
-												 
-											</td>
-											
-										</tr>
-										</tbody>
-										</table>
-							</div>
-                           
-						</div>			
-					</div>
-                    
+<div ng-include="'header.html'"></div>	
+	<div id="content" ng-controller="problemTypeCtrl">	
+		<div class="row">
+			<div class="col-md-12">
+				<br>
+				<div class="alert alert-danger" ng-show="error">
+					<strong>Something went wrong!</strong>
 				</div>
-				<div class="row">
-                	
-                </div>
-			</div>		
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.icheck.min.js"></script>
-            <script src="js/select2.min.js"></script>
-            <script src="js/jquery.validate.js"></script>
-            
-            <script src="js/jquery.nicescroll.min.js"></script>
-            <script src="js/babycache.js"></script>
-            <script src="js/babycache.form_validation.js"></script>
+			</div>
+			<div class="col-xs-12 col-md-8 col-sm-8">
+				<div class="widget-box">
+					<div class="widget-title">
+						<span class="icon">
+							<i class="fa fa-align-justify"></i>									
+						</span>
+						<h5>Problem Type List</h5>							
+					</div>					
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped table-hover">
+							<thead>
+								<tr>												
+									<th>Name</th>
+									<th>Status</th>									
+									<th>Action</th>									
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="val in pblmData">
+									<td>{{val.name}}</td>
+									<td class="green" ng-if="val.enabled == 1">Enabled</td>
+									<td class="red" ng-if="val.enabled == 0">Disabled</td>									
+									<td class="green" ng-if="val.enabled == 1" align="center"><a ng-click="changeSts(0,val.problemtypeid)" title="Make in active" class="red"><i class="fa fa-times" ></i></a></td>
+									<td class="red" ng-if="val.enabled == 0" align="center"><a ng-click="changeSts(1,val.problemtypeid)" title="Make in Inactive" class="green"><i class="fa fa-check" ></i></a></td>
+								</tr>						
+							</tbody>
+						</table>
+					</div>				   
+				</div>			
+			</div>			
+		</div>
+	</div>	
+	<div class="row">
+		<div ng-include="'footer.html'"></div>		
+	</div>
+	</div>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.icheck.min.js"></script>
+	<script src="js/select2.min.js"></script>
+	<script src="js/jquery.validate.js"></script>
+	
+	<script src="js/jquery.nicescroll.min.js"></script>
+	<script src="js/babycache.js"></script>
+	<script src="js/babycache.form_validation.js"></script>	
 	</body>
 </html>
