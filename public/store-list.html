@@ -5,7 +5,7 @@
 		
 		<div id="content" ng-controller="storelistCtrl">
 			
-				<div class="row">
+				<div class="row" >
 					<div class="col-xs-12">
 						<div class="widget-box">
 							<div class="widget-title">
@@ -14,9 +14,11 @@
 								</span>
 								<h5>Store List</h5>
 									
+										<span class="btn btn-info pull-right" data-toggle="collapse" data-target="#collapse2"><i class="fa fa-search">  Search </i></span>		
+									  
 							</div>
-							<div class="widget-content nopadding">
-								<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">						<div class="col-md-6">
+							<div class="widget-content nopadding collapse" id="collapse2" >
+								<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate"><div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Address Containing</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
