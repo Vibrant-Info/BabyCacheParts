@@ -32,18 +32,21 @@ app.controller('storelistCtrl',['$scope','$http','$timeout',function($scope,$htt
 	$scope.searchValues=function(){
 		console.log($scope.search);
 		
-		if($scope.search ==undefined || Object.keys($scope.search).length==0 ){
+		if($scope.search == undefined ||  Object.keys($scope.search).length==0 ){
 			$scope.errmsgshow=true;
 			$timeout(function(){
 				$scope.errmsgshow=false;
 			},3000);
 		}
 		else {
-			
+			if($scope.search.enabled == 2){
+				$scope.search.enabled="";
+			}
 			$scope.errmsgshow=false;
 			$scope.tablevaluesshow=true;
 			$scope.searchQuery = angular.copy($scope.search);
 		   $scope.searchResult=true;
+		   $scope.search.enabled=2;
 		} 
     }
 	$scope.Reset=function(){

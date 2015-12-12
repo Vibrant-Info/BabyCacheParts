@@ -87,22 +87,19 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Status	</label>
-                                        <div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="enabled"  style="position: absolute; opacity: 0;"  ng-model="search.enabled" value=0>
+                                        <div class="col-sm-9 col-md-9 col-lg-9 ">
+                                            
+                                            <input type="radio" name="enabled"    ng-model="search.enabled" value=1>
                                            
-                                            </div> Enabled</label>
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="enabled"  style="position: absolute; opacity: 0;"  ng-model="search.enabled" value=1 >
+                                           Enabled</br>
+                                          
+                                            <input type="radio" name="enabled"    ng-model="search.enabled" value=0 >
                                        
-                                            </div> Disabled</label>
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="enabled"  style="position: absolute; opacity: 0;" ng-model="search.enabled" value="both" >
+                                            Disabled</br>
+                                            
+                                            <input type="radio" name="enabled"   ng-model="search.enabled"  value=2>
                                         
-                                            </div> Both</label>
+                                            Both</br>
                                         </div>
 	
 										
@@ -126,9 +123,7 @@
 										<table class="table table-bordered table-striped table-hover">
 										<thead>
 											<tr>
-												<th>
-													 Status
-												</th>
+												
 												<th>
 													 Name
 												</th>
@@ -160,6 +155,9 @@
 													 Email
 												</th>
 												<th>
+													 Status
+												</th>
+												<th>
 													 Options
 												</th>
 												
@@ -167,8 +165,7 @@
 										</thead>
 										<tbody >
 											<tr ng-repeat="store in values | filter:searchQuery | startFrom:(currentPage-1)*pageSize |limitTo:pageSize">
-											<td ng-if="store.enabled==0" class="red">Inactive {{store.enabled}}</td>
-											<td ng-if="store.enabled==1" class="green">Active  {{store.enabled}}</i></td>
+											
 											<td>{{store.name}}</td>
 											<td>{{store.code}}</td>
 											<td>{{store.address}}</td>
@@ -179,8 +176,10 @@
 											<td>{{store.phone}}</td>
 											<td>{{store.fax}}</td>
 											<td>{{store.emailid}}</td>
-											<td ng-if="store.enabled==0"><span ng-click="checkActive(1,store.code)"><i class="fa fa-check" class="green" data-toggle="tooltip" data-placement="bottom" title="Enable store"></i></span></td>
-											<td ng-if="store.enabled==1"><span ng-click="checkActive(0,store.code)"><i class="fa fa-times" class="red" title="Disable store"></span></td>
+											<td ng-if="store.enabled==0" class="red">Inactive </td>
+											<td ng-if="store.enabled==1" class="green">Active  </i></td>
+											<td ng-if="store.enabled==0"><span ng-click="checkActive(1,store.code)" class="green" ><i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Enable store"></i></span></td>
+											<td ng-if="store.enabled==1"><span ng-click="checkActive(0,store.code)" class="red"><i class="fa fa-times"  title="Disable store"></span></td>
 										
 											</tr>
 										</tbody>
@@ -195,7 +194,7 @@
             
            
             <script src="js/bootstrap.min.js"></script>
-             <script src="js/jquery.icheck.min.js"></script> 
+          <!--    <script src="js/jquery.icheck.min.js"></script>  -->
             <script src="js/select2.min.js"></script>
             <script src="js/jquery.validate.js"></script>
             
@@ -204,7 +203,12 @@
 
 			<script>
 					$(document).ready(function(){
+					
 						$("select").select2();
+							// $('input[type=checkbox],input[type=radio]').iCheck({
+							//	checkboxClass: 'icheckbox_flat-blue',
+							//	radioClass: 'iradio_flat-blue'
+							//}); 
 					});
 			</script>
 			

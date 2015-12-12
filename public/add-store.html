@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Zip Code/ Pin Code:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm"   ng-model="store.zipcode">
+                                            <input type="text" class="form-control input-sm"   ng-model="store.zipcode" ui-mask="99999">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -73,19 +73,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email ID:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm"  ng-model="store.emailid">
+                                            <input type="email"  name="email" class="form-control input-sm"  ng-model="store.emailid" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Phone No.:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm"  ng-model="store.Phone">
+                                            <input type="text" class="form-control input-sm"  ng-model="store.Phone" ui-mask="999-999-9999">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Fax:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" ng-model="store.fax">
+                                            <input type="text" class="form-control input-sm" ng-model="store.fax" ui-mask="999-999-9999">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -100,7 +100,7 @@
                                    
                                     
                                     <div class="form-actions col-md-12"> 
-                                      <button  class="btn btn-primary" ng-click="addStore()" ng-disabled="!myForm.$valid"> Add Store</button>
+                                      <button  class="btn btn-primary" ng-click="addStore()" ng-disabled="!myForm.$valid" > Add Store</button>
                                     </div>
                                 </form>
 							</div>
