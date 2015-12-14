@@ -38,13 +38,12 @@ var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
 
 require('./config/passport')(passport);
-<<<<<<< HEAD
-=======
+
 
 require('./router/route')(app,passport);
 require('./router/problemType')(app,passport,connection);
 
->>>>>>> origin/Babycache_branch
+
 require('./router/route')(app,passport,connection);
 require('./router/storeroute')(app,passport,connection);
 
