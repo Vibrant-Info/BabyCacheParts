@@ -46,6 +46,7 @@ require('./router/problemType')(app,passport,connection);
 
 require('./router/route')(app,passport,connection);
 require('./router/storeroute')(app,passport,connection);
+require('./router/staffroute')(app,passport,connection);
 
 require('./router/classificationList')(app,passport,connection);
 

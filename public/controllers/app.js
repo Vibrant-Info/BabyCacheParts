@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.utils'])
+var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.utils','angular-md5'])
   .config(function($routeProvider, $locationProvider, $httpProvider) {
     
     var checkLoggedin = function($q, $timeout, $http, $location, $rootScope){
