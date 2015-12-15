@@ -30,10 +30,6 @@ module.exports=function(app,passport,connection){
 		});
 	});
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/Babycache_branch
 }
 
 var auth = function(req, res, next){

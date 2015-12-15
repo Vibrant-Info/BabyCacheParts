@@ -1,10 +1,9 @@
-app.controller('LoginCtrl', function($scope, $rootScope, $http, $location) {
+app.controller('LoginCtrl', function($scope, $rootScope, $http, $location, md5) {
   // This object will be filled by the form
   $scope.msgshow1=true;
 
   // Register the login() function
   $scope.login = function(){
-	  console.log($scope.user);
 	   var userinput = $('#username');
         var passinput = $('#password');
 	  if($scope.user==undefined){
@@ -16,12 +15,12 @@ app.controller('LoginCtrl', function($scope, $rootScope, $http, $location) {
 	   
     $http.post('/login', {
       username: $scope.user.username,
-      password: $scope.user.password,
+      password: md5.createHash($scope.user.password || '')
     })
     .success(function(user){
       // No error: authentication OK
 	  
-	 sessionStorage.setItem('user',user.uname);
+	 sessionStorage.setItem('user',user.loginname);
 	
       $rootScope.message = 'Authentication successful!';
       $location.url('/home');

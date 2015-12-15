@@ -13,10 +13,9 @@ module.exports = function(passport) {
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
-        function(req, username, password, done) { // callback with email and password from our form
-		console.log("PAssport entered");
-            connection.query("SELECT * FROM munire_comply_users WHERE uname = ?",[username], function(err, rows){
-				console.log("[uname]="+rows[0]);
+        function(req, username, password, done) { // callback with email and password from our form		
+            var q=connection.query("SELECT * FROM stafflogin WHERE loginname = ? AND password = ?",[username,password], function(err, rows){
+				console.log(q.sql);
                 if (err)
                     return done(err);
                 if (!rows.length) {

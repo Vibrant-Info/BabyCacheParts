@@ -1,6 +1,12 @@
 <div ng-include="'header.html'"></div>	
 	<div id="content" ng-controller="ProdClassificationListCtrl">		
 		<div class="row">
+			<div class="col-md-12">
+				<br>
+				<div class="alert alert-danger" ng-show="error">
+					<strong>Please choose any one of them!</strong>
+				</div>
+			</div>
 			<div class="col-xs-12">
 				<div class="widget-box">
 					<div class="widget-title">
@@ -10,14 +16,14 @@
 						<h5>Product Classification List</h5>							
 					</div>
 					<div class="widget-content nopadding">
-						<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">							
+						<form class="form-horizontal" name="basic_validate" id="basic_validate" novalidate="novalidate">				
 							<div class="col-md-8">
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Classification</label>
 									<div class="col-sm-9 col-md-9 col-lg-9 ">
 										<div class="selecting-option">
-											<select class="" id="sel1" ng-model="types">
-												<option ng-repeat="val in types" value="val.classificationid">{{val.name}}</option>
+											<select class="" id="sel1" ng-model="prod.types">
+												<option ng-repeat="val in types" value="{{val.classificationid}}">{{val.name}}</option>
 											</select>
 										</div>
 									</div>
@@ -25,7 +31,7 @@
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Name Containing</label>
 									<div class="col-sm-9 col-md-9 col-lg-9">
-										<input type="text" class="form-control input-sm" name="date" id="date">
+										<input type="text" class="form-control input-sm" ng-model="prod.name" >
 									</div>
 								</div>							
 								<div class="form-group">
@@ -33,21 +39,21 @@
 									<div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
 										<label class="">
 										
-										<input type="radio" name="radios" ng-model="check">		
+										<input type="radio" name="radios" value="1" ng-model="prod.check">		
 									Enabled</label>
 										<label class="">
 									
-										<input type="radio" name="radios"  value="erdfdfe" ng-model="check" >						
+										<input type="radio" name="radios"  value="0" ng-model="prod.check" >						
 										Disabled</label>
 										<label class="">
 								
-										<input type="radio" name="radios"  value="ere" ng-model="check">
+										<input type="radio" name="radios"  value="2" ng-model="prod.check">
 										 Both</label>
-									</div>{{check}}
+									</div>
 								</div>								
 							</div>
 							<div class="form-actions col-md-12">
-								<input type="button" ng-click="search(check)" value="Search" class="btn btn-primary"> 
+								<input type="button" ng-click="search()" value="Search" class="btn btn-primary"> 
 								<input type="button" value="Reset" class="btn btn-primary">
 							</div>
 						</form>
@@ -58,17 +64,30 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="table-responsive">
-					<table class="table table-bordered table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Status</th>
-								<th>Name</th>
-								<th>Classification</th>								
-							</tr>
-						</thead>
-						<tbody>						
-						</tbody>
-					</table>
+						<table class="table table-bordered table-striped table-hover">
+							<thead>
+								<tr>												
+									<th>Name</th>
+									<th>Classification</th>	
+									<th>Status</th>									
+									<th>Action</th>																	
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="val in classification">
+									<td>{{val.name}}</td>
+									<td ng-if="val.classificationid == 1">Color</td>
+									<td ng-if="val.classificationid == 2">Collection</td>
+									<td ng-if="val.classificationid == 3">Product Type</td>
+									
+									<td class="green" ng-if="val.enabled == 1">Enabled</td>
+									<td class="red" ng-if="val.enabled == 0">Disabled</td>	
+									
+									<td class="green" ng-if="val.enabled == 1" align="center"><a ng-click="changeSts(0,val.classificationtypeid)" title="Make in active" class="red"><i class="fa fa-times" ></i></a></td>
+									<td class="red" ng-if="val.enabled == 0" align="center"><a ng-click="changeSts(1,val.classificationtypeid)" title="Make in Inactive" class="green"><i class="fa fa-check" ></i></a></td>
+								</tr>						
+							</tbody>
+						</table>
 				</div>
 			</div>
 		</div>			

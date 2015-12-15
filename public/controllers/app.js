@@ -131,8 +131,15 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
         }
         
       })
+	   .when('/add-product', {
+        templateUrl: 'add-product.html',
+		  resolve: {
+          loggedin: checkLoggedin
+        }
+        
+      })
       .otherwise({
-        redirectTo: '/login'
+        redirectTo: '/home'
       });
 
 

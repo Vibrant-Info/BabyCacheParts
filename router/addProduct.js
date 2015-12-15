@@ -1,9 +1,11 @@
 module.exports=function(app,passport,connection){
-	app.get('/getTypes',function(req,res){
-		connection.query("SELECT * FROM `classification` WHERE `enabled` = '1'",function(err,rows){
+	var date = new Date();
+	app.post('/addPart',function(req,res){
+		console.log(req.body);
+		connection.query("INSERT INTO `productpart` (`archived`,`code`,`description`,`enabled`,`name`,`shippingtypeid`) VALUES ('false','"+req.body.code+"','"+req.body.name+"','1','"+req.body.name+"', '3')",function(err,result){			
 			if(err)
 				return err;
-			res.send(rows);
+			res.send(result); 
 		});
 	});
 	app.post('/searchClassification',function(req,res){
