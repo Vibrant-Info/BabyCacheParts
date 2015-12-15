@@ -8,13 +8,13 @@
 						<br/>
 						<br/>
 						<button class="btn btn-info" ng-click="collapsed=!collapsed">Add Items</button>
-						<button class="btn btn-info" ng-click="collapsed1=!collapsed1">Add Parts</button>
-						
-						<br>
-						<div class="alert alert-danger" ng-show="error">
-							<strong>Something went wrong!</strong>
+						<button class="btn btn-info" ng-click="collapsed1=!collapsed1">Add Parts</button>						
+						<br/>
+						<br/>
+						<div class="alert alert-danger text-center" ng-show="error">
+							<strong>{{pattern}}</strong>
 						</div>
-						<div class="alert alert-success" ng-show="insert">
+						<div class="alert alert-success text-center" ng-show="insert">
 							<strong>Insert Successfully !</strong>
 						</div>
 						<div class="widget-box" >
@@ -28,7 +28,7 @@
 								<form class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate">
 									<div class="col-md-12 col-xs-12 col-sm-12">
 									<div class="table-responsive">
-										<table class="table table-bordered">
+										<table class="table">
 											<thead>
 												<tr>												
 													<th>Item Code</th>
@@ -70,8 +70,7 @@
 									</div>		                       
                                     </div>                                  
                                 </form>
-							</div>
-                           
+							</div>                           
 						</div>	
 					
 						<div class="widget-box" >
@@ -96,10 +95,10 @@
 											<tbody>
 												<tr>
 													<td>
-														<input class="form-control" ng-model="part.code" required/>
+														<input class="form-control input_capital" ng-model="part.code" required/>
 													</td>
 													<td>
-														<input class="form-control" ng-model="part.name" required/>
+														<input class="form-control input_capital" ng-model="part.name" required/>
 													</td>													
 													<td align="center">
 														<a class="green" ng-click="addPart()" ng-disabled="partsForm.$invalid"><i class="fa fa-plus-circle"></i></a>
@@ -136,7 +135,7 @@
 					$(document).ready(function(){
 					
 						$("select").select2();
-							
+					
 					});
 			</script>
 	</body>

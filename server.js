@@ -50,6 +50,7 @@ require('./router/staffroute')(app,passport,connection);
 
 require('./router/classificationList')(app,passport,connection);
 require('./router/addProduct')(app,passport,connection);
+require('./router/Parts')(app,passport,connection);
 
 
  http.createServer(app).listen(app.get('port'), function(){

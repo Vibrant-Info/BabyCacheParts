@@ -63,7 +63,7 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
           loggedin: checkLoggedin
         }
 		})
-	   .when('/product-par-list', {
+	   .when('/product-part-list', {
         templateUrl: 'product-par-list.html',
 		  resolve: {
           loggedin: checkLoggedin

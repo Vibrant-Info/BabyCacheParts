@@ -1,11 +1,21 @@
-app.controller('addProdsCtrl', function($scope, $http,$timeout) {
+app.controller('getPartsCtrl', function($scope, $http,$timeout) {
 	$scope.part = {};
 	$scope.error = false;
 	$scope.insert = false;
-	$scope.prodTypeLoad = function(){
-		$http.get('/getTypes').success(function(response){
-			$scope.types = response;
+	
+	$scope.getPartCodeLoad = function(){
+		$http.get('/getCodes').success(function(response){
+			$scope.codes = response;
 		});
+	}
+	$scope.getshippingTypes = function(){
+		$http.get('/getshippingTypes').success(function(response){
+			console.log(response);
+			$scope.shipTypes = response;
+		});
+	}
+	$scope.searchByPart = function(){
+		console.log($scope.part);
 	}
 	$scope.addPart = function(){
 		var letterNumber = /^[0-9a-zA-Z]+$/;  	
@@ -54,7 +64,8 @@ app.controller('addProdsCtrl', function($scope, $http,$timeout) {
 				$scope.search();			
 		});
 	}	
-	$scope.prodTypeLoad();
+	$scope.getPartCodeLoad();
+	$scope.getshippingTypes();
 });
 
 

@@ -1,12 +1,17 @@
 module.exports=function(app,passport,connection){
 	var date = new Date();
 	app.post('/addPart',function(req,res){
-		console.log(req.body);
-		connection.query("INSERT INTO `productpart` (`archived`,`code`,`description`,`enabled`,`name`,`shippingtypeid`) VALUES ('false','"+req.body.code+"','"+req.body.name+"','1','"+req.body.name+"', '3')",function(err,result){			
-			if(err)
-				return err;
-			res.send(result); 
-		});
+		connection.query("SELECT `code` FROM `productpart` WHERE `code` = '"+req.body.code+"'",function(err,rows){
+			if(rows.length >= 1){
+				res.send("1");
+			}else{
+				connection.query("INSERT INTO `productpart` (`archived`,`code`,`description`,`enabled`,`name`,`shippingtypeid`) VALUES ('false','"+req.body.code+"','"+req.body.name+"','1','"+req.body.name+"', '3')",function(err,result){			
+					if(err)
+						return err;
+					res.send("0");
+				});
+			}			
+		});		
 	});
 	app.post('/searchClassification',function(req,res){
 		var WHERE = " 1 = 1";
