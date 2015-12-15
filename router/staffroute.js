@@ -60,6 +60,8 @@ module.exports=function(app,passport,connection){
 		WHERE += " AND `firstname` LIKE '%" + staffvalues.firstname+"%'";
 		if(staffvalues.initial != undefined)
 		WHERE += " AND `initial` LIKE '%" + staffvalues.initial+"%'";
+		if(staffvalues.emailid != undefined)
+		WHERE += " AND `emailid` LIKE '%" + staffvalues.emailid+"%'";
 		if(staffvalues.lastname != undefined)
 		WHERE += " AND `lastname` LIKE '%" + staffvalues.lastname+"%'";
 		if(staffvalues.enabled != undefined){
@@ -70,8 +72,7 @@ module.exports=function(app,passport,connection){
 		}
 		
 		var query=connection.query("SELECT * FROM staff WHERE "+WHERE,function(err,rows){
-			console.log(query.sql);
-			console.log(rows);
+			
 			if(err)
 				return err;
 			res.send(rows);
@@ -95,8 +96,9 @@ module.exports=function(app,passport,connection){
 		}); 
 	});
 	app.post('/editstaff',function(req,res){
+		
 		var up=	connection.query("SELECT s.staffid,s.firstname,s.lastname,s.initial,s.emailid,sl.loginname FROM staff s,stafflogin sl WHERE s.staffid=? and sl.staffid=?",[req.body.id,req.body.id],function(err,rows){
-			
+				
 			console.log(up.sql);
 			console.log(rows[0]);
 			if(err)
@@ -104,5 +106,38 @@ module.exports=function(app,passport,connection){
 			res.send(rows[0]);
 			
 		});
+	});
+	app.post('/updateStaff',function(req,res){
+		console.log(req.body);
+		var staffvalues=req.body;
+		var staff="";
+		var stafflogin="";
+		if(staffvalues.lastname != undefined)
+			staff += " ,`lastname` = '" + staffvalues.lastname +"'";
+		if(staffvalues.emailid != undefined)
+			staff += " , `emailid` = '" + staffvalues.emailid+"'";
+		if(staffvalues.initial != undefined)
+			staff += " , `initial` = '" + staffvalues.initial+"'";
+		if(staffvalues.password != undefined)
+			stafflogin += " , `password` = '" + staffvalues.password+"'";
+		
+		connection.query("UPDATE staff SET firstname = '" + staffvalues.firstname + "',lastmodified=NOW()" + staff + " WHERE staffid = " + staffvalues.staffid , function(err,result){
+			
+			if(err){
+				return err;
+			}
+		connection.query("UPDATE stafflogin SET loginname = '" + staffvalues.loginname + "',lastmodified=NOW()" + stafflogin + " WHERE staffid = " + staffvalues.staffid , function(err,result){
+						
+			if(err){
+				return err;
+			}
+			res.send(result);
+		});
+			
+		})
+		
+		
+		
+		
 	});
 }

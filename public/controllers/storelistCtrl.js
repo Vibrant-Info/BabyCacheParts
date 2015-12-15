@@ -1,37 +1,23 @@
 app.controller('storelistCtrl',['$scope','$http','$timeout',function($scope,$http,$timeout){
 	$scope.pageSize = 25;
 	$scope.currentPage = 1;
-	$scope.tablevaluesshow = true;
+	$scope.valuesnull=false;
 	$scope.errmsgshow=false;
 	
 	var getValues=function(){
 		$http.get('/storelist').success(function(data){
-			console.log(data);
-			//$scope.tablevaluesshow=true;
-			$scope.values=data;
+			$scope.codevalues=data;
 		});
 	}
 	getValues();
 	
 	$scope.checkActive=function(st,id){
 		$http.post('/storestatus',{st,id}).success(function(data){
-		console.log(data);
-		getValues();
+		$scope.searchValues();
 		});
 	}
 	
-	$scope.datasearch=function(){
-		getValues();
-		if($scope.tablevaluesshow == true){
-			$scope.tablevaluesshow	 = false;		
-		}	
-		else
-			$scope.tablevaluesshow = true;
-	}
-	
 	$scope.searchValues=function(){
-		console.log($scope.search);
-		
 		if($scope.search == undefined ||  Object.keys($scope.search).length==0 ){
 			$scope.errmsgshow=true;
 			$timeout(function(){
@@ -39,19 +25,30 @@ app.controller('storelistCtrl',['$scope','$http','$timeout',function($scope,$htt
 			},3000);
 		}
 		else {
-			if($scope.search.enabled == 2){
-				$scope.search.enabled="";
-			}
-			$scope.errmsgshow=false;
-			$scope.tablevaluesshow=true;
-			$scope.searchQuery = angular.copy($scope.search);
-		   $scope.searchResult=true;
-		   $scope.search.enabled=2;
-		} 
-    }
+			var a=$scope.search;
+				for (var i in a) 
+				{ 
+					if (a[i] === '' || a[i] == undefined ) { 
+					 delete a[i]; 
+					}
+				}
+			$http.post('/getStoreValues',a).success(function(response){
+				
+				if(Object.keys(response).length==0 ){
+					console.log("response");
+					$scope.valuesshow=false;
+					$scope.valuesnull=true;
+				}
+				else{
+					$scope.valuesnull=false;
+					$scope.valuesshow=true;
+					$scope.values=response;
+				}
+			});}
+	}
 	$scope.Reset=function(){
-		$scope.tablevaluesshow=false;
 		$scope.search={};
+		$scope.values={};
 		$scope.errmsgshow=false;
 		destroycode();
 	}

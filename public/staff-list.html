@@ -16,10 +16,10 @@
 							</div>
 							<div class="widget-content nopadding ">
 								<div class="row"ng-show="errmsgshow">
-								<div class="col-md-12">
-									<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+									<div class="col-md-12">
+										<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+									</div>
 								</div>
-							</div>
 								<form class="form-horizontal"  name="myForm" id="basic_validate" novalidate="novalidate">	
 								<div class="col-md-6">
                                     <div class="form-group">
@@ -62,7 +62,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="email" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid" >
+                                            <input type="text" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid" >
                                         </div>
                                     </div>
                                     
@@ -129,7 +129,7 @@
 											</tr>
 										</thead>
 										<tbody >
-										<tr ng-repeat="value in values">	
+										<tr ng-repeat="value in values" ng-show="valuesshow">	
 											<td>{{value.firstname}}</td>	
 											<td>{{value.initial}}</td>	
 											<td>{{value.lastname}}</td>	
@@ -160,6 +160,7 @@
 											
 											                                           
 										</tr>
+										<tr ng-show="valuesnull"><td colspan="12"> No data found</td></tr>
 										</tbody>
 										</table>
 									</div>
@@ -169,14 +170,64 @@
 				<div class="modal-header">
 					<h3 class="modal-title">Edit Staff</h3>
 				</div>
+				<form class="form-horizontal"  name="updateForm" id="basic_validate" novalidate="novalidate">	
 				<div class="modal-body">
-				{{editStaff.firstname}}
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="row"ng-show="successshow">
+									<div class="col-md-12">
+										<div class="alert alert-success text-center" >Staff updated successfully</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">First Name <span style="color:red">*</span></label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="editStaff.firstname" required> </label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Initial</label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="initial" id="initial" ng-model="editStaff.initial"> 
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Last Name <span style="color:red">*</span></label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="editStaff.lastname" required></label>
+										</div>
+									</div>
+									 <div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Email </label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="email" class="form-control input-sm" name="emailid" id="emailid" ng-model="editStaff.emailid" ></label>
+										</div>
+									</div> 
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Loginname <span style="color:red">*</span></label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="loginname" id="loginname" ng-model="editStaff.loginname" required> 
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Password</label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="password" class="form-control input-sm" name="password" id="password" ng-model="editStaff.password" >
+										</div>
+									</div>
+								</div>
+									   
+							
+						</div>
+					</div>
 				
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" type="button" ng-click="updateStaff()">Update</button>
+					<button class="btn btn-primary" type="button" ng-click="updateStaff()" ng-disabled="!updateForm.$valid">Update</button>
 					<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 				</div>
+				</form>	
 			</script>
 				
 		</div>
