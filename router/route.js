@@ -29,8 +29,7 @@ module.exports=function(app,passport,connection){
 			res.send(rows);
 		});
 	});
-	
-	
+
 
 }
 

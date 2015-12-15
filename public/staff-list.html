@@ -2,7 +2,7 @@
 <div ng-include="'header.html'"></div>
 		
 		
-		<div id="content">
+		<div id="content"  ng-controller="stafflistCtrl">
 			
 				<div class="row">
 					<div class="col-xs-12">
@@ -12,26 +12,32 @@
 									<i class="fa fa-align-justify"></i>									
 								</span>
 								<h5>Staff List</h5>
-									
+								
 							</div>
-							<div class="widget-content nopadding">
-								<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">						<div class="col-md-6">
+							<div class="widget-content nopadding ">
+								<div class="row"ng-show="errmsgshow">
+									<div class="col-md-12">
+										<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+									</div>
+								</div>
+								<form class="form-horizontal"  name="myForm" id="basic_validate" novalidate="novalidate">	
+								<div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">First Name</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="staff.firstname">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Initial</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="initial" id="initial" ng-model="staff.initial">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Last Name</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="staff.lastname">
                                         </div>
                                     </div>
                                    
@@ -43,14 +49,12 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Code
 
-</label>
+										</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9 ">
-                                        	<div class="selecting-option">
-                                            <select class="" id="sel1">
-                                                <option> 7520</option>
-                                                <option>5806</option>
-                                                <option>0001</option>
-                                                <option>1111</option>
+                                        	<div class="selecting-option" >
+                                            <select class="selectcode" id="sel1" ng-model="staff.storeid">
+                                                <option ng-repeat="value in values" value="{{value.storeid}}"> {{value.code}}</option>
+                                                
                                               </select>
                                               </div>
                                         </div>
@@ -58,35 +62,35 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid" >
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group">
+                                   <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Status	</label>
-                                        <div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                                            </div> Enabled</label>
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);">
-                                            </ins>
-                                            </div> Disabled</label>
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                                            </div> Both</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9 ">
+                                            
+                                            <input type="radio" name="enabled"    ng-model="staff.enabled" value=1>
+                                           
+                                           Enabled</br>
+                                          
+                                            <input type="radio" name="enabled"    ng-model="staff.enabled" value=0 >
+                                       
+                                            Disabled</br>
+                                            
+                                            <input type="radio" name="enabled"   ng-model="staff.enabled"  value=2>
+                                        
+                                            Both</br>
                                         </div>
+	
+										
                                     </div>
+                                    
                                     
                                   </div>
                                     <div class="form-actions col-md-12">
-                                        <input type="submit" value="Search" class="btn btn-primary"> <input type="submit" value="Reset" class="btn btn-primary">
+                                        <button  class="btn btn-primary" ng-click="staffSearch()">Search</button> 
+                                        <button  class="btn btn-primary" ng-click="resetSearch()">Reset</button> 
                                     </div>
                                 </form>
 							</div>
@@ -102,9 +106,7 @@
 										<thead>
 											<tr>
 												<th>
-													 Status
-												</th>
-												<th>
+												
 													 First Name
 												</th>
 												<th>
@@ -116,117 +118,117 @@
 												<th>
 													 Email
 												</th>
+												<th>
+													 Status
+												</th>
+												<th>
+													 Options
+												</th>
 												
-												
+										
 											</tr>
 										</thead>
-										
-										<tr>
-											<td>Enabled
-												
+										<tbody >
+										<tr ng-repeat="value in values" ng-show="valuesshow">	
+											<td>{{value.firstname}}</td>	
+											<td>{{value.initial}}</td>	
+											<td>{{value.lastname}}</td>	
+											<td>{{value.emailid}}</td>	
+											<td ng-if="value.enabled==0" class="red">Inactive </td>
+											<td ng-if="value.enabled==1" class="green">Active  </i></td>
+											<td ng-if="value.enabled==0">
+												<span ng-click="checkActive(1,value.staffid)" class="green" >
+													<i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Enable staff">
+													</i>
+												</span> &nbsp; &nbsp;&nbsp;
+												<span ng-click="selectStaff(value.staffid)" class="blue" >
+													<i class="fa fa-pencil-square-o"  title="Edit  staff">
+													</i>
+												</span>
 											</td>
-											<td>Name
-												 
+											<td ng-if="value.enabled==1">
+												<span ng-click="checkActive(0,value.staffid)" class="red">
+													<i class="fa fa-times"  title="Disable staff">
+													</i>
+												</span> &nbsp; &nbsp;&nbsp;
+												<span ng-click="selectStaff(value.staffid)" class="blue"  >
+													<i class="fa fa-pencil-square-o"  title="Edit staff"  >
+													</i>
+												</span>
 											</td>
-											<td>--
-												 
-											</td>
-                                            <td>Last Name
-												
-											</td>
+											 
 											
-                                            <td>ng@vibrant-info.com
-												 
-											</td>
-											
-                                            
+											                                           
 										</tr>
-										<tr>
-											<td>Enabled
-												
-											</td>
-											<td>Name
-												 
-											</td>
-											<td>--
-												 
-											</td>
-                                            <td>Last Name
-												
-											</td>
-											
-                                            <td>ng@vibrant-info.com
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-											
-                                            
-										</tr>
+										<tr ng-show="valuesnull"><td colspan="12"> No data found</td></tr>
 										</tbody>
 										</table>
 									</div>
                     </div>
                 </div>
+			 <script type="text/ng-template" id="editStaff.html">
+				<div class="modal-header">
+					<h3 class="modal-title">Edit Staff</h3>
+				</div>
+				<form class="form-horizontal"  name="updateForm" id="basic_validate" novalidate="novalidate">	
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="row"ng-show="successshow">
+									<div class="col-md-12">
+										<div class="alert alert-success text-center" >Staff updated successfully</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">First Name <span style="color:red">*</span></label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="editStaff.firstname" required> </label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Initial</label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="initial" id="initial" ng-model="editStaff.initial"> 
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Last Name <span style="color:red">*</span></label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="editStaff.lastname" required></label>
+										</div>
+									</div>
+									 <div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Email </label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="email" class="form-control input-sm" name="emailid" id="emailid" ng-model="editStaff.emailid" ></label>
+										</div>
+									</div> 
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Loginname <span style="color:red">*</span></label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="loginname" id="loginname" ng-model="editStaff.loginname" required> 
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Password</label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="password" class="form-control input-sm" name="password" id="password" ng-model="editStaff.password" >
+										</div>
+									</div>
+								</div>
+									   
+							
+						</div>
+					</div>
+				
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button" ng-click="updateStaff()" ng-disabled="!updateForm.$valid">Update</button>
+					<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+				</div>
+				</form>	
+			</script>
 				
 		</div>
 		
@@ -240,6 +242,16 @@
             
             <script src="js/jquery.nicescroll.min.js"></script> 
             <script src="js/babycache.js"></script>
-            <script src="js/babycache.form_validation.js"></script>
+            <script>
+					$(document).ready(function(){
+					
+						$("select").select2();
+							// $('input[type=checkbox],input[type=radio]').iCheck({
+							//	checkboxClass: 'icheckbox_flat-blue',
+							//	radioClass: 'iradio_flat-blue'
+							//}); 
+					});
+			</script>
+			
 	</body>
 </html>

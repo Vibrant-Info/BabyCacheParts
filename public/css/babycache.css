@@ -16,7 +16,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   margin-top: -20px;
-  background: #000000 url('../img/pattern.png') repeat scroll top center;
+  background:url(../img/pattern.png) repeat;
 }
 @media (nax-width: 767px) {
   body {
@@ -5963,7 +5963,7 @@ body[data-color="purple"].flat .ui-dialog .ui-dialog-titlebar {
 
 div#header{ margin-top:-20px; } 
 body[data-color="grey"] #wrapper { height: 100%; } 
-/*body { margin-top: 0px !important; background:#3c3c3c !important; } */
+body { margin-top: 0px !important; /*background:#3c3c3c !important;*/ } 
 html{ height:100%; }
 #header .munire-logo-resp{
 	position:absolute;
@@ -5986,8 +5986,27 @@ html{ height:100%; }
 	top:30px;
 	}
 	}
-	a{
-		cursor:pointer
-	}
+.red{
+	color: red;	
+	font-size:16px;
+}
+.green{	color: green;
+font-size: 16px;
 	
-	
+}
+.blue{
+	color: blue;	
+	font-size:16px;
+}
+.blue i{
+	font-size: 23px;
+	cursor: pointer;
+}
+.red i{	
+	font-size: 23px;
+	cursor: pointer;
+}
+.green i{	
+	font-size: 23px;
+	cursor: pointer;
+}
