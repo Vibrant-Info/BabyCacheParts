@@ -5994,6 +5994,14 @@ html{ height:100%; }
 font-size: 16px;
 	
 }
+.blue{
+	color: blue;	
+	font-size:16px;
+}
+.blue i{
+	font-size: 23px;
+	cursor: pointer;
+}
 .red i{	
 	font-size: 23px;
 	cursor: pointer;

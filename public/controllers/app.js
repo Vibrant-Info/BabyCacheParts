@@ -110,14 +110,14 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
         }
         
       })
-	   .when('/productclassificationlist', {
+	   .when('/product-classification-list', {
         templateUrl: 'productclassificationlist.html',
 		  resolve: {
           loggedin: checkLoggedin
         }
         
       })
-	   .when('/problemtypelist', {
+	   .when('/problem-type-list', {
         templateUrl: 'problemtypelist.html',
 		  resolve: {
           loggedin: checkLoggedin
@@ -132,7 +132,7 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
         
       })
       .otherwise({
-        redirectTo: '/login'
+        redirectTo: '/home'
       });
 
 

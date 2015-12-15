@@ -3,7 +3,8 @@
 			<div >
             <h1><a href="#/home"><img src="img"></a></h1>
             <p class="munire-logo-resp"><a title="" href="#/home"><img src="img/logo-baby.png"></a></p>
-            <p class="logout-respo"><a title="" href="#/" ng-click="logout()"><i class="fa fa-share"></i> {{uname}} Logout</a></p>
+			<p><i class="fa fa-user">{{uname}}</i></p>
+            <p class="logout-respo"><a title="" href="#/" ng-click="logout()"><i class="fa fa-share"></i> Logout</a></p>
             </div>
 
 			<a id="menu-trigger"><i class="fa fa-bars"></i></a>	
@@ -41,8 +42,8 @@
 							
 						</ul>
 					</li>
-					<li ng-class="{active:isActive('/productclassificationlist')}"><a href="#/productclassificationlist"><i class="fa fa-align-left"></i> <span>Classifications</span></a></li>
-					<li ng-class="{active:isActive('/problemtypelist')}"><a href="#/problemtypelist"><i class="fa fa-exclamation-triangle"></i> <span>Problem Types</span></a></li>
+					<li ng-class="{active:isActive('/product-classification-list')}"><a href="#/product-classification-list"><i class="fa fa-align-left"></i> <span>Classifications</span></a></li>
+					<li ng-class="{active:isActive('/problem-type-list')}"><a href="#/problem-type-list"><i class="fa fa-exclamation-triangle"></i> <span>Problem Types</span></a></li>
 					
 					<li ng-class="{active:isActive('/shipping-type-list')}">
 						<a href="#/shipping-type-list"><i class="fa fa-shopping-bag"></i> <span>Shipping&nbsp;Types</span></a>

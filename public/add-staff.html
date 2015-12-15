@@ -5,6 +5,10 @@
 			
 				<div class="row">
 					<div class="col-xs-12">
+						<div class="row">
+							<div class="alert alert-success" role="alert" ng-show="successmsgshow" style="text-align: center;">{{successmsg}}</div>
+							<div class="alert alert-danger" role="alert" ng-show="errmsgshow" style="text-align: center;">{{errmsg}}</div>
+						</div>
 						<div class="widget-box">
 							<div class="widget-title">
 								<span class="icon">
@@ -14,7 +18,8 @@
 									
 							</div>
 							<div class="widget-content nopadding">
-								<form class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate">						<div class="col-md-8">
+								<form class="form-horizontal"  name="myForm" id="basic_validate" novalidate="novalidate">
+								<div class="col-md-8">
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Initial:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
@@ -24,27 +29,27 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">First Name:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="staff.firstname">
+                                            <input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="staff.firstname" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Last Name:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="staff.lastname">
+                                            <input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="staff.lastname" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email ID:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid">
+                                            <input type="email" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Select Store<span style="color:red">*</span>
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Select Store<span style="color:red" >*</span>
 </label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
                                         	<div class="selecting-option">
-                                            <select class="" id="sel1" ng-model="staff.storeid" >
+                                            <select class="" id="sel1" ng-model="staff.storeid" required>
                                                 <option ng-repeat="store in values" value="{{store.storeid}}">{{store.code}} </option>
                                               
                                               </select>
@@ -56,13 +61,13 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Login Name:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="loginname" id="loginname" ng-model="staff.loginname">
+                                            <input type="text" class="form-control input-sm" name="loginname" id="loginname" ng-model="staff.loginname" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Password:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="password" id="password" ng-model="staff.password">
+                                            <input type="password" class="form-control input-sm" name="password" id="password" ng-model="staff.password" required>
                                         </div>
                                     </div>
                                     
@@ -72,7 +77,7 @@
                                     
                                     
                                     <div class="form-actions col-md-12">
-                                        <button  class="btn btn-primary" ng-click="addStaff()"> Add Staff</button>
+                                        <button  class="btn btn-primary" ng-click="addStaff()" ng-disabled="!myForm.$valid"> Add Staff</button>
                                     </div>
                                 </form>
 							</div>
@@ -98,9 +103,7 @@
             <script src="js/babycache.form_validation.js"></script>
 						<script>
 					$(document).ready(function(){
-					
 						$("select").select2();
-							
 					});
 			</script>
 	</body>
