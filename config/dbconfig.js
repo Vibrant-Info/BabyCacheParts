@@ -4,6 +4,6 @@ module.exports = {
         'user': 'root',
         'password': ''
     },
-	'database': 'babyrus',
+	'database': 'babyrus2',
  
 };

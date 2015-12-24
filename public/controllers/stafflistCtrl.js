@@ -1,5 +1,6 @@
-app.controller('stafflistCtrl',['$scope','$http','$timeout','$uibModal',function($scope,$http,$timeout,$uibModal){
-
+app.controller('stafflistCtrl',['$scope','$http','$timeout','$uibModal','$rootScope',function($scope,$http,$timeout,$uibModal,$rootScope){
+$scope.pageSize = 25;
+	$scope.currentPage = 1;
 	$scope.editId="";
 	$scope.errmsgshow=false;
 	var getValues= function(){
@@ -8,13 +9,19 @@ app.controller('stafflistCtrl',['$scope','$http','$timeout','$uibModal',function
 		}); 
 	}
 	getValues();
-	$scope.staffSearch=function(){
+	 $rootScope.$on("CallParentMethod", function(){
+           $scope.searchStaff();
+        });
+
+	$scope.searchStaff=function(){
+		console.log($scope.staff);
 		if($scope.staff==undefined || Object.keys($scope.staff).length==0){
 			$scope.errmsgshow=true;
 			$scope.values={};
 			$timeout(function(){
 				$scope.errmsgshow=false;
 			},3000);
+			getValues();
 		}
 		else{
 			
@@ -26,7 +33,7 @@ app.controller('stafflistCtrl',['$scope','$http','$timeout','$uibModal',function
 					}
 				}
 			
-			$http.post('/getStaffValues',$scope.staff).success(function(response){
+			$http.post('/getStaffValues',a).success(function(response){
 				if(Object.keys(response).length==0 ){
 					console.log("response");
 					$scope.valuesshow=false;
@@ -54,7 +61,7 @@ app.controller('stafflistCtrl',['$scope','$http','$timeout','$uibModal',function
 	$scope.checkActive=function(st,id){
 		$http.post('/staffstatus',{st,id}).success(function(data){
 		console.log(data);
-		$scope.staffSearch();
+		$scope.searchStaff();
 		});
 	}
 	
@@ -79,7 +86,7 @@ app.controller('stafflistCtrl',['$scope','$http','$timeout','$uibModal',function
 	}
 	
 }]);
-app.controller('staffupdateCtrl',function($scope,$http,$timeout,$uibModalInstance,edit,md5){
+app.controller('staffupdateCtrl',function($scope,$http,$timeout,$uibModalInstance,edit,md5,$rootScope){
 	$scope.editStaff=edit;
 	$scope.successshow=false;
 	$scope.updateStaff = function () {
@@ -92,6 +99,7 @@ app.controller('staffupdateCtrl',function($scope,$http,$timeout,$uibModalInstanc
 				$timeout(function(){
 					$uibModalInstance.close();
 				},3000);
+				$rootScope.$emit("CallParentMethod", {});
 			}
 		});
 	};

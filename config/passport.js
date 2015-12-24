@@ -18,7 +18,7 @@ module.exports = function(passport) {
                 if (err)
                     return done(err);
                 if (!rows.length) {
-					console.log("rows.length="+rows.length);
+				
                     return done(null, false);
                 }
         

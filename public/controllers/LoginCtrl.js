@@ -21,6 +21,7 @@ app.controller('LoginCtrl', function($scope, $rootScope, $http, $location, md5) 
       // No error: authentication OK
 	  
 	 sessionStorage.setItem('user',user.loginname);
+	 sessionStorage.setItem('id',user.staffid);
 	
       $rootScope.message = 'Authentication successful!';
       $location.url('/home');

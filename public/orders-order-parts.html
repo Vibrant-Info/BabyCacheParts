@@ -1,266 +1,668 @@
 <div ng-include="'header.html'"></div>
 		
 		
-			<div id="content">
-			
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="widget-box">
-							<div class="widget-title">
-								<h5>Orders- Order Parts</h5>
+<div id="content" ng-controller="orderpartsCtrl" >
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<h5>Orders- Order Parts</h5>
+				</div>
+				<div class="widget-content">
+					<div class="row">
+							<div class="col-sm-12">
+							<div class="row" ng-show="errmsgshow">
+								<div class="col-md-12">
+									<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+								</div>
 							</div>
-							<div class="widget-content">
-								<div class="row">
-										<div class="col-sm-12">
-											<div class="tabbable inline">
-												<ul class="nav nav-tabs tab-bricky" id="myTab">
-													<li class="active">
-														<a data-toggle="tab" href="#panel_tab2_example1">
-															Step 1: Select Part(s)
-														</a>
-													</li>
-													<li>
-														<a data-toggle="tab" href="#panel_tab2_example2">
-															Step 2: View Cart/Provide Order Info
-														</a>
-													</li>
-                                                    <li>
-														<a data-toggle="tab" href="#panel_tab2_example3">
-															Step 3: Shipping Info
-														</a>
-													</li>
-													<li>
-														<a data-toggle="tab" href="#panel_tab2_example2">
-															Step 4: Order Confirmation
-														</a>
-													</li>
+											
+								<div class="tabbable inline">
+									<div class="col-md-3" ng-class="tab1Sec">Step 1: Select Part(s)</div>
+									<div class="col-md-3" ng-class="tab2Sec">Step 2: View Cart/Provide Order Info</div>
+									<div class="col-md-3" ng-class="tab3Sec">Step 3: Shipping info</div>
+									<div class="col-md-3" ng-class="tab4Sec">Step 4: Order Confirmation</div>
+									<div ng-show="tabSec1">
+										<div id="panel_tab2_example1" class="tab-pane in active">
+										  <div class="row">
+											<div class="col-xs-12">
+												<div class="widget-box">
+													<div class="widget-title">
+														<span class="icon">
+															<i class="fa fa-align-justify"></i>									
+														</span>
+														<h5>Orders-Order Parts</h5>
+															
+													</div>
+													<div class="widget-content nopadding">
+														<form class="form-horizontal" name="basic_validate" id="basic_validate" novalidate="novalidate">
+														<div class="col-md-6">
+														
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">SKN # :</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<div class="selecting-option">
+																	<ui-select ng-model="myproduct.prskn" theme="select2"  style="min-width: 100px;" ng-disabled="skndisable" on-select="collectionDisable()">
+																		<ui-select-match  placeholder="Select skn ">{{$select.selected.skn}}</ui-select-match>
+																		<ui-select-choices repeat="val in productskn | propsFilter: {skn: $select.search}">
+																		  <div ng-bind-html="val.skn | highlight: $select.search"></div>
+																			</ui-select-choices>
+																		 </ui-select>
+																	  </div>
+																	  ----OR----	
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Collection\Style :</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<div class="selecting-option">
+																	 <ui-select ng-model="myproduct.prstyle" theme="select2"  style="min-width: 100px;" ng-disabled="collectionsdisable" on-select="sknDisable()">
+																		<ui-select-match  placeholder="Select Collection\Style ">{{$select.selected.style}}</ui-select-match>
+																		<ui-select-choices repeat="st in styles | propsFilter: {style: $select.search}">
+																		  <div ng-bind-html="st.style | highlight: $select.search"></div>
+																			</ui-select-choices>
+																		 </ui-select>
+																	  </div>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Type :</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<div class="selecting-option">
+																	 <ui-select ng-model="myproduct.prtypes" theme="select2"  style="min-width: 100px;" ng-disabled="collectionsdisable" on-select="sknDisable()">
+																		<ui-select-match  placeholder="Select product type ">{{$select.selected.prtype}}</ui-select-match>
+																		<ui-select-choices repeat="type in pr_type | propsFilter: {prtype: $select.search}">
+																		  <div ng-bind-html="type.prtype | highlight: $select.search"></div>
+																			</ui-select-choices>
+																		 </ui-select>
+																	  </div>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Color :</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<div class="selecting-option">
+																	<ui-select ng-model="myproduct.prcolors" theme="select2"  style="min-width: 100px;" ng-disabled="collectionsdisable" on-select="sknDisable()">
+																		<ui-select-match  placeholder="Select color ">{{$select.selected.prcolor}}</ui-select-match>
+																		<ui-select-choices repeat="color in colors | propsFilter: {prcolor: $select.search}">
+																		  <div ng-bind-html="color.prcolor | highlight: $select.search"></div>
+																			</ui-select-choices>
+																		 </ui-select>
+																	  </div>
+																</div>
+															</div>
+															
+															</div>
+															
+															
+														  <div class="col-md-6">
+															<div class="form-group">
+																
+																<div class="col-sm-9 col-md-9 col-lg-9 ">
+																	<div class="selecting-option img-content-align" >
+																		Product/ Part Image
+																		<div class="img-align"  ><img src="img\noimage.jpg" class="img-responsive"></div>
+																	</div>
+																</div>
+															</div>
+														  </div>
+															<div class="form-actions col-md-12">
+																<button class="btn btn-primary" ng-click="searchItem()"> submit</button>
+																<button class="btn btn-primary" ng-click="resetAll()">Reset</button>
+															</div>
+														</form>
+													</div>
+												   
+												</div>			
+											</div>
+											
+										</div>
+										</div>
+												
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="table-responsive">
+																<table class="table table-bordered table-striped table-hover">
+																<thead>
+																	<tr>
+																		<th>
+																			 Part Module
+																		</th>
+																		
+																		<th>
+																			 Part Description
+																		</th>
+																		
+																		<th>
+																			 Select
+																		</th>
+																		
+																		
+																	</tr>
+																</thead>
+																													
+																<tbody>
+																<tr ng-repeat="part in values"  ng-show="showvalues">
+																	<td>{{part.partcode}} </td>
+																	<td>{{part.partdesc}} </td>
+																	<td><input type="checkbox" ng-model="part.checked" ng-change="getOrders({{part}})"> </td>
+																</tr>
+																	<tr ng-show="valuesnull"><td colspan="12"> No data found</td></tr>
+																</tbody>
+																</table>
+															</div>
+											</div>
+											<div class="form-actions col-md-12">
+													<div class="widget-content nopadding">
+														<form class="form-horizontal" name="basic_validate" id="basic_validate" novalidate="novalidate">						
+															<input type="submit" value="Add to Cart" class="btn btn-primary" ng-click="addCart()"> 
+														</form>
+														</div>
+												</div>
+												<div class="col-lg-12" ng-show="cartshow">
 													
-												</ul>
-												<div class="tab-content">
-													<div id="panel_tab2_example1" class="tab-pane in active">
-                                                      <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="widget-box">
-                                                                <div class="widget-title">
-                                                                    <span class="icon">
-                                                                        <i class="fa fa-align-justify"></i>									
-                                                                    </span>
-                                                                    <h5>Basic validation</h5>
-                                                                        
-                                                                </div>
-                                                                <div class="widget-content nopadding">
-                                                                    <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">					<div class="col-md-6">
-                                                                    
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-3 col-md-3 col-lg-3 control-label">SKN # :</label>
-                                                                            <div class="col-sm-9 col-md-9 col-lg-9">
-                                                                                <div class="selecting-option">
-                                                                                <select class="" id="sel1">
-                                                                                    <option>010600</option>
-                                                                                    <option>010655</option>
-                                                                                    <option>010744</option>
-                                                                                    <option>010749</option>
-                                                                                  </select>
-                                                                                  </div>
-                                                                                  ----OR----	
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-3 col-md-3 col-lg-3 control-label">Collection\Style :</label>
-                                                                            <div class="col-sm-9 col-md-9 col-lg-9">
-                                                                                <div class="selecting-option">
-                                                                                 <select class="" id="sel1">
-                                                                                    <option>HERITAGE</option>
-                                                                                    <option>ROCKPORT</option>
-                                                                                    <option>TAHOE</option>
-                                                                                    <option>BLISS</option>
-                                                                                  </select>
-                                                                                  </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Type :</label>
-                                                                            <div class="col-sm-9 col-md-9 col-lg-9">
-                                                                                <div class="selecting-option">
-                                                                                 <select class="" id="sel1">
-                                                                                    <option>MIRROR</option>
-                                                                                        <option>TWIN BED</option>
-                                                                                        <option>HUTCH</option>
-                                                                                        <option>COMBO</option>
-                                                                                  </select>
-                                                                                  </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-3 col-md-3 col-lg-3 control-label">Color :</label>
-                                                                            <div class="col-sm-9 col-md-9 col-lg-9">
-                                                                                <div class="selecting-option">
-                                                                                 <select class="" id="sel1">
-                                                                                    <option>GLAZED WH</option>
-                                                                                    <option>CHESTNUT</option>
-                                                                                    <option>JAVA</option>
-                                                                                    <option>ESPRESSO	</option>
-                                                                                  </select>
-                                                                                  </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                        </div>
-                                                                        
-                                                                        
-                                                                      <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            
-                                                                            <div class="col-sm-9 col-md-9 col-lg-9 ">
-                                                                                <div class="selecting-option img-content-align" >
-                                                                                	Product/ Part Image
-                                                                                	<div class="img-align"  ><img src="img\noimage.jpg" class="img-responsive"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                      </div>
-                                                                        <div class="form-actions col-md-12">
-                                                                            <input type="submit" value="Search" class="btn btn-primary"> <input type="submit" value="Reset" class="btn btn-primary">
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                               
-                                                            </div>			
-                                                        </div>
-                                                        
-                                                    </div>
+												<div class="table-responsive">
+												<form name="orderform">
+													<table class="table table-bordered table-striped table-hover">
+													<thead>
+														<tr>
+															<th>
+																 Part Module
+															</th>
+															
+															<th>
+																 Part Description
+															</th>
+															
+															<th>
+																 Production date
+															</th>	
+															<th>
+																Factory code
+															</th>	
+															<th>
+																Purchase date
+															</th>
+															<th>
+																P.O Number
+															</th>
+															
+															
+														</tr>
+													</thead>
+													
+													<tbody>
+												
+													<tr ng-repeat="part in order">
+														<td>{{part.partcode}} </td>
+														<td>{{part.productdesc}} </td>
+														<td>  <p class="input-group"><input type="date" class="form-control"  ng-model="part.prdate[$index + 1]"  style="width: 174px;" required/> </p></td>
+													<td> 
+														<ui-select ng-model="part.factory[$index + 1]" theme="select2"  style="min-width: 100px;">
+															<ui-select-match  placeholder="Select Factory code ">{{$select.selected.code}}</ui-select-match>
+															<ui-select-choices repeat="codes in factorycodes |filter: $select.search" required>
+																<div ng-bind-html="codes.code | highlight: $select.search"></div>
+															</ui-select-choices>
+														 </ui-select>  
+													 </td>
+													<td> 
+														<p class="input-group"><input type="date" class="form-control" ng-model="part.prsdate[$index + 1]"  style="width: 174px;" required/> 
+														</p>
+													</td>
+													<td> <input type="text" class="form-control" ng-model="part.ponumber[$index + 1]" required></td>
+													
+													</tr>
+													
+													</tbody>
+													</table>
+												</div>
+													<input type="button" value="next" class="btn btn-primary"  ng-click="nextCart('tab2')"> 
+													<input type="submit" value="cancel" class="btn btn-primary" ng-click="cancelCart()"> 
+												</form>
+										</div>
+										
+									</div>
+									
+									</div>
+									
+									<div ng-show="tabSec2">
+										
+									<div id="panel_tab2_example2" class="tab-pane">
+									 <div class="row">
+											
+											<h5>Orders-View Carts</h5>
+												<div class="widget-box">
+													<!-- <div class="widget-title">
+														<span class="icon">
+															<i class="fa fa-align-justify"></i>									
+														</span>
+														
+															
+													</div> -->
+													<div class="widget-content nopadding">
+														<div class="col-lg-12">
+														<form name="cartform">
+															<div class="table-responsive res_table" style="overflow-x: auto;overflow-y: auto">
+																<table class="table table-bordered table-striped table-hover">
+																<thead>
+																
+																	<tr>
+																		<th ng-show="skus">
+																			 SKU #
+																		</th>
+																		<th ng-show="Part">
+																			 Part #
+																		</th>
+																		
+																		<th ng-show="Des">
+																			 Product Description
+																		</th>
+																		<th ng-show="PartDes">
+																			 Part Description
+																		</th>
+																		
+																		<th ng-show="ProdDate">
+																			 Production date
+																		</th>	
+																		<th ng-show="FacCode">
+																			Factory code
+																		</th>	
+																		<th ng-show="PurDate">
+																			Purchase date
+																		</th>
+																		<th ng-show="qty">
+																			Order quantity
+																		</th>
+																		<th ng-show="typeS">
+																			Problem type
+																		</th>
+																		<th>
+																			Additional Information																			
+																	
+																			  
+																		
+																			<img src="img/colsel.png" class="additional_icon dropdown-toggle" data-toggle="dropdown" />
+																		<ul class="dropdown-menu add-drop">
+																		  <li><a href="" class="small" ><input type="checkbox" ng-click="skus=!skus" ng-checked="skus"/>&nbsp;SKU</a></li>
+																		  <li><a href="" class="small" ><input type="checkbox" ng-click="Part=!Part" ng-checked="Part" />&nbsp;Part</a></li>
+																		  <li><a href="" class="small" ><input type="checkbox" ng-click="Des=!Des" ng-checked="Des" />&nbsp;Product Description</a></li>
+																		  <li><a href="" class="small" ><input type="checkbox" ng-click="PartDes=!PartDes" ng-checked="PartDes" />&nbsp;Part Description</a></li>
+																		  <li><a href="" class="small" ><input type="checkbox" ng-click="ProdDate=!ProdDate" ng-checked="ProdDate" />&nbsp;Production date</a></li>
+																		  <li><a href="" class="small" ><input type="checkbox"ng-click="FacCode=!FacCode" ng-checked="FacCode" />&nbsp;Factory code</a></li>
+																		  <li><a href="" class="small" ><input type="checkbox"ng-click="PurDate=!PurDate" ng-checked="PurDate" />&nbsp;Purchase date</a></li>
+																		  <li><a href="" class="small" ><input type="checkbox" ng-click="qty=!qty" ng-checked="qty"/>&nbsp;Order quantity</a></li>
+																		  <li><a href="" class="small" ><input type="checkbox" ng-click="typeS=!typeS" ng-checked="typeS"/>&nbsp;Problem type</a></li>
+																		  
+																		</ul>
+																	</th>
+																		
+																	</tr>
+																</thead>
+																
+																<tbody>
+																<tr ng-repeat="orpart in orparts">
+																	<td ng-show="skus">{{orpart.skn}}</td>
+																	<td ng-show="Part">{{orpart.partcode}}</td>
+																	<td ng-show="Des">{{orpart.productdesc}}</td>
+																	<td ng-show="PartDes">{{orpart.partdesc}}</td>
+																	<td ng-show="ProdDate">{{orpart.productdate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="FacCode">{{orpart.factorycode}}</td>
+																	<td ng-show="PurDate">{{orpart.purchasedate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="qty"><input type="text" class="form-control" ng-model="orpart.quantity[$index + 1]" required></td>
+																	<td ng-show="typeS">
+																	<ui-select ng-model="orpart.prblmtype[$index + 1]" theme="select2"  >
+																		<ui-select-match  placeholder="Select Factory code ">{{$select.selected.prblmname}}</ui-select-match>
+																		<ui-select-choices repeat="problems in prblmtype | propsFilter: {prblmname: $select.search}" required>
+																			<div ng-bind-html="problems.prblmname | highlight: $select.search"></div>
+																		</ui-select-choices>
+																	 </ui-select>  </td>
+																	<td><textarea class="form-control" rows="5" ng-model="orpart.add_info[$index + 1]" ></textarea></td>
+																</tr>
+																
+																</tbody>
+																</table>
+															</div>
+															</form>
+																
 													</div>
-													<div id="panel_tab2_example2" class="tab-pane">
-														<p>
-															Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-														</p>
+													<input type="submit" value="Previous Step" class="btn btn-primary" ng-click="previousCart('tab1')"> 
+													<input type="submit" value="Next Step" class="btn btn-primary" ng-click="nextCart('tab3')"> 
+													<input type="submit" value="Cancel" class="btn btn-primary" ng-click="cancelCart()"> 
 													</div>
-													<div id="panel_tab2_example3" class="tab-pane">
-														<p>
-															Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.
-														</p>
-														<p>
-															Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
-														</p>
+										</div>
+										</div>
+										</div>
+										
+									</div>
+									<div ng-show="tabSec3">
+										
+									<div id="panel_tab2_example2" class="tab-pane">
+											 <div class="row">
+											<div class="col-xs-12">
+												<div class="widget-box">
+													<div class="widget-title">
+														<span class="icon">
+															<i class="fa fa-align-justify"></i>									
+														</span>
+														<h5>Orders-View Carts</h5>
+															
 													</div>
-													<div id="panel_tab2_example4" class="tab-pane">
-														<p>
-															Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.
-														</p>
+													<div class="widget-content nopadding">
+														<div class="col-lg-12">
+															<div class="table-responsive">
+																<table class="table table-bordered table-striped table-hover">
+																<thead>
+																	<tr>
+																		<th ng-show="skus">
+																			 SKU #
+																		</th>
+																		<th ng-show="Part">
+																			 Part #
+																		</th>
+																		
+																		<th ng-show="Des">
+																			 Product Description
+																		</th>
+																		<th ng-show="PartDes">
+																			 Part Description
+																		</th>
+																		
+																		<th ng-show="ProdDate">
+																			 Production date
+																		</th>	
+																		<th ng-show="FacCode">
+																			Factory code
+																		</th>	
+																		<th ng-show="PurDate">
+																			Purchase date
+																		</th>
+																		<th ng-show="qty">
+																			Order quantity
+																		</th>
+																		<th ng-show="typeS">
+																			Problem type
+																		</th>
+																		<th>
+																			Additional Information	
+																		
+																	</tr>
+																</thead>
+																
+																<tbody>
+																<tr ng-repeat="cart in viewcart" >
+																	<td  ng-show="skus">{{cart.skn}}</td>
+																	<td ng-show="Part">{{cart.partcode}}</td>
+																	<td ng-show="Des">{{cart.productdesc}}</td>
+																	<td ng-show="PartDes">{{cart.partdesc}}</td>
+																	<td ng-show="ProdDate">{{cart.productdate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="FacCode">{{cart.factorycode}}</td>
+																	<td ng-show="PurDate">{{cart.purchasedate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="qty">{{cart.quantity}}</td>
+																	<td ng-show="typeS">{{cart.prblmname}}</td>
+																	<td>{{cart.add_info}}</td>
+															
+																</tr>
+																
+																</tbody>
+																</table>
+															</div>
+																
+													</div>
+													<input type="submit" value="Previous Step" class="btn btn-primary" ng-click="previousCart('tab2')"> 
+													<input type="submit" value="Cancel" class="btn btn-primary" ng-click="cancelCart()"> 
+													<form class="form-horizontal" name="basic_validate" id="basic_validate" novalidate="novalidate">
+														<div class="col-md-6">
+														
+															<div class="form-group" ng-init="ship.store = 0 ">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Select Shipping mode</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="radio" ng-model="ship.store" value="0"  ng-change="addressValue('store')"> Ship to Store</br>
+																	<input type="radio" ng-model="ship.store" value="1" ng-change="addressValue('store_guest')"> Ship to Store for Guest</br>
+																	<input type="radio" ng-model="ship.store" value="2" ng-change="addressValue('guest')"> Ship Directly to Guest</br>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<ui-select ng-model="ship.storename[$index + 1]" theme="select2"  ng-change="getStoreValues({{$select.selected.storeid}})"style="min-width: 100px;">
+																		<ui-select-match  placeholder="Select Factory code ">{{$select.selected.storename}}</ui-select-match>
+																		<ui-select-choices repeat="st in stores | propsFilter: {storename: $select.search}" required>
+																			<div ng-bind-html="st.storename | highlight: $select.search"></div>
+																		</ui-select-choices>
+																	 </ui-select>
+																		
+																</div>
+															</div>
+															
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Associate First Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.fname" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Associate Last Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.lname" required></label>
+																</div>
+															</div>
+															<div class="form-group" ng-show="(ship.store == 1)||(ship.store == 2)">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest first Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestfname" required></label>
+																</div>
+															</div>
+															<div class="form-group" ng-show="(ship.store == 1)||(ship.store == 2)">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Last Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestlname" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Address <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.address" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">City <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.city" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">state <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.state" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Zipcode <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.zipcode" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Country <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.country" required></label>
+																</div>
+															</div>
+															<div class="form-group" ng-show="(ship.store == 1)||(ship.store == 2)" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Email <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestemail" required></label>
+																</div>
+															</div>
+															<div class="form-group" ng-show="(ship.store == 1)||(ship.store == 2)">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Phone <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestphone" required></label>
+																</div>
+															</div>
+															<div class="form-group" ng-show="(ship.store == 1)||(ship.store == 2)">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Fax <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestfax" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="submit" value="Confirm order" class="btn btn-primary" ng-click="confirmOrder()"> 
+																</div>
+															</div>
+													</div>
+													
+												</div>
+											</div>
+											</div>
+										</div>
+										</div>
+										</div>
+										<div ng-show="tabSec4">
+										
+											<div id="panel_tab2_example2" class="tab-pane"  >
+											 <div class="row">
+												<div class="col-xs-12">
+													<div class="widget-box">
+														<div class="widget-title">
+															<span class="icon">
+																<i class="fa fa-align-justify"></i>									
+															</span>
+															<h5>Orders-Conformation</h5>
+														</div>
+														<div class="widget-content nopadding">
+															<div class="row">
+																<div class="col-sm-6">
+																<div class="form-group">
+																	<label class="col-sm-3 col-md-3 col-lg-3 control-label">Address </label>
+																	<div class="col-sm-9 col-md-9 col-lg-9">
+																		:{{ship.address}}
+																	</div>
+																</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 col-md-3 col-lg-3 control-label">city </label>
+																		<div class="col-sm-9 col-md-9 col-lg-9">
+																			{{ship.city}}
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 col-md-3 col-lg-3 control-label">country </label>
+																		<div class="col-sm-9 col-md-9 col-lg-9">
+																			{{ship.country}}
+																		</div>
+																	</div>
+																	
+																
+																</div>
+																<div class="col-sm-6">
+																<div class="form-group">
+																	<label class="col-sm-3 col-md-3 col-lg-3 control-label">state </label>
+																		<div class="col-sm-9 col-md-9 col-lg-9">
+																			{{ship.state}}
+																		</div>
+																	</div>
+																		<div class="form-group">
+																		<label class="col-sm-3 col-md-3 col-lg-3 control-label">zipcode </label>
+																		<div class="col-sm-9 col-md-9 col-lg-9">
+																			{{ship.zipcode}}
+																		</div>
+																	</div>
+																
+																</div>
+															</div>
+															<div class="row">
+															<div class="col-lg-12">
+															<div class="table-responsive">
+																<table class="table table-bordered table-striped table-hover">
+																<thead>
+																	<tr>
+																		<th ng-show="skus">
+																			 SKU #
+																		</th>
+																		<th ng-show="Part">
+																			 Part #
+																		</th>
+																		
+																		<th ng-show="Des">
+																			 Product Description
+																		</th>
+																		<th ng-show="PartDes">
+																			 Part Description
+																		</th>
+																		
+																		<th ng-show="ProdDate">
+																			 Production date
+																		</th>	
+																		<th ng-show="FacCode">
+																			Factory code
+																		</th>	
+																		<th ng-show="PurDate">
+																			Purchase date
+																		</th>
+																		<th ng-show="qty">
+																			Order quantity
+																		</th>
+																		<th ng-show="typeS">
+																			Problem type
+																		</th>
+																		<th>
+																			Additional Information	
+																		
+																	</tr>
+																</thead>
+																
+																<tbody>
+																<tr ng-repeat="cart in viewcart" >
+																	<td  ng-show="skus">{{cart.skn}}</td>
+																	<td ng-show="Part">{{cart.partcode}}</td>
+																	<td ng-show="Des">{{cart.productdesc}}</td>
+																	<td ng-show="PartDes">{{cart.partdesc}}</td>
+																	<td ng-show="ProdDate">{{cart.productdate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="FacCode">{{cart.factorycode}}</td>
+																	<td ng-show="PurDate">{{cart.purchasedate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="qty">{{cart.quantity}}</td>
+																	<td ng-show="typeS">{{cart.prblmname}}</td>
+																	<td>{{cart.add_info}}</td>
+															
+																</tr>
+																
+																</tbody>
+																</table>
+															</div>
+																
+													</div>
+															</div>
+															<div class="col-sm-4"></div>
+																<div class="col-sm-4">
+																<a href="#/home" class="btn btn-default">Home</a> 
+																</div>
+															</div>
+															
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 										
-										
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-                	<div class="col-lg-12">
-                    	<div class="table-responsive">
-										<table class="table table-bordered table-striped table-hover">
-										<thead>
-											<tr>
-												<th>
-													 Part Module
-												</th>
-												
-												<th>
-													 Part Description
-												</th>
-                                                
-												<th>
-													 Select
-												</th>
-												
-												
-											</tr>
-										</thead>
-										
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            
-											
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                        </tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                        </tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                       </tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                       </tr>
-										</tbody>
-										</table>
 									</div>
-                    </div>
-                    <div class="form-actions col-md-12">
-                        	<div class="widget-content nopadding">
-								<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">						
-                            <input type="submit" value="Add to Cart" class="btn btn-primary"> 
-                            	</form>
-                                </div>
-                        </div>
-                </div>
-				
+									
+									
+									</div>
+								</div>
+							</div>
+							
+							
+					</div>
+					
+				</div>
+	
+
+</div>
+</div>
 		</div>
-		
-		</div>
-            
+	</div>
            
             <script src="js/bootstrap.min.js"></script>
             <script src="js/jquery.icheck.min.js"></script>
@@ -269,6 +671,6 @@
             
             <script src="js/jquery.nicescroll.min.js"></script>
             <script src="js/babycache.js"></script>
-            <script src="js/babycache.form_validation.js"></script>
+         
 	</body>
 </html>

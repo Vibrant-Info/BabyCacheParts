@@ -11,10 +11,25 @@
 									<i class="fa fa-align-justify"></i>									
 								</span>
 								<h5>Add Staff</h5>
-									
+								<div class="row"ng-show="errmsgshow">
+									<div class="col-md-12">
+										<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+									</div>
+								</div>
+								<div class="row"ng-show="logmsgshow">
+									<div class="col-md-12">
+										<div class="alert alert-danger text-center" >User name already exist</div>
+									</div>
+								</div>
+								<div class="row"ng-show="successmsgshow">
+									<div class="col-md-12">
+										<div class="alert alert-success text-center" >Staff added successfully</div>
+									</div>
+								</div>
 							</div>
 							<div class="widget-content nopadding">
-								<form class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate">						<div class="col-md-8">
+								<form class="form-horizontal"  name="staff_form" id="basic_validate" novalidate="novalidate">						
+								<div class="col-md-8">
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Initial:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
@@ -24,30 +39,33 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">First Name:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="staff.firstname">
+                                            <input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="staff.firstname" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Last Name:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="staff.lastname">
+                                            <input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="staff.lastname" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email ID:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid">
+                                            <input type="email" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Select Store<span style="color:red">*</span>
-</label>
+										</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
                                         	<div class="selecting-option">
-                                            <select class="" id="sel1" ng-model="staff.storeid" >
-                                                <option ng-repeat="store in values" value="{{store.storeid}}">{{store.code}} </option>
-                                              
-                                              </select>
+											 <ui-select ng-model="staff.storeid" theme="select2"  style="min-width: 100px;" required>
+												<ui-select-match allow-clear="true" placeholder="Select store">{{$select.selected.code}}</ui-select-match>
+												<ui-select-choices repeat="store in values | propsFilter: {code: $select.search}">
+												  <div ng-bind-html="store.code | highlight: $select.search""></div>
+													</ui-select-choices>
+												 </ui-select>
+                                           
                                               </div>
 
                                         </div>
@@ -56,13 +74,13 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Login Name:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="loginname" id="loginname" ng-model="staff.loginname">
+                                            <input type="text" class="form-control input-sm" name="loginname" id="loginname" ng-model="staff.loginname" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Password:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="password" id="password" ng-model="staff.password">
+                                            <input type="text" class="form-control input-sm" name="password" id="password" ng-model="staff.password" required>
                                         </div>
                                     </div>
                                     
@@ -72,7 +90,7 @@
                                     
                                     
                                     <div class="form-actions col-md-12">
-                                        <button  class="btn btn-primary" ng-click="addStaff()"> Add Staff</button>
+                                        <button  class="btn btn-primary" ng-click="addStaff()" ng-disabled="!staff_form.$valid"> Add Staff</button>
                                     </div>
                                 </form>
 							</div>

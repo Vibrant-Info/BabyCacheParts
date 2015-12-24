@@ -1,0 +1,76 @@
+var q1=connection.query("SELECT p.productid as 'productid' FROM product p where "+WHERE,function(err,rows){
+			if(err)
+				return err;
+			console.log("2222222");
+			productid=rows[0].productid;
+			q2(productid);
+		});		
+				
+		var q2=function(productid){
+			var s=connection.query("SELECT productpartid, productid FROM productandparts  where productid="+productid,function(err,result){
+				console.log("33333333"+s.sql);
+				if(err)
+					return err;
+				
+				q4(result);
+			});
+		}
+		var q3=function(results){
+		
+		 for(var i=0;i<results.length;i++){
+			 console.log(results[i].productpartid);
+			var a=connection.query("SELECT productpartid,shippingtypeid FROM productpart WHERE productpartid="+ results[i].productpartid,function(err,shippingrows){
+				//console.log(a.sql);
+				if(err)
+					return err;
+				temp.push(shippingrows);
+			});
+			
+		 }
+			  	
+			q4(temp);
+		
+		}
+		var a=[];
+		var q4=function(temp){
+			
+			for(var i=0;i<temp.length;i++){
+				 console.log("i="+i);
+				 q5(i,temp);
+			}
+		}
+		var q5=function(i,temp){
+			connection.query("SELECT p.productpartid, p.code, p.description, p.enabled, p.name as 'partname', s.name as 'name',s.shippingtypeid FROM productpart p, shippingtype s where p.productpartid = ? and s.shippingtypeid=3",[temp[i].productpartid],function(err,row){
+					if(err)
+						return err;
+					
+						ppvalues=JSON.stringify(row);
+						console.log(i == (temp.length-1));
+						if(i == (temp.length-1)){
+							console.log(ppvalues);
+							res.send(ppvalues);
+						}
+				}); 
+		}
+		
+		
+		async.each(ids, function(id, callback) { //The second argument (callback) is the "task callback" for a specific messageId
+						console.log(id);
+						var a=connection.query("SELECT productpartid,shippingtypeid FROM productpart WHERE productpartid="+id,function(err,shippingrows){
+							console.log(a.sql);
+							if (err) {
+								callback(err);
+								return; //It's important to return so that the task callback isn't called twice
+							}
+								for(var j=0;j<=2;j++){
+									temp[j]=JSON.stringify(shippingrows);
+								}
+								console.log(temp);
+								callback();
+						
+						});
+						
+							
+			
+												
+					})

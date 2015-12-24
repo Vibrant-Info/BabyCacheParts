@@ -1,0 +1,23 @@
+CREATE OR REPLACE FUNCTION searchbyProduct(IN skn VARCHAR(225),IN code VARCHAR(225),IN name VARCHAR(225))
+
+BEGIN
+	
+	
+	DECLARE 
+	
+	WHERE VARCHAR(500);
+	type namesarray IS VARRAY(100) OF VARCHAR2(1000);
+	product namesarray;
+	
+	WHERE = '1==1';
+	IF skn <> '' THEN
+    	SET WHERE = WHERE || ' AND skn =' || skn ;
+   IF code <> '' THEN
+    	SET WHERE = WHERE || ' AND code =' || code ;
+	IF name <> '' THEN
+    	SET WHERE = WHERE || ' AND name =' || name ;
+
+	SELECT p.productid as 'productid' FROM product p where || WHERE		
+	
+	 dbms_output.put_line("product id= "|| productid);
+END

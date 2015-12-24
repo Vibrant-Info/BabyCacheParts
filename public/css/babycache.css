@@ -6002,3 +6002,47 @@ font-size: 16px;
 	font-size: 23px;
 	cursor: pointer;
 }
+.blue{
+	color: blue;	
+	font-size:16px;
+}
+.blue i{
+	font-size: 23px;
+	cursor: pointer;
+}
+.rowselect{
+display:block;
+background: transparent url(../img/rarrow.png) no-repeat;
+   margin-left: 1098px;
+    height: 36px;
+    width: 15px;
+}
+.tab-inactive{
+    background: #e3e3e3;
+    padding: 10px;
+    border-radius: 4px;
+    margin-left: 5px;
+    width: 24%;
+}
+.tab-active {
+    background: none;
+    /* padding-left: 10px; */
+    /* padding-right: 10px; */
+    padding: 8px;
+    border: 1px solid #e3e3e3;
+	color:#ee5311;
+}
+.additional_icon {
+    position: absolute;
+    top: 4px;
+    right: 17px;
+}
+.res_table .ui-select-choices {
+	max-height: 56px !important;
+}
+.add-drop {
+    top: 40px;
+    right: 0;
+    left: initial;
+    min-width: 141px;
+}
