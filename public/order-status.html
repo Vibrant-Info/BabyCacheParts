@@ -1,6 +1,6 @@
 <div ng-include="'header.html'"></div>
 		
-		<div id="content">
+		<div id="content"ng-controller="orderhistoryCtrl">
 			
 				<div class="row">
 					<div class="col-xs-12 col-md-4">
@@ -18,27 +18,10 @@
                                     <div class="form-group">
                                         
                                         <div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
-                                            <label class="radio-btn-width">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                                            </div> All Orders</label>
-                                            <label class="radio-btn-width">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);">
-                                            </ins>
-                                            </div> Open Orders Only</label>
-                                            <label class="radio-btn-width">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                                            </div> Closed Orders Only</label>
-                                            <label class="radio-btn-width">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                                            </div> Cancelled Orders</label>
+                                           <input type="radio" ng-model="order.status" value="0" >  All Orders</br>
+										<input type="radio" ng-model="order.status" value="1" > Open Orders Only</br>
+										<input type="radio" ng-model="order.status" value="2" >  Closed Orders Only</br>
+										<input type="radio" ng-model="order.status" value="3" >  Cancelled Orders</br>
                                         </div>
                                     </div>
                                     
@@ -47,7 +30,7 @@
                            
 						</div>			
 					</div>
-                    
+                   
                     
                     <div class="col-xs-12 col-md-4">
 						<div class="widget-box basic-height">
