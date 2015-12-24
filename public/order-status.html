@@ -1,6 +1,6 @@
 <div ng-include="'header.html'"></div>
 		
-		<div id="content"ng-controller="orderhistoryCtrl">
+		<div id="content" ng-controller="orderhistoryCtrl">
 			
 				<div class="row">
 					<div class="col-xs-12 col-md-4">
@@ -18,10 +18,12 @@
                                     <div class="form-group">
                                         
                                         <div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
-                                           <input type="radio" ng-model="order.status" value="0" >  All Orders</br>
-										<input type="radio" ng-model="order.status" value="1" > Open Orders Only</br>
-										<input type="radio" ng-model="order.status" value="2" >  Closed Orders Only</br>
-										<input type="radio" ng-model="order.status" value="3" >  Cancelled Orders</br>
+                                           
+                                            <input type="radio" ng-model="order.status" value="0" > All Orders</br>
+                                            <input type="radio" ng-model="order.status" value="1"> Open Orders Only</br>
+                                            <input type="radio" ng-model="order.status" value="2">  Closed Orders Only</br>
+                                            <input type="radio" ng-model="order.status" value="3"> Cancelled Orders</br>
+                                            
                                         </div>
                                     </div>
                                     
@@ -30,7 +32,7 @@
                            
 						</div>			
 					</div>
-                   
+                    
                     
                     <div class="col-xs-12 col-md-4">
 						<div class="widget-box basic-height">
@@ -299,14 +301,11 @@
             <script src="js/bootstrap-datepicker.js"></script>
             <script src="js/jquery.nicescroll.min.js"></script>
             <script src="js/babycache.js"></script>
-            <script src="js/babycache.form_validation.js"></script>
+           
             <script src="js/fullcalendar.min.js"></script>
             
             <script src="js/bootstrap-colorpicker.js"></script> 
-			<script src="js/babycache.form_common.js"></script>  
-            <script src="js/babycache.tables.js"></script> 
-            
-            
+			
             
             
                        

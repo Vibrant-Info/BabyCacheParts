@@ -1,3 +1,3 @@
-app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootScope) {
+app.controller('orderhistoryCtrl', function($scope,$http,$timeout,$uibModal,$rootScope) {
 
 });
