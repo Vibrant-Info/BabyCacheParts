@@ -266,10 +266,9 @@ module.exports=function(app,passport,connection){
 	});
 	app.post('/postOrder',function(req,res){
 		var shipdetails=req.body.address;
+		console.log(shipdetails);
 		var cartdetails=req.body.carts;
 		var orderid;
-	console.log(cartdetails);
-	   
 	    var productorder={shippingmode:shipdetails.store,staffid:shipdetails.staffid,storeid:shipdetails.storename[1].storeid};
 		
 		var a=connection.query("INSERT INTO `productorder` set ?",productorder,function(err,result1){
@@ -280,7 +279,7 @@ module.exports=function(app,passport,connection){
 			else{
 				if(result1.affectedRows > 0 ){
 					orderid=result1.insertId;
-						var guestshippingdetails={address:shipdetails.address,city:shipdetails.city,country:shipdetails.country,emailid:shipdetails.emailid,fax:shipdetails.fax,guestfirstname:shipdetails.guestfirstname,guestlastname:shipdetails.guestlastname,phone:shipdetails.phone,repfirstname:shipdetails.fname,replastname:shipdetails.lname,state:shipdetails.state,zipcode:shipdetails.zipcode,approverid:shipdetails.staffid,orderid:orderid}
+						var guestshippingdetails={address:shipdetails.address,city:shipdetails.city,country:shipdetails.country,emailid:shipdetails.guestemail,fax:shipdetails.guestfax,guestfirstname:shipdetails.guestfname,guestlastname:shipdetails.guestlname,phone:shipdetails.guestphone,repfirstname:shipdetails.fname,replastname:shipdetails.lname,state:shipdetails.state,zipcode:shipdetails.zipcode,approverid:shipdetails.staffid,orderid:orderid}
 								var c=connection.query("INSERT INTO `guestshippingdetail` set ?",guestshippingdetails,function(err,result2){
 									console.log(c.sql);
 									if(err)
@@ -289,7 +288,7 @@ module.exports=function(app,passport,connection){
 										var d=0;
 										for(var i=0;i<cartdetails.length;i++){
 										
-											var orderdetail={factorycode:cartdetails[i].factorycode,notes:cartdetails[i].add_info,ponumber:cartdetails[i].ponum,productiondate:cartdetails[i].productdate,purchasedon:cartdetails[i].purchasedate,quantity:cartdetails[i].quantity,shippedquantity:'0',orderid:orderid,problemtypeid:cartdetails[i].problemtypeid,productid:cartdetails[i].productid,productpartid:cartdetails[i].productpartid,shippingtypeid:'3'};
+											var orderdetail={factorycode:cartdetails[i].factorycode,notes:cartdetails[i].add_infos,ponumber:cartdetails[i].ponum,productiondate:cartdetails[i].productdate,purchasedon:cartdetails[i].purchasedate,quantity:cartdetails[i].quantities,shippedquantity:'0',orderid:orderid,problemtypeid:cartdetails[i].problemtypeid,productid:cartdetails[i].productid,productpartid:cartdetails[i].productpartid,shippingtypeid:'3'};
 				
 											var b=connection.query("INSERT INTO `orderdetail` set ?",orderdetail,function(err,result3){
 												console.log(b.sql);

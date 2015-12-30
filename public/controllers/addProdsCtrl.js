@@ -1,13 +1,15 @@
 app.controller('addProdsCtrl', function($scope, $http,$timeout) {
 	$scope.part = {};
+	$scope.prod = {};
 	$scope.error = false;
 	$scope.insert = false;
-	$scope.prodTypeLoad = function(){
+	/* $scope.prodTypeLoad = function(){
 		$http.get('/getTypes').success(function(response){
 			$scope.types = response;
 		});
-	}
-	$scope.addPart = function(){
+	} */
+	$scope.ghj = function(){
+		console.log($scope.prod);
 		var letterNumber = /^[0-9a-zA-Z]+$/;  	
 		if($scope.part.code != undefined && $scope.part.name != undefined){	
 			$scope.part.code = angular.uppercase($scope.part.code);
@@ -54,7 +56,9 @@ app.controller('addProdsCtrl', function($scope, $http,$timeout) {
 				$scope.search();			
 		});
 	}	
-	$scope.prodTypeLoad();
+	//$scope.prodTypeLoad();
+	
+	
 });
 
 

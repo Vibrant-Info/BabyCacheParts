@@ -1,0 +1,871 @@
+<div ng-include="'header.html'"></div>
+		
+		
+<div id="content" ng-controller="orderpartsCtrl" >
+	<style>
+		.form-group {
+			margin-bottom: 44px;
+		}
+		.confirmSec{
+			    margin-top: 15px;
+		}
+	</style>
+	<div id="content-header">
+		<h1>Order Parts</h1>				
+	</div>
+	<div id="breadcrumb">
+		<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i> Home</a>
+		<a href="">Orders</a>
+		<a href="" class="current">Order Parts</a>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon">
+						<i class="fa fa-align-justify"></i>									
+					</span>
+					<h5>Order Parts</h5>
+				</div>
+				<div class="widget-content">
+					<div class="row">
+							<div class="col-sm-12">
+							<div class="row" ng-show="errmsgshow">
+								<div class="col-md-12">
+									<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+								</div>
+							</div>
+											
+								<div class="tabbable inline">
+									<div class="col-md-3" ng-class="tab1Sec">Step 1: Select Part(s)</div>
+									<div class="col-md-3" ng-class="tab2Sec">Step 2: View Cart/Provide Order Info</div>
+									<div class="col-md-3" ng-class="tab3Sec">Step 3: Shipping info</div>
+									<div class="col-md-3" ng-class="tab4Sec">Step 4: Order Confirmation</div>
+									<div ng-show="tabSec1">
+										<div id="panel_tab2_example1" class="tab-pane in active">
+										  <div class="row">
+											<div class="col-xs-12">
+												<div class="widget-box">
+													<!-- <div class="widget-title">
+														<span class="icon">
+															<i class="fa fa-align-justify"></i>									
+														</span>
+														<h5>Orders-Order Parts</h5>
+															
+													</div> -->
+													<div class="widget-content nopadding">
+														<form class="form-horizontal" name="basic_validate" id="basic_validate" novalidate="novalidate">
+														<div class="col-md-6">
+														
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">SKN # :</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<div class="selecting-option">
+																	<ui-select ng-model="myproduct.prskn" theme="select2"  style="min-width: 100px;" ng-disabled="skndisable" on-select="collectionDisable()">
+																		<ui-select-match  placeholder="Select skn ">{{$select.selected.skn}}</ui-select-match>
+																		<ui-select-choices repeat="val in productskn | propsFilter: {skn: $select.search}">
+																		  <div ng-bind-html="val.skn | highlight: $select.search"></div>
+																			</ui-select-choices>
+																		 </ui-select>
+																	  </div>
+																	  ----OR----	
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Collection\Style :</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<div class="selecting-option">
+																	 <ui-select ng-model="myproduct.prstyle" theme="select2"  style="min-width: 100px;" ng-disabled="collectionsdisable" on-select="sknDisable()">
+																		<ui-select-match  placeholder="Select Collection\Style ">{{$select.selected.style}}</ui-select-match>
+																		<ui-select-choices repeat="st in styles | propsFilter: {style: $select.search}">
+																		  <div ng-bind-html="st.style | highlight: $select.search"></div>
+																			</ui-select-choices>
+																		 </ui-select>
+																	  </div>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Type :</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<div class="selecting-option">
+																	 <ui-select ng-model="myproduct.prtypes" theme="select2"  style="min-width: 100px;" ng-disabled="collectionsdisable" on-select="sknDisable()">
+																		<ui-select-match  placeholder="Select product type ">{{$select.selected.prtype}}</ui-select-match>
+																		<ui-select-choices repeat="type in pr_type | propsFilter: {prtype: $select.search}">
+																		  <div ng-bind-html="type.prtype | highlight: $select.search"></div>
+																			</ui-select-choices>
+																		 </ui-select>
+																	  </div>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Color :</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<div class="selecting-option">
+																	<ui-select ng-model="myproduct.prcolors" theme="select2"  style="min-width: 100px;" ng-disabled="collectionsdisable" on-select="sknDisable()">
+																		<ui-select-match  placeholder="Select color ">{{$select.selected.prcolor}}</ui-select-match>
+																		<ui-select-choices repeat="color in colors | propsFilter: {prcolor: $select.search}">
+																		  <div ng-bind-html="color.prcolor | highlight: $select.search"></div>
+																			</ui-select-choices>
+																		 </ui-select>
+																	  </div>
+																</div>
+															</div>
+															
+															</div>
+															
+															
+														  <div class="col-md-6">
+															<div class="form-group">
+																
+																<div class="col-sm-9 col-md-9 col-lg-9 ">
+																	<div class="selecting-option img-content-align" >
+																		Product/ Part Image
+																		<div class="img-align"  ><img src="img\noimage.jpg" class="img-responsive"></div>
+																	</div>
+																</div>
+															</div>
+														  </div>
+															<div class="form-actions col-md-12">
+																<button class="btn btn-primary" ng-click="searchItem()"> submit</button>
+																<button class="btn btn-primary" ng-click="resetAll()">Reset</button>
+															</div>
+														</form>
+													</div>
+												   
+												</div>			
+											</div>
+											
+										</div>
+										</div>
+												
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="table-responsive">
+																<table class="table table-bordered table-striped table-hover">
+																<thead>
+																	<tr>
+																		<th>
+																			 Part Module
+																		</th>
+																		
+																		<th>
+																			 Part Description
+																		</th>
+																		
+																		<th>
+																			 Select
+																		</th>
+																		
+																		
+																	</tr>
+																</thead>
+																													
+																<tbody>
+																<tr ng-repeat="part in values"  ng-show="showvalues">
+																	<td>{{part.partcode}} </td>
+																	<td>{{part.partdesc}} </td>
+																	<td><input type="checkbox" ng-model="part.selected"> </td>
+																</tr>
+																	<tr ng-show="valuesnull"><td colspan="12"> No data found</td></tr>
+																</tbody>
+																</table>
+															</div>
+											</div>
+											<div class="form-actions col-md-12">
+													<div class="widget-content nopadding">
+														<form class="form-horizontal" name="basic_validate" id="basic_validate" novalidate="novalidate">						
+															<input type="submit" ng-show="addCartShow" value="Add to Cart" class="btn btn-primary" ng-click="addCart(orders)"> 
+														</form>
+														</div>
+												</div>
+												<div class="col-lg-12" ng-show="cartshow">
+												<div class="row" ng-show="dateerr">
+													<div class="col-md-12">
+														<div class="alert alert-danger text-center" >{{dates}}</div>
+													</div>
+												</div>	
+												<div class="table-responsive">
+												<form name="orderform">
+													<table class="table table-bordered table-striped table-hover">
+													<thead>
+														<tr>
+															<th>
+																 Part Module
+															</th>
+															
+															<th>
+																 Part Description
+															</th>
+															
+															<th>
+																 Production date
+															</th>	
+															<th>
+																Factory code
+															</th>	
+															<th>
+																Purchase date
+															</th>
+															<th>
+																P.O Number
+															</th>
+															
+															
+														</tr>
+													</thead>
+													
+													<tbody>
+												
+													<tr ng-repeat="part in order">
+														<td>{{part.partcode}} </td>
+														<td>{{part.partdesc}} </td>
+														<td>  <p class="input-group"><input type="date" class="form-control"  ng-model="part.prdate[$index + 1]"  style="width: 174px;" required ng-change="compareDate(part.prdate[$index + 1],part.prsdate[$index + 1])"/> </p></td>
+													<td> 
+														<ui-select ng-model="part.factory[$index + 1]" theme="select2"  style="min-width: 100px;">
+															<ui-select-match  placeholder="Select Factory code ">{{$select.selected.code}}</ui-select-match>
+															<ui-select-choices repeat="codes in factorycodes |filter: $select.search" required>
+																<div ng-bind-html="codes.code | highlight: $select.search"></div>
+															</ui-select-choices>
+														 </ui-select>  
+													 </td>
+													<td> 
+														<p class="input-group"><input type="date" class="form-control" ng-model="part.prsdate[$index + 1]"  style="width: 174px;" ng-change="compareDate(part.prsdate[$index + 1],part.prsdate[$index + 1])" required/> 
+														</p>
+													</td>
+													<td> <input type="text" class="form-control" ng-model="part.ponumber[$index + 1]" ui-mask="99999" required></td>
+													
+													</tr>
+													
+													</tbody>
+													</table>
+												</div>
+													<input type="button" value="next" class="btn btn-primary" ng-disabled="!orderform.$valid" ng-click="nextCart('tab2')"> 
+													<input type="submit" value="cancel" class="btn btn-primary" ng-click="cancelCart()"> 
+												</form>
+										</div>
+										
+									</div>
+									
+									</div>
+									
+									<div ng-show="tabSec2">
+										
+									<div id="panel_tab2_example2" class="tab-pane">
+									 <div class="row">											
+										<div class="widget-box">
+													<!-- <div class="widget-title">
+														<span class="icon">
+															<i class="fa fa-align-justify"></i>									
+														</span>
+														
+															
+													</div> -->
+													<div class="widget-content">
+														<div class="col-lg-12">
+															<div class="row" ng-show="addinfoerr">
+																<div class="col-md-12">
+																	<div class="alert alert-danger text-center" >{{addinfo}}</div>
+																</div>
+															</div>	
+														<form name="cartform">
+															<div class="table-responsive res_table" >
+																<table class="table table-bordered table-striped table-hover">
+																<thead>
+																
+																	<tr>
+																		<th ng-show="skus">
+																			 SKU #
+																		</th>
+																		<th ng-show="Part">
+																			 Part #
+																		</th>
+																		
+																		<th ng-show="Des">
+																			 Product Description
+																		</th>
+																		<th ng-show="PartDes">
+																			 Part Description
+																		</th>
+																		
+																		<th ng-show="ProdDate">
+																			 Production date
+																		</th>	
+																		<th ng-show="FacCode">
+																			Factory code
+																		</th>	
+																		<th ng-show="PurDate">
+																			Purchase date
+																		</th>
+																		<th ng-show="qty">
+																			Order quantity
+																		</th>
+																		<th ng-show="typeS">
+																			Problem type
+																		</th>
+																		<th>
+																			Additional Information																			
+																		<img src="img/colsel.png" class="additional_icon dropdown-toggle" data-toggle="dropdown" />
+																		<ul class="dropdown-menu add-drop">
+																		  <li><a href="" ng-click="skus=!skus" ng-class="{'showHideBgc': skus}"><input type="checkbox"  ng-checked="skus"/>&nbsp;SKU</a></li>
+																		  <li><a href="" ng-click="Part=!Part" ng-class="{'showHideBgc': Part}"><input type="checkbox"  ng-checked="Part" />&nbsp;Part</a></li>
+																		  <li><a ng-click="Des=!Des" href="" ng-class="{'showHideBgc': Des}"><input type="checkbox" ng-checked="Des" />&nbsp;Product Description</a></li>
+																		  <li><a href="" ng-click="PartDes=!PartDes" ng-class="{'showHideBgc': PartDes}"><input type="checkbox"  ng-checked="PartDes" />&nbsp;Part Description</a></li>
+																		  <li><a href="" ng-click="ProdDate=!ProdDate" ng-class="{'showHideBgc': ProdDate}"><input type="checkbox" ng-checked="ProdDate" />&nbsp;Production date</a></li>
+																		  <li><a href="" ng-click="FacCode=!FacCode" ng-class="{'showHideBgc': FacCode}"><input type="checkbox" ng-checked="FacCode" />&nbsp;Factory code</a></li>
+																		  <li><a href="" ng-click="PurDate=!PurDate" ng-class="{'showHideBgc': PurDate}"><input type="checkbox" ng-checked="PurDate" />&nbsp;Purchase date</a></li>
+																		  <li><a href="" ng-click="qty=!qty" ng-class="{'showHideBgc': qty}"><input type="checkbox" ng-checked="qty"/>&nbsp;Order quantity</a></li>
+																		  <li><a href="" ng-click="typeS=!typeS" ng-class="{'showHideBgc': typeS}"><input type="checkbox"  ng-checked="typeS"/>&nbsp;Problem type</a></li>
+																		  
+																		</ul>
+																	</th>
+																		
+																	</tr>
+																</thead>
+																
+																<tbody>
+																<tr ng-repeat="orpart in orparts">
+																	<td ng-show="skus">{{orpart.skn}}</td>
+																	<td ng-show="Part">{{orpart.partcode}}</td>
+																	<td ng-show="Des">{{orpart.productdesc}}</td>
+																	<td ng-show="PartDes">{{orpart.partdesc}}</td>
+																	<td ng-show="ProdDate" >{{orpart.productdate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="FacCode">{{orpart.factorycode}}</td>
+																	<td ng-show="PurDate">{{orpart.purchasedate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="qty">
+																		<input type="text" class="form-control" name="quans" ng-model="orpart.quantity[$index + 1]" ng-pattern="/^[0-9]{1,7}$/" required>
+																<span  ng-show="cartform.quans.$error.pattern" style="color:red">Please enter valid quantity</span></td>
+																	<td ng-show="typeS">
+																	<ui-select ng-model="orpart.prblmtype[$index + 1]" theme="select2" required >
+																		<ui-select-match  placeholder="Select Factory code ">{{$select.selected.prblmname}}</ui-select-match>
+																		<ui-select-choices repeat="problems in prblmtype | propsFilter: {prblmname: $select.search}" required>
+																			<div ng-bind-html="problems.prblmname | highlight: $select.search"></div>
+																		</ui-select-choices>
+																	 </ui-select>  </td>
+																	<td><textarea class="form-control" rows="5" ng-model="orpart.add_info[$index + 1]" ></textarea></td>
+																</tr>
+																
+																</tbody>
+																</table>
+															</div>
+															</form>
+																
+													</div>
+													<input type="submit" value="Previous Step" class="btn btn-primary" ng-click="previousCart('tab1')"> 
+													<input type="submit" value="Next Step" class="btn btn-primary" ng-disabled="!cartform.$valid" ng-click="nextCart('tab3')"> 
+													<input type="submit" value="Cancel" class="btn btn-primary" ng-click="cancelCart()"> 
+													</div>
+										</div>
+										</div>
+										</div>
+										
+									</div>
+									<div ng-show="tabSec3">
+										
+									<div id="panel_tab2_example2" class="tab-pane">
+											 <div class="row">
+											<div class="col-xs-12">
+												<div class="widget-box">
+												<!-- 	<div class="widget-title">
+														<span class="icon">
+															<i class="fa fa-align-justify"></i>									
+														</span>
+														<h5>Orders-View Carts</h5>
+															
+													</div>  -->
+													<div class="widget-content">
+														<div class="col-lg-12">
+															<div class="table-responsive">
+																<table class="table table-bordered table-striped table-hover">
+																<thead>
+																	<tr>
+																		<th ng-show="skus">
+																			 SKU #
+																		</th>
+																		<th ng-show="Part">
+																			 Part #
+																		</th>
+																		
+																		<th ng-show="Des">
+																			 Product Description
+																		</th>
+																		<th ng-show="PartDes">
+																			 Part Description
+																		</th>
+																		
+																		<th ng-show="ProdDate">
+																			 Production date
+																		</th>	
+																		<th ng-show="FacCode">
+																			Factory code
+																		</th>	
+																		<th ng-show="PurDate">
+																			Purchase date
+																		</th>
+																		<th ng-show="qty">
+																			Order quantity
+																		</th>
+																		<th ng-show="typeS">
+																			Problem type
+																		</th>
+																		<th>
+																			Additional Information	
+																		
+																	</tr>
+																</thead>
+																
+																<tbody>
+																<tr ng-repeat="cart in viewcart" >
+																	<td  ng-show="skus">{{cart.skn}}</td>
+																	<td ng-show="Part">{{cart.partcode}}</td>
+																	<td ng-show="Des">{{cart.productdesc}}</td>
+																	<td ng-show="PartDes">{{cart.partdesc}}</td>
+																	<td ng-show="ProdDate">{{cart.productdate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="FacCode">{{cart.factorycode}}</td>
+																	<td ng-show="PurDate">{{cart.purchasedate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="qty">{{cart.quantities}}</td>
+																	<td ng-show="typeS">{{cart.prblmname}}</td>
+																	<td>{{cart.add_infos}}</td>
+															
+																</tr>
+																
+																</tbody>
+																</table>
+															</div>
+																
+													</div>
+													<input type="submit" value="Previous Step" class="btn btn-primary" ng-click="previousCart('tab2')"> 
+													<input type="submit" value="Cancel" class="btn btn-primary" ng-click="cancelCart()"> 
+														</br><div class="col-md-6">
+														
+															<div class="form-group" ng-init="ship.store = 0 ">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Select Shipping mode</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="radio" ng-model="ship.store" value="0"  ng-change="addressValue('store')"> Ship to Store</br>
+																	<input type="radio" ng-model="ship.store" value="1" ng-change="addressValue('store_guest')"> Ship to Store for Guest</br>
+																	<input type="radio" ng-model="ship.store" value="2" ng-change="addressValue('guest')"> Ship Directly to Guest</br>
+																</div>
+															</div>
+															<!--form for store-->
+														<form class="form-horizontal" name="storeform" id="basic_validate" novalidate="novalidate" ng-show="storeshow">
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<ui-select ng-model="ship.storename[$index + 1]" theme="select2"  ng-change="getStoreValues({{$select.selected.storeid}})"style="min-width: 100px;">
+																		<ui-select-match  placeholder="Select Factory code ">{{$select.selected.storename}}</ui-select-match>
+																		<ui-select-choices repeat="st in stores | propsFilter: {storename: $select.search}" required>
+																			<div ng-bind-html="st.storename | highlight: $select.search"></div>
+																		</ui-select-choices>
+																	 </ui-select>
+																		
+																</div>
+															</div>
+															
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Associate First Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.fname" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Associate Last Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.lname" required></label>
+																</div>
+															</div>
+																<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Address <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.address" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">City <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.city" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">state <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.state" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Zipcode <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.zipcode"  ui-mask="99999" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Country <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.country" required></label>
+																</div>
+															</div>
+															
+															<div class="form-group">
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="submit" value="Confirm order" class="btn btn-primary" ng-disabled="!storeform.$valid"ng-click="confirmOrder()"> 
+																</div>
+															</div>
+														</form>
+															<!-- Form for store_guest -->
+														<form class="form-horizontal" name="store_guestform" id="basic_validate" novalidate="novalidate" ng-show="store_guestshow">
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<ui-select ng-model="ship.storename[$index + 1]" theme="select2"  ng-change="getStoreValues({{$select.selected.storeid}})"style="min-width: 100px;">
+																		<ui-select-match  placeholder="Select Factory code ">{{$select.selected.storename}}</ui-select-match>
+																		<ui-select-choices repeat="st in stores | propsFilter: {storename: $select.search}" required>
+																			<div ng-bind-html="st.storename | highlight: $select.search"></div>
+																		</ui-select-choices>
+																	 </ui-select>
+																		
+																</div>
+															</div>
+															
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Associate First Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.fname" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Associate Last Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.lname" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest first Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestfname" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Last Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestlname" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Address <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.address" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">City <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.city" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">state <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.state" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Zipcode <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.zipcode"  ui-mask="99999" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Country <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.country" required></label>
+																</div>
+															</div>
+															<div class="form-group"  >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Email <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestemail" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Phone <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestphone"  ui-mask="999-999-9999" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Fax <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestfax"  ui-mask="999-999-9999" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="submit" value="Confirm order" class="btn btn-primary" ng-disabled="!store_guestform.$valid"ng-click="confirmOrder()"> 
+																</div>
+															</div>
+														</form>
+													<!-- Form for directto guest -->
+														<form class="form-horizontal" name="guestform" id="basic_validate" novalidate="novalidate" ng-show="guestshow">
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store</label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<ui-select ng-model="ship.storename[$index + 1]" theme="select2"  ng-change="getStoreValues({{$select.selected.storeid}})"style="min-width: 100px;">
+																		<ui-select-match  placeholder="Select Factory code ">{{$select.selected.storename}}</ui-select-match>
+																		<ui-select-choices repeat="st in stores | propsFilter: {storename: $select.search}" required>
+																			<div ng-bind-html="st.storename | highlight: $select.search"></div>
+																		</ui-select-choices>
+																	 </ui-select>
+																		
+																</div>
+															</div>
+															
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Associate First Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.fname" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Associate Last Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.lname" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest first Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestfname" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Last Name <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestlname" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Address <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.address" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">City <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.city" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">state <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.state" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Zipcode <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.zipcode"  ui-mask="99999" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Country <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.country" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Email <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestemail" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Phone <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestphone"  ui-mask="999-999-9999" required></label>
+																</div>
+															</div>
+															<div class="form-group" >
+																<label class="col-sm-3 col-md-3 col-lg-3 control-label">Guest Fax <span style="color:red">*</span></label>
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="text" class="form-control input-sm"  ng-model="ship.guestfax"  ui-mask="999-999-9999" required></label>
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="col-sm-9 col-md-9 col-lg-9">
+																	<input type="submit" value="Confirm order" class="btn btn-primary" ng-disabled="!guestform.$valid"ng-click="confirmOrder()"> 
+																</div>
+															</div>
+														</form>
+													</div>
+													
+													
+												</div>
+											</div>
+											</div>
+										</div>
+										</div>
+										</div>
+										<div ng-show="tabSec4">
+										
+											<div id="panel_tab2_example2" class="tab-pane"  >
+											 <div class="row">
+												<div class="col-xs-12">
+													<div class="widget-box">
+														<!-- <div class="widget-title">
+															<span class="icon">
+																<i class="fa fa-align-justify"></i>									
+															</span>
+															<h5>Orders-Conformation</h5>
+														</div> -->
+														<div class="widget-content">
+															<div class="row">
+																<div class="col-md-2">
+																	<a href="#/home" class="btn btn-info btn-block"><i class="fa fa-home">&nbsp;&nbsp;Home</i></a>
+																<br/>
+																<br/>
+																
+																</div>			
+															
+																	<div class="col-md-12" ng-show="successmsgshow">
+																		<div class="alert alert-success text-center" >Your order added successfully</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																<div class="form-group">
+																	<label class="col-sm-3 col-md-3 col-lg-3 control-label">Address </label>
+																	<div class="col-sm-9 col-md-9 col-lg-9">
+																		:{{ship.address}}
+																	</div>
+																</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 col-md-3 col-lg-3 control-label">city </label>
+																		<div class="col-sm-9 col-md-9 col-lg-9">
+																			:{{ship.city}}
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 col-md-3 col-lg-3 control-label">country </label>
+																		<div class="col-sm-9 col-md-9 col-lg-9">
+																			:{{ship.country}}
+																		</div>
+																	</div>
+																	
+																
+																</div>
+																<div class="col-sm-6">
+																<div class="form-group">
+																	<label class="col-sm-3 col-md-3 col-lg-3 control-label">state </label>
+																		<div class="col-sm-9 col-md-9 col-lg-9">
+																			:{{ship.state}}
+																		</div>
+																	</div>
+																		<div class="form-group">
+																		<label class="col-sm-3 col-md-3 col-lg-3 control-label">zipcode </label>
+																		<div class="col-sm-9 col-md-9 col-lg-9">
+																			:{{ship.zipcode}}
+																		</div>
+																	</div>
+																
+																</div>
+															</div>
+															<div class="row">
+															<div class="col-lg-12">
+															<div class="table-responsive">
+																<table class="table table-bordered table-striped table-hover">
+																<thead>
+																	<tr>
+																		<th ng-show="skus">
+																			 SKU #
+																		</th>
+																		<th ng-show="Part">
+																			 Part #
+																		</th>
+																		
+																		<th ng-show="Des">
+																			 Product Description
+																		</th>
+																		<th ng-show="PartDes">
+																			 Part Description
+																		</th>
+																		
+																		<th ng-show="ProdDate">
+																			 Production date
+																		</th>	
+																		<th ng-show="FacCode">
+																			Factory code
+																		</th>	
+																		<th ng-show="PurDate">
+																			Purchase date
+																		</th>
+																		<th ng-show="qty">
+																			Order quantity
+																		</th>
+																		<th ng-show="typeS">
+																			Problem type
+																		</th>
+																		<th>
+																			Additional Information	
+																		
+																	</tr>
+																</thead>
+																
+																<tbody>
+																<tr ng-repeat="cart in viewcart" >
+																	<td  ng-show="skus">{{cart.skn}}</td>
+																	<td ng-show="Part">{{cart.partcode}}</td>
+																	<td ng-show="Des">{{cart.productdesc}}</td>
+																	<td ng-show="PartDes">{{cart.partdesc}}</td>
+																	<td ng-show="ProdDate">{{cart.productdate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="FacCode">{{cart.factorycode}}</td>
+																	<td ng-show="PurDate">{{cart.purchasedate | date: "MMM dd,yyyy"}}</td>
+																	<td ng-show="qty">{{cart.quantities}}</td>
+																	<td ng-show="typeS">{{cart.prblmname}}</td>
+																	<td>{{cart.add_infos}}</td>
+															
+																</tr>
+																
+																</tbody>
+																</table>
+															</div>
+																
+													</div>
+															</div>
+															<div class="col-sm-4"></div>
+																<div class="col-sm-4">
+																<a href="#/home" class="btn btn-default">Home</a> 
+																</div>
+															</div>
+															
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									
+									
+									</div>
+								</div>
+							</div>
+							
+							
+					</div>
+					
+				</div>
+	
+
+</div>
+</div>
+		</div>
+	</div>
+           
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.icheck.min.js"></script>
+            <script src="js/select2.min.js"></script>
+            <script src="js/jquery.validate.js"></script>
+            
+            <script src="js/jquery.nicescroll.min.js"></script>
+            <script src="js/babycache.js"></script>
+         
+	</body>
+</html>

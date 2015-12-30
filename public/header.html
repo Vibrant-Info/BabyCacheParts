@@ -1,38 +1,47 @@
 	<div id="wrapper" ng-controller="navCtrl">
-			<div id="header">
-			<div >
+		<div id="header">
+		
             <h1><a href="#/home"><img src="img"></a></h1>
-            <p class="munire-logo-resp"><a title="" href="#/home"><img src="img/logo-baby.png"></a></p>
-			  <p ><a title="" href="#/home"><i class="fa fa-user"></i> {{uname}}</a></p>
+            <!--<p class="munire-logo-resp"><a title="" href="#/home"><img src="img/logo-baby.png"></a></p>
+			  <p ><a title="" href="#/home" style="float: right;color: white;margin: -32px 92px;"><i class="fa fa-user"></i> </a></p>
             <p class="logout-respo"><a title="" href="#/" ng-click="logout()"><i class="fa fa-share"></i> Logout</a></p>
-         
-            </div>
-
-			<a id="menu-trigger"><i class="fa fa-bars"></i></a>	
-
-			<a id="menu-trigger" href=""><i class="fa fa-bars"></i></a>	
+            <p class="logout-respo"><a title="" href="#/" ng-click="logout()"><i class="fa fa-user"></i>{{uname}}</a></p>
+         -->
+          
 
 		</div>
+		<div id="user-nav">
+	            <ul class="btn-group">
+	                <li class="btn"><a title="" href="#/"><i class="fa fa-user"></i> <span class="text">{{uname}}</span></a></li>
+	                <li class="btn"><a title="" href="#/" ng-click="logout()"><i class="fa fa-share"></i> <span class="text">Logout</span></a></li>
+	            </ul>
+	        </div>
 		
 		<div id="sidebar" >
 					
 				<ul>
 					<li  ng-class="{active:isActive('/home')}"><a href="#/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                    <li ng-class="{active:isActive('/product')}"><a href="#/product"><i class="fa fa-shopping-basket"></i> <span>Products</span></a></li>
-                    <li ng-class="{active:isActive('/product-par-list')}"><a href="#/product-part-list"><i class="fa fa-cubes"></i> <span>Parts</span></a></li>
-					<li  class="submenu">
-						<a ><i class="fa fa-flask"></i> <span>Orders</span> <i class="arrow fa fa-chevron-right"></i></a>
+                    <!--<li ng-class="{active:isActive('/product')}"><a href="#/product"><i class="fa fa-shopping-basket"></i> <span>Products</span></a></li>
+                    <li ng-class="{active:isActive('/product-part-list')}"><a href="#/product-part-list"><i class="fa fa-cubes"></i> <span>Parts</span></a></li>-->
+					<li  class="submenu " ng-class="{open:isOpen('/orders-order-parts','/order-status')}">
+						<a ><i class="fa fa-shopping-cart"></i> <span>Orders</span> <i class="arrow fa fa-chevron-right"></i></a>
 						<ul>
 							<li  ng-class="{active:isActive('/orders-order-parts')}"><a href="#/orders-order-parts">Create Orders</a></li>
 							<li  ng-class="{active:isActive('/order-status')}"><a href="#/order-status">Order History</a></li>	</ul>
 					</li>
-					<li  class="submenu">
-						<a ><i class="fa fa-shopping-basket"></i> <span>Products</span> <i class="arrow fa fa-chevron-right"></i></a>
+					<li  ng-if="uid==1" class="submenu " ng-class="{open:isOpen('/add-product','/product')}">
+						<a ><i class="fa fa-gears"></i> <span>Products</span> <i class="arrow fa fa-chevron-right"></i></a>
 						<ul>
 							<li  ng-class="{active:isActive('/add-product')}"><a href="#/add-product">Add Product</a></li>
 							<li  ng-class="{active:isActive('/product')}"><a href="#/product">Edit Product</a></li>	</ul>
 					</li>
-					<li  class="submenu">
+					<li ng-if="uid==1"  class="submenu " ng-class="{open:isOpen('/add-part','/product-part-list')}">
+						<a ><i class="fa fa-gear"></i> <span>Parts</span> <i class="arrow fa fa-chevron-right"></i></a>
+						<ul>
+							<li  ng-class="{active:isActive('/add-part')}"><a href="#/add-part">Add Part</a></li>
+							<li  ng-class="{active:isActive('/product-part-list')}"><a href="#/product-part-list">Edit Part</a></li>	</ul>
+					</li>
+					<li ng-if="uid==1" class="submenu " ng-class="{open:isOpen('/store-list','/add-store')}">
 						<a ><i class="fa fa-th-list"></i> <span>Stores</span> <i class="arrow fa fa-chevron-right"></i></a>
 						<ul>
 							<li  ng-class="{active:isActive('/store-list')}"><a href="#/store-list">Modify Store</a></li>
@@ -40,7 +49,7 @@
 							
 						</ul>
 					</li>
-                    <li class="submenu">
+                    <li ng-if="uid==1" class="submenu " ng-class="{open:isOpen('/staff-list','/add-staff')}">
 						<a class="test"><i class="fa fa-users"></i> <span>Staffs</span> <i class="arrow fa fa-chevron-right"></i></a>
 						<ul>
 							<li  ng-class="{active:isActive('/staff-list')}"><a href="#/staff-list">Modify Staff</a></li>
@@ -48,11 +57,11 @@
 							
 						</ul>
 					</li>
-					<li ng-class="{active:isActive('/productclassificationlist')}"><a href="#/productclassificationlist"><i class="fa fa-align-left"></i> <span>Classifications</span></a></li>
-					<li ng-class="{active:isActive('/problemtypelist')}"><a href="#/problemtypelist"><i class="fa fa-exclamation-triangle"></i> <span>Problem Types</span></a></li>
+					<li ng-if="uid==1" ng-class="{active:isActive('/productclassificationlist')}"><a href="#/productclassificationlist"><i class="fa fa-align-left"></i> <span>Classifications</span></a></li>
+					<li ng-if="uid==1"  ng-class="{active:isActive('/problemtypelist')}"><a href="#/problemtypelist"><i class="fa fa-exclamation-triangle"></i> <span>Problem Types</span></a></li>
 					
-					<li ng-class="{active:isActive('/shipping-type-list')}">
-						<a href="#/shipping-type-list"><i class="fa fa-shopping-bag"></i> <span>Shipping&nbsp;Types</span></a>
+					<li ng-if="uid==1" ng-class="{active:isActive('/shipping-type-list')}">
+						<a href="#/shipping-type-list"><i class="fa fa-truck"></i> <span>Shipping&nbsp;Types</span></a>
 					</li>
 					
 				</ul>
@@ -62,9 +71,7 @@
 		</div>	
 			
 			<script>
-				$(".submenu").click(function(){		
 				
-				});
 			</script>
 
 		</div>

@@ -15,6 +15,7 @@ app.controller('addStaffCtrl',['$scope','$http','$timeout','md5',function($scope
 					$timeout(function(){
 						$scope.successmsgshow=false;
 					},3000);
+					$scope.staff=[];
 				}
 				if(data=="0"){
 					$scope.logmsgshow=true;

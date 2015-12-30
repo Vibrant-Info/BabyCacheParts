@@ -1,9 +1,8 @@
 module.exports = {
-    'connection': {
+     'connection': {
         'host': 'localhost',
         'user': 'root',
         'password': ''
     },
 	'database': 'babyrus2',
- 
 };

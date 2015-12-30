@@ -1,5 +1,12 @@
 <div ng-include="'header.html'"></div>	
-	<div id="content" ng-controller="ProdClassificationListCtrl">		
+	<div id="content" ng-controller="ProdClassificationListCtrl">
+		<div id="content-header">
+			<h1>Product Classification List</h1>				
+		</div>
+		<div id="breadcrumb">
+			<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i>Home</a>			
+			<a href="" class="current">Product Classification List</a>
+		</div>		
 		<div class="row">
 			<div class="col-md-12">
 				<br>
@@ -22,7 +29,7 @@
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Classification</label>
 									<div class="col-sm-9 col-md-9 col-lg-9 ">
 										<div class="selecting-option">
-											<select class="" id="sel1" ng-model="prod.types">
+											<select class="form-control" id="sel1" ng-model="prod.types">
 												<option ng-repeat="val in types" value="{{val.classificationid}}">{{val.name}}</option>
 											</select>
 										</div>
@@ -102,9 +109,7 @@
 	<script src="js/jquery.nicescroll.min.js"></script>
 	<script src="js/babycache.js"></script>
 	<script>
-		$(document).ready(function(){	
-			$('select').select2();
-		});	
+		
 	</script>
 </body>
 </html>

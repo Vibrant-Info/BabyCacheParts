@@ -2,13 +2,18 @@ app.controller('stafflistCtrl',['$scope','$http','$timeout','$uibModal','$rootSc
 $scope.pageSize = 25;
 	$scope.currentPage = 1;
 	$scope.editId="";
+	$scope.staff={};
+	$scope.values={};
+	$scope.storecodes=[];
+	
 	$scope.errmsgshow=false;
-	var getValues= function(){
+	
+	$scope.getValues= function(){
 		$http.get('/getStorecode').success(function(response){
-		$scope.values=response;
+			$scope.storecodes=response;
 		}); 
 	}
-	getValues();
+	
 	 $rootScope.$on("CallParentMethod", function(){
            $scope.searchStaff();
         });
@@ -17,11 +22,11 @@ $scope.pageSize = 25;
 		console.log($scope.staff);
 		if($scope.staff==undefined || Object.keys($scope.staff).length==0){
 			$scope.errmsgshow=true;
-			$scope.values={};
+			
 			$timeout(function(){
 				$scope.errmsgshow=false;
 			},3000);
-			getValues();
+		
 		}
 		else{
 			
@@ -33,7 +38,8 @@ $scope.pageSize = 25;
 					}
 				}
 			
-			$http.post('/getStaffValues',a).success(function(response){
+			
+			$http.post('/getStaffValues',{staffs:a}).success(function(response){
 				if(Object.keys(response).length==0 ){
 					console.log("response");
 					$scope.valuesshow=false;
@@ -53,10 +59,8 @@ $scope.pageSize = 25;
 	}
 	$scope.resetSearch=function(){
 			$scope.staff={};
-			$scope.errmsgshow=false;
 			$scope.values={};
-			destroycode();
-			getValues();
+			$scope.getValues();
 		}
 	$scope.checkActive=function(st,id){
 		$http.post('/staffstatus',{st,id}).success(function(data){
@@ -84,6 +88,7 @@ $scope.pageSize = 25;
 		});
 		
 	}
+	$scope.getValues();
 	
 }]);
 app.controller('staffupdateCtrl',function($scope,$http,$timeout,$uibModalInstance,edit,md5,$rootScope){

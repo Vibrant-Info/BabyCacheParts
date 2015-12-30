@@ -1,0 +1,39 @@
+
+        <div id="container" ng-controller="LoginCtrl">
+            <div id="logo">
+                <img src="img/login-logo.png" alt="" class="img-responsive" />
+            </div>
+            <!--<div id="user">
+                <div class="avatar">
+                    <div class="inner"></div>
+                    <img src="img/demo/av1_1.jpg" />
+                </div>
+                <div class="text">
+                    <h4>Hello,<span class="user_name"></span></h4>
+                </div>
+            </div>-->
+            <div id="loginbox">            
+                <form id="loginform" >
+    				<p ng-show="msgshow1">Enter username and password to continue.</p>
+					<p style="color:red" ng-show="msgshow">{{msg}}</p>
+                    <div class="input-group input-sm">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span><input class="form-control" type="text" id="username" placeholder="Username" ng-model="user.username"/>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span><input class="form-control" type="password" id="password" placeholder="Password"  ng-model="user.password"  />
+                    </div>
+                    <div class="form-actions clearfix">
+                        
+                       <button type="submit" class="btn btn-block btn-primary btn-default" ng-click="login()"> Login</button>
+                    </div>
+                    
+
+                </form>
+                
+               
+            </div>
+        </div>
+          
+  
+    </body>
+</html>

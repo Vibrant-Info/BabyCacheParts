@@ -1,0 +1,137 @@
+<div ng-include="'header.html'"></div>
+		
+		
+			<div id="content" ng-controller="addStaffCtrl">
+				<div id="content-header">
+					<h1>Add Staff</h1>				
+				</div>
+				<div id="breadcrumb">
+					<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i>Home</a>
+					<a href="">Staffs</a>
+					<a href="" class="current">Add Staff</a>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="fa fa-align-justify"></i>									
+								</span>
+								<h5>Add Staff</h5>
+								<div class="row"ng-show="errmsgshow">
+									<div class="col-md-12">
+										<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+									</div>
+								</div>
+								<div class="row"ng-show="logmsgshow">
+									<div class="col-md-12">
+										<div class="alert alert-danger text-center" >User name already exist</div>
+									</div>
+								</div>
+								<div class="row"ng-show="successmsgshow">
+									<div class="col-md-12">
+										<div class="alert alert-success text-center" >Staff added successfully</div>
+									</div>
+								</div>
+							</div>
+							<div class="widget-content nopadding">
+								<form class="form-horizontal"  name="staff_form" id="basic_validate" novalidate="novalidate">						
+								<div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Initial:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" name="initial" id="initial" ng-model="staff.initial">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">First Name:<span style="color:red">*</span></label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="staff.firstname" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Last Name:<span style="color:red">*</span></label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="staff.lastname" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email ID:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"><span  ng-show="staff_form.emailid.$error.pattern" style="color:red">Please enter valid emailid</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Select Store<span style="color:red">*</span>
+										</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                        	<div class="selecting-option">
+											 <ui-select ng-model="staff.storeid" theme="select2"  style="min-width: 100px;" required>
+												<ui-select-match allow-clear="true" placeholder="Select store">{{$select.selected.code}}</ui-select-match>
+												<ui-select-choices repeat="store in values | propsFilter: {code: $select.search}">
+												  <div ng-bind-html="store.code | highlight: $select.search""></div>
+													</ui-select-choices>
+												 </ui-select>
+                                           
+                                              </div>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Login Name:<span style="color:red">*</span></label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" name="loginname" id="loginname" ng-model="staff.loginname" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Password:<span style="color:red">*</span></label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="password" class="form-control input-sm" name="password" id="password" ng-model="staff.password" required>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="form-actions col-md-12">
+                                        <button  class="btn btn-primary" ng-click="addStaff()" ng-disabled="!staff_form.$valid"> Add Staff</button>
+                                    </div>
+                                </form>
+							</div>
+                           
+						</div>			
+					</div>
+                    
+				</div>
+				</div>
+				
+		</div>
+		
+		</div>
+			<div class="row">
+				<div id="footer" class="col-xs-12">
+					2015 © BabyCache. <span class="pull-right" style="padding-right:5px;">Powered by <a href="http://www.vibrant-info.com">Vibrant Info</a></span>
+				</div>	
+			</div>   
+            
+           
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.icheck.min.js"></script>
+            <script src="js/select2.min.js"></script>
+            <script src="js/jquery.validate.js"></script>
+            
+            <script src="js/jquery.nicescroll.min.js"></script>
+            <script src="js/babycache.js"></script>
+            <script src="js/babycache.form_validation.js"></script>
+						<script>
+					$(document).ready(function(){
+					
+						$("select").select2();
+							
+					});
+			</script>
+	</body>
+</html>

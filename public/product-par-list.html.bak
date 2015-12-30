@@ -1,0 +1,285 @@
+<div ng-include="'header.html'"></div>
+ <div id="content" ng-controller="addProdsCtrl">
+	<div id="content-header">
+		<h1>Parts</h1>				
+	</div>
+	<div id="breadcrumb">
+		<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i>Home</a>
+		<a href="">Parts</a>
+		<a href="" class="current">Parts List</a>
+	</div>
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="fa fa-align-justify"></i> </span>
+            <h5>Product Part List</h5>
+          </div>
+          <div class="widget-content nopadding">
+			<div class="row" ng-show="errmsgshow">
+				<div class="col-md-12">
+					<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+				</div>
+			</div>
+            <form class="form-horizontal" name="ppart_form" id="basic_validate" novalidate="novalidate">
+              <div class="form-group">
+                <label class="col-sm-3 col-md-3 col-lg-3 control-label">Part Code </label>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                  <div class="selecting-option">
+				  <ui-select ng-model="part.code" theme="select2"  style="min-width: 100px;">
+						<ui-select-match  placeholder="Select part code">{{$select.selected.code}}</ui-select-match>
+						<ui-select-choices repeat="val in codes | propsFilter: {code: $select.search}">
+						  <div ng-bind-html="val.code | highlight: $select.search"></div>
+							</ui-select-choices>
+						 </ui-select>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 col-md-3 col-lg-3 control-label">Part Name Containing</label>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                  <input type="text" class="form-control input-sm" name="url" ng-model="part.name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 col-md-3 col-lg-3 control-label">Part Description Containing </label>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                  <input type="text" class="form-control input-sm" name="date" ng-model="part.desc">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 col-md-3 col-lg-3 control-label"> Shipping Type</label>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                  <div class="selecting-option">
+					<ui-select ng-model="part.shipType" theme="select2"  style="min-width: 100px;">
+						<ui-select-match  placeholder="Select shipping type">{{$select.selected.name}}</ui-select-match>
+						<ui-select-choices repeat="val in shipTypes | propsFilter: {name: $select.search}">
+						  <div ng-bind-html="val.name | highlight: $select.search""></div>
+							</ui-select-choices>
+						 </ui-select>
+				   </div>
+                </div>
+              </div>
+              <div class="form-group">
+				<label class="col-sm-3 col-md-3 col-lg-3 control-label">Status	</label>
+				<div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
+					<label class="">
+					
+					<input type="radio" name="radios" value="1" ng-model="part.check">		
+				Enabled</label>
+					<label class="">
+				
+					<input type="radio" name="radios"  value="0" ng-model="part.check" >						
+					Disabled</label>
+					<label class="">
+			
+					<input type="radio" name="radios"  value="2" ng-model="part.check">
+					 Both</label>
+				</div>
+			</div>			
+              <div class="form-actions col-md-12">
+                <button ng-click="searchByPart()" class="btn btn-primary">Filter by Parts</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="fa fa-align-justify"></i> </span>
+            <h5>Product Part List</h5>
+          </div>
+          <div class="widget-content nopadding">
+		  <div class="row" ng-show="errproductmsgshow">
+				<div class="col-md-12">
+					<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+				</div>
+			</div>
+            <form class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate">
+              <div class="form-group">
+                <label class="col-sm-3 col-md-3 col-lg-3 control-label">SKN </label>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                  <div class="selecting-option">
+				   <ui-select ng-model="byproduct.skn" theme="select2"  style="min-width: 100px;">
+						<ui-select-match  placeholder="Select skn value">{{$select.selected.skn}}</ui-select-match>
+						<ui-select-choices repeat="codes in productcode | propsFilter: {skn: $select.search} ">
+						  <div ng-bind-html="codes.skn | highlight: $select.search""></div>
+							</ui-select-choices>
+						 </ui-select>
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 col-md-3 col-lg-3 control-label"> Model #</label>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                  <div class="selecting-option">
+				   <ui-select ng-model="byproduct.prcode" theme="select2"  style="min-width: 100px;">
+						<ui-select-match  placeholder="Select product code">{{$select.selected.code}}</ui-select-match>
+						<ui-select-choices repeat="codes in productcode | propsFilter: {code: $select.search} ">
+						  <div ng-bind-html="codes.code | highlight: $select.search"></div>
+							</ui-select-choices>
+						 </ui-select>
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 col-md-3 col-lg-3 control-label">Part Name Containing</label>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                  <input type="text" class="form-control input-sm" name="name" id="name" ng-model="byproduct.prname">
+                </div>
+              </div>
+              <div class="form-actions col-md-12">
+                <button ng-click="searchByProduct()" class="btn btn-primary">Filter by Product</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-xs-12 col-sm-12">
+        <div class="form-actions col-md-12">
+          <div class="widget-content nopadding">
+           
+            <button ng-click="resetAll()" class="btn btn-primary">Reset</button>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+               
+                <th> Part Name </th>
+                <th> Part Description </th>
+                <th> Part Code </th>
+                <th> Shipping Type </th>
+				 <th> Status </th>
+				 <th> Options </th>
+              </tr>
+            </thead>
+			<tbody>
+				<tr ng-repeat="part in values"  ng-show="valuesshow">
+
+					<td>{{part.partname}} </td>
+					<td>{{part.description}} </td>
+					<td>{{part.code}} </td>
+					<td>{{part.name}} </td>
+					<td ng-if="part.enabled==0" class="red">Inactive </td>
+					<td ng-if="part.enabled==1" class="green">Active  </i></td>
+					<td ng-if="part.enabled==0">
+						<span ng-click="changeSts(1,part.productpartid)" class="green" >
+							<i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Enable store"></i>
+						</span>
+							&nbsp; &nbsp;&nbsp;
+						<span ng-click="selectPart(part)" class="blue"  >
+							<i class="fa fa-pencil-square-o"  >
+							</i>
+						</span>
+					</td>
+					<td ng-if="part.enabled==1">
+					<span ng-click="changeSts(0,part.productpartid)" class="red">
+						<i class="fa fa-times"  title="Disable store"></i>
+					</span>&nbsp; &nbsp;&nbsp;
+					<span ng-click="selectPart(part)" class="blue"  >
+						<i class="fa fa-pencil-square-o"    >
+						</i>
+						</span></td>
+					</tr>
+					<tr ng-show="valuesnull"><td colspan="12"> No data found</td></tr>
+				</tbody>
+            
+          </table>
+        </div>
+		<uib-pagination total-items="values.length" ng-model="currentPage" items-per-page="pageSize"></uib-pagination>
+      </div>
+    </div>
+	<script type="text/ng-template" id="editPart.html">
+				<div class="modal-header">
+					<h3 class="modal-title">Edit Part</h3>
+				</div>
+				<form class="form-horizontal"  name="updateForm" id="basic_validate" novalidate="novalidate">	
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">
+						<div class="row"ng-show="uperror">
+									<div class="col-md-12">
+										<div class="alert alert-danger text-center" >{{uppattern}}</div>
+									</div>
+								</div>
+							<div class="row"ng-show="successshow">
+									<div class="col-md-12">
+										<div class="alert alert-success text-center" >Part updated successfully</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Part code <span style="color:red">*</span></label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="firstname" id="firstname" ng-model="part.code" required> </label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Part Name</label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="initial" id="initial" ng-model="part.partname"> 
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Part Description <span style="color:red">*</span></label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+											<input type="text" class="form-control input-sm" name="lastname" id="lastname" ng-model="part.description" required></label>
+										</div>
+									</div>
+									<!--  <div class="form-group">
+										<label class="col-sm-3 col-md-3 col-lg-3 control-label"> Shipping Type</label>
+										<div class="col-sm-9 col-md-9 col-lg-9">
+										  <div class="selecting-option" >
+										   <ui-select ng-model="editPart.shiptypename" theme="select2" style="min-width: 100px;">
+											<ui-select-match  placeholder="Select shipping type">{{$select.selected.name}}</ui-select-match>
+											<ui-select-choices repeat="val in shipTypes |  propsFilter: {name: $select.search}"  ng-selected="editPart.shippingtypeid == val.shippingtypeid">
+											
+											  <div ng-bind-html="val.name | highlight: $select.search"></div>
+												</ui-select-choices>
+											 </ui-select>
+										  </div>
+										</div>
+									  </div> -->
+									
+								</div>
+									   
+							
+						</div>
+					</div>
+				
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button" ng-click="updatePart()" ng-disabled="!updateForm.$valid">Update</button>
+					<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+				</div>
+				</form>	
+			</script>
+  </div>
+  
+</div><div class="row">
+				<div id="footer" class="col-xs-12">
+					2015 © BabyCache. <span class="pull-right" style="padding-right:5px;">Powered by <a href="http://www.vibrant-info.com">Vibrant Info</a></span>
+				</div>	
+			</div>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/select2.min.js"></script> 
+<script src="js/jquery.validate.js"></script> 
+<script src="js/jquery.nicescroll.min.js"></script> 
+<script src="js/babycache.js"></script>
+<script>
+	$(document).ready(function(){	
+		$('select').select2();
+	});	
+</script> 
+</body>
+</html>
+

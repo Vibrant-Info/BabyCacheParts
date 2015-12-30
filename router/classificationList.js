@@ -19,13 +19,12 @@ module.exports=function(app,passport,connection){
 				WHERE += " AND `enabled` IN (1,0)";
 		}
 		connection.query("SELECT * FROM `classificationtype` WHERE"+ WHERE+ "",function(err,rows){		
-			
 			if(err)
 				return err;	
 			res.send(rows);
 		}); 
 	});
-	app.put('/chgeSts',function(req,res){	
+	app.put('/chgeclassificationSts',function(req,res){	
 		 connection.query("UPDATE `classificationtype` SET  `enabled` ="+req.body.val+" WHERE `classificationtypeid` = "+req.body.id+"",function(err,result){
 			if(err)
 				return err;	

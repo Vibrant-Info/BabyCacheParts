@@ -62,6 +62,12 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
 		  resolve: {
           loggedin: checkLoggedin
         }
+		})     
+	   .when('/add-part', {
+        templateUrl: 'add-part.html',
+		  resolve: {
+          loggedin: checkLoggedin
+        }
 		})
 	   .when('/product-part-list', {
         templateUrl: 'product-par-list.html',
@@ -70,6 +76,7 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
         }
         
       })
+	  
 	   .when('/orders-order-parts', {
         templateUrl: 'orders-order-parts.html',
 		  resolve: {
@@ -148,18 +155,19 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
 	
     $rootScope.message = '';
 	$rootScope.uname='';
-	/*  var rootpermission=['/home','/product','/product-par-list','/orders-order-parts','/order-status','/store-list','/add-store','/staff-list','/add-staff','/productclassificationlist','/problemtypelist','/shipping-type-list'];
+	  var rootpermission=['/home','/product','/product-part-list','/orders-order-parts','/order-status','/store-list','/add-store','/staff-list','/add-staff','/productclassificationlist','/problemtypelist','/shipping-type-list','/add-product','/add-part'];
 		$rootScope.$on('$routeChangeStart',function(){
-			var page=rootpermission[rootpermission.indexOf($location.path())];
+			sessionStorage.setItem("page",rootpermission[rootpermission.indexOf($location.path())]);
+		
 			if(rootpermission.indexOf($location.path())==-1 ){
-				console.log(rootpermission.indexOf($location.path()));
 					$http.get('/loggedin').success(function(user){
-						console.log(user);
-						console.log(typeof user   );
+					
 						// Authenticated
 						if (user !== '0')
 						{
-							$location.url('/'+page);
+							$location.url(sessionStorage.getItem("page"));
+							return;
+							
 
 						}
 						// Not Authenticated
@@ -170,10 +178,13 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
 			
 			
 			}
-		} )   */
+		} )  
     // Logout function is available in any pages
     $rootScope.logout = function(){
      sessionStorage.removeItem('user');
+     sessionStorage.removeItem('id');
+     sessionStorage.removeItem('partclick');
+     sessionStorage.removeItem('page');
       $http.post('/logout');
     };
   });
@@ -214,6 +225,22 @@ app.filter('propsFilter', function() {
 
     return out;
   }
+});
+app.service('userservice', function() {
+	var users;
+	var userid;
+	this.saveuser=function(user){
+		users=user;
+	}
+	this.saveid=function(id){
+		userid=id;
+	}
+	this.getuser=function(){
+		return users;
+	}
+	this.getid=function(){
+		return userid;
+	}
 });
 
 

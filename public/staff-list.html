@@ -3,7 +3,14 @@
 		
 		
 		<div id="content"  ng-controller="stafflistCtrl">
-			
+			<div id="content-header">
+					<h1>Staff List</h1>				
+				</div>
+				<div id="breadcrumb">
+					<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i>Home</a>
+					<a href="">Staff</a>
+					<a href="" class="current">Staff List</a>
+				</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="widget-box">
@@ -50,23 +57,20 @@
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Code</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9 ">
                                         	<div class="selecting-option" >
-											<select ng-model="staff.storeid">
-												<option ng-repeat="store in values" value="{{store.storeid}}">{{store.code}} </option>
-											  <!--  <ui-select ng-model="staffsearch.code" theme="select2"  style="min-width: 100px;">
-												<ui-select-match allow-clear="true" placeholder="Select store code">{{$select.selected.code}}</ui-select-match>
-												<ui-select-choices repeat="store in values ">
-												  <div ng-bind-html="store.code "></div>
+											    <ui-select ng-model="staff.storeid" theme="select2"  style="min-width: 100px;">
+												<ui-select-match  placeholder="Select store code">{{$select.selected.code}}</ui-select-match>
+												<ui-select-choices repeat="store in storecodes | propsFilter: {code: $select.search} ">
+												  <div ng-bind-html="store.code  | highlight: $select.search"></div>
 													</ui-select-choices>
-												 </ui-select> -->
-												 </select>
-											
+												 </ui-select> 
+												 										
 											</div>
 										</div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid" >
+                                            <input type="text" class="form-control input-sm" name="emailid" id="emailid" ng-model="staff.emailid" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"><span  ng-show="myForm.email.$error.pattern" style="color:red">Please enter valid emailid</span>
                                         </div>
                                     </div>
                                     
@@ -205,7 +209,7 @@
 									 <div class="form-group">
 										<label class="col-sm-3 col-md-3 col-lg-3 control-label">Email </label>
 										<div class="col-sm-9 col-md-9 col-lg-9">
-											<input type="email" class="form-control input-sm" name="emailid" id="emailid" ng-model="editStaff.emailid" ></label>
+											<input type="text" class="form-control input-sm" name="emailid" id="emailid" ng-model="editStaff.emailid" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"><span  ng-show="updateForm.emailid.$error.pattern" style="color:red">Please enter valid emailid</span>
 										</div>
 									</div> 
 									<div class="form-group">
@@ -256,6 +260,11 @@
 							//}); 
 					});
 			</script>
+				<div class="row">
+				<div id="footer" class="col-xs-12">
+					2015 © BabyCache. <span class="pull-right" style="padding-right:5px;">Powered by <a href="http://www.vibrant-info.com">Vibrant Info</a></span>
+				</div>	
+			</div>
 			
 	</body>
 </html>

@@ -3,6 +3,14 @@
 		
 		
 		<div id="content" ng-controller="storeCtrl">
+			<div id="content-header">
+				<h1>Add Store</h1>				
+			</div>
+			<div id="breadcrumb">
+				<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i>Home</a>
+				<a href="">Stores</a>
+				<a href="" class="current">Add Store</a>
+			</div>
 			
 				<div class="row">
 					<div class="col-xs-12">
@@ -30,7 +38,7 @@
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Store Code:<span style="color:red">*</span></label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
                                             <input type="text" class="form-control input-sm" name="storecode"  ng-model="store.code" ng-pattern="/^[0-9]{1,7}$/" required>
-											<span  ng-show="myForm.storecode.$error.pattern" style="color:red">Please Enter only numbers</span>
+											<span  ng-show="myForm.storecode.$error.pattern" style="color:red">Please enter valid store code</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -73,7 +81,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Email ID:</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="email"  name="email" class="form-control input-sm"  ng-model="store.emailid" >
+                                            <input type="text"  name="email" class="form-control input-sm"  ng-model="store.emailid" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"><span  ng-show="myForm.email.$error.pattern" style="color:red">Please enter valid emailid</span>
+                                       
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -114,7 +123,11 @@
 		</div>
 		
 		</div>
-            
+            	<div class="row">
+				<div id="footer" class="col-xs-12">
+					2015 © BabyCache. <span class="pull-right" style="padding-right:5px;">Powered by <a href="http://www.vibrant-info.com">Vibrant Info</a></span>
+				</div>	
+			</div>
          
             <script src="js/bootstrap.min.js"></script>
             <script src="js/jquery.icheck.min.js"></script>

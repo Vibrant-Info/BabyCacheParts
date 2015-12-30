@@ -43,7 +43,8 @@ module.exports=function(app,passport,connection){
 	//Modift Staff page functions
 	
 	app.get('/getStorecode',function(req,res){
-		connection.query("SELECT a.storeid,b.code FROM staff a,store b where a.storeid=b.storeid",function(err,rows){
+		connection.query("SELECT DISTINCT a.storeid,b.code FROM staff a,store b where a.storeid=b.storeid",function(err,rows){
+			
 			if(err)
 				return err;
 			res.send(rows);
@@ -51,11 +52,11 @@ module.exports=function(app,passport,connection){
 	});
 	app.post('/getStaffValues',function(req,res){
 		
-		var staffvalues=req.body;
+		var staffvalues=req.body.staffs;
 		console.log(req.body);
 		var WHERE = " 1 = 1";
 		if(staffvalues.storeid != undefined)
-		WHERE += " AND `storeid` = '" + staffvalues.storeid+"'";
+		WHERE += " AND `storeid` = '" + staffvalues.storeid.storeid+"'";
 		if(staffvalues.firstname != undefined)
 		WHERE += " AND `firstname` LIKE '%" + staffvalues.firstname+"%'";
 		if(staffvalues.initial != undefined)
@@ -71,7 +72,8 @@ module.exports=function(app,passport,connection){
 			WHERE += " AND `enabled` IN (1,0)";
 		}
 		
-		var query=connection.query("SELECT * FROM staff WHERE "+WHERE,function(err,rows){
+		var quer=connection.query("SELECT * FROM staff WHERE "+WHERE,function(err,rows){
+			console.log(quer.sql);
 			
 			if(err)
 				return err;

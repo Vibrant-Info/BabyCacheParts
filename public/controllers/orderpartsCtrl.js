@@ -1,4 +1,4 @@
-app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootScope) {
+app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootScope,userservice) {
 	$scope.tab1=false;
 	$scope.tab2=true;
 	$scope.tab3=true;
@@ -13,6 +13,10 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 	$scope.PurDate = true;
 	$scope.qty = true;
 	$scope.typeS = true;
+	
+	$scope.storeshow=true;
+	$scope.store_guestshow=false;
+	$scope.guestshow=false;
 	
 	$scope.tabSec1=true;
 	$scope.tab1Sec = "tab-active";
@@ -29,7 +33,7 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 	$scope.values=[];
 	$scope.orders=[];
 	$scope.viewcart=[];
-	
+	$scope.successmsgshow=true;	
 	$scope.orparts=[];
 	$scope.order={};
 	$scope.or={};
@@ -71,6 +75,11 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 		});
 		
 	}
+	$scope.changeShow = function(val){
+		$scope.value = '$scope.'+val;
+		//$scope.value = !$scope.value;
+		console.log($scope.value );
+	}
 
 	$scope.address;
 	$scope.city;
@@ -99,6 +108,9 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 			$scope.ship.country=$scope.country;
 			$scope.ship.state=$scope.state;
 			$scope.ship.zipcode=$scope.zipcode;
+			$scope.storeshow=true;
+			$scope.store_guestshow=false;
+			$scope.guestshow=false;
 			
 		}
 		if( value=='store_guest'){
@@ -107,6 +119,9 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 			$scope.ship.country=$scope.country;
 			$scope.ship.state=$scope.state;
 			$scope.ship.zipcode=$scope.zipcode;
+			$scope.store_guestshow=true;
+			$scope.storeshow=false;
+			$scope.guestshow=false;
 			
 		}
 		if( value=='guest'){
@@ -115,7 +130,9 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 			$scope.ship.country="";
 			$scope.ship.state="";
 			$scope.ship.zipcode="";
-			
+			$scope.store_guestshow=false;
+			$scope.storeshow=false;
+			$scope.guestshow=true;
 		}
 	}
 	
@@ -125,7 +142,7 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 	$scope.sknDisable=function(){
 			$scope.skndisable=true;
 	}
-	
+	$scope.addCartShow = false;
 	
 	//getting order items
 	$scope.searchItem=function(){
@@ -149,6 +166,7 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 				$scope.valuesnull=true;
 			}
 			else{
+				$scope.addCartShow = true;
 				$scope.valuesnull=false;
 				$scope.showvalues=true;
 				$scope.values=[];
@@ -166,7 +184,12 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 	//cart functions
 	$scope.addCart=function(){
 		$scope.cartshow=true;
-		$scope.order=$scope.orders;
+		$scope.cartArray = [];
+		angular.forEach($scope.values, function(part){
+		  if (part.selected) 
+			  $scope.cartArray.push(part);
+		});	
+		$scope.order=$scope.cartArray;
 	}
 	$scope.getOrders= function(part){
 	  $scope.orders.push(part);
@@ -175,27 +198,63 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 	
   
   $scope.nextCart=function(tab){
-	  
-	
 	  if(tab=='tab2'){
-		 $scope.tabSec2=true;
-		 $scope.tabSec1=false;
+		$scope.tabSec2=true;
+		$scope.tabSec1=false;
 		$scope.tab1Sec = "tab-inactive";
 		$scope.tab2Sec = "tab-active";
 		$scope.tab3Sec = "tab-inactive";
 		$scope.tab4Sec = "tab-inactive";
-		  var sl=Object.keys($scope.orders).length;
+		  var sl=Object.keys($scope.order).length;
+			var a=0;
 		  for(var i=0;i<sl;i++){
 			  var j=i+1;
-			  $scope.orders[i].factorycode=$scope.orders[i].factory[j].code;
-			  $scope.orders[i].ponum=$scope.orders[i].ponumber[j];
-			  $scope.orders[i].productdate=$scope.orders[i].prdate[j];
-			  $scope.orders[i].purchasedate=$scope.orders[i].prsdate[j];
+			
+			  if($scope.order[i].prdate[j] > $scope.order[i].prsdate[j]){
+					$scope.dateerr=true;
+					$scope.dates="Production date should be earlier than purchase date";
+					$timeout(function(){
+						$scope.dateerr=false;
+					},3000);
+					$scope.tabSec4=false;
+					$scope.tabSec3=false;
+					$scope.tabSec2=false;
+					$scope.tabSec1=true;
+					$scope.tab1Sec = "tab-active";
+					$scope.tab2Sec = "tab-inactive";
+					$scope.tab3Sec = "tab-inactive";
+					$scope.tab4Sec = "tab-inactive";
+					break;
+			  }
+				if($scope.order[i].prsdate[j] > new Date()){
+					$scope.dateerr=true;
+					$scope.dates="Purchase date should be lesser than today's date";
+					$timeout(function(){
+						$scope.dateerr=false;
+					},3000);
+					$scope.tabSec4=false;
+					$scope.tabSec3=false;
+					$scope.tabSec2=false;
+					$scope.tabSec1=true;
+					$scope.tab1Sec = "tab-active";
+					$scope.tab2Sec = "tab-inactive";
+					$scope.tab3Sec = "tab-inactive";
+					$scope.tab4Sec = "tab-inactive";
+					break;
+				}
+				a++;
+				 $scope.order[i].factorycode=$scope.order[i].factory[j].code;
+				 $scope.order[i].ponum=$scope.order[i].ponumber[j];
+				 $scope.order[i].productdate=$scope.order[i].prdate[j];
+				 $scope.order[i].purchasedate=$scope.order[i].prsdate[j];  
+				 if(a==sl){
+					 $scope.orparts=$scope.order;
+					 $scope.tab2=false;
+					 $scope.tab1=true;
+				 }
 		  }
-		  $scope.orparts=$scope.orders;
-		  $scope.tab2=false;
-		  $scope.tab1=true;
-	  } 
+	  }
+	
 	  if(tab == 'tab3'){
 			$scope.tabSec3=true;
 			$scope.tabSec2=false;
@@ -204,18 +263,80 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 			$scope.tab2Sec = "tab-inactive";
 			$scope.tab3Sec = "tab-active";
 			$scope.tab4Sec = "tab-inactive";
+			var a=0;
 		 var sl=Object.keys($scope.orparts).length;
 		  for(var i=0;i<sl;i++){
 			  var j=i+1;
-			  $scope.orparts[i].add_info=$scope.orparts[i].add_info[j];
-			  $scope.orparts[i].quantity=$scope.orparts[i].quantity[j];
+			  $scope.orparts[i].quantities=$scope.orparts[i].quantity[j];
 			  $scope.orparts[i].prblmname=$scope.orparts[i].prblmtype[j].prblmname;
 			  $scope.orparts[i].problemtypeid=$scope.orparts[i].prblmtype[j].problemtypeid;
+			   if($scope.orparts[i].problemtypeid == 3){
+				  if($scope.orparts[i].add_info == undefined || $scope.orparts[i].add_info == ""){
+					  console.log("if");
+						$scope.addinfoerr=true;
+						$scope.addinfo="Additional information is needed";
+							$timeout(function(){
+								$scope.addinfoerr=false;
+							},3000);
+					$scope.tabSec3=false;
+					$scope.tabSec2=true;
+					$scope.tabSec1=false;
+					$scope.tab1Sec = "tab-inactive";
+					$scope.tab2Sec = "tab-active";
+					$scope.tab3Sec = "tab-inactive";
+					$scope.tab4Sec = "tab-inactive";
+					break;
+				} 
+				else{
+					console.log("else");
+					 if($scope.orparts[i].add_info == undefined ){
+						 a++;
+						  if(a==sl){
+							 console.log($scope.orparts);
+							$scope.viewcart=$scope.orparts;
+							$scope.tab3=false;
+							$scope.tab2=true;
+						}
+					 }
+					 else{
+						 $scope.orparts[i].add_infos=$scope.orparts[i].add_info[j];
+						a++;
+						 if(a==sl){
+							 console.log($scope.orparts);
+							$scope.viewcart=$scope.orparts;
+							$scope.tab3=false;
+							$scope.tab2=true;
+						}
+					}
+					
+			 }
+				
+		}
+			else{
+					console.log("elsew");
+					 if($scope.orparts[i].add_info == undefined){
+						 a++;
+						  if(a==sl){
+							 console.log($scope.orparts);
+							$scope.viewcart=$scope.orparts;
+							$scope.tab3=false;
+							$scope.tab2=true;
+					 }
+					 }
+						 else{
+							$scope.orparts[i].add_infos=$scope.orparts[i].add_info[j];
+							a++;
+							 if(a==sl){
+							 console.log($scope.orparts);
+							$scope.viewcart=$scope.orparts;
+							$scope.tab3=false;
+							$scope.tab2=true;
+					 }
+				 }
+				}
+				
 		  }
-		  $scope.viewcart=$scope.orparts;
-		
-		  $scope.tab3=false;
-		  $scope.tab2=true;
+		 
 	  }
   }
   $scope.previousCart=function(tab){
@@ -230,6 +351,7 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 		$scope.tab4Sec = "tab-inactive";
 	  }
 	   if(tab=='tab2'){
+		  console.log($scope.orparts);
 		$scope.tabSec4=false;
 		$scope.tabSec3=false;
 		$scope.tabSec2=true;
@@ -295,7 +417,9 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 	
 		$scope.ship.staffid=sessionStorage.getItem('id');
 		
-		 console.log($scope.viewcart[0].productiondate);
+		 console.log($scope.ship.guestemail);
+		 console.log($scope.ship.guestfax);
+		 console.log($scope.ship.guestfname);
 		
 		 if($scope.ship.guestemail == undefined){
 			 $scope.ship.guestemail="''";
@@ -311,7 +435,12 @@ app.controller('orderpartsCtrl', function($scope,$http,$timeout,$uibModal,$rootS
 		 }
 		
 		$http.post('/postOrder',{address:$scope.ship,carts:$scope.viewcart}).success(function(response){
-			console.log(response);
+			if(response == "1"){
+				$scope.successmsgshow=true;	
+				$timeout(function(){
+					$scope.successmsgshow=false;
+			},3000);
+			}
 		});
 		$scope.tabSec4=true;
 		$scope.tabSec3=false;

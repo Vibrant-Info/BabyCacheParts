@@ -29,12 +29,11 @@
 		<script type="text/javascript" src="js/angular-sanitize.js"></script>
 		<script type="text/javascript" src="js/angularmd5.js"></script>
 		<script type="text/javascript" src="js/angular-multiselect.js"></script>
-	
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.14.3.min.js"></script>
 		
 		<script type="text/javascript" src="js/select.js"></script>
-		 <link rel="stylesheet" href="css/select.css">
+		 <link rel="stylesheet" href="css/select.css"/>
 			
-		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.14.3.min.js"></script>
 		<script type="text/javascript" src="controllers/app.js"></script>
 		<script type="text/javascript" src="controllers/LoginCtrl.js"></script>
 		<script type="text/javascript" src="controllers/dashboardCtrl.js"></script>
@@ -42,38 +41,32 @@
 		<script type="text/javascript" src="controllers/productCtrl.js"></script>
 		<script type="text/javascript" src="controllers/storeCtrl.js"></script>
 		<script type="text/javascript" src="controllers/orderpartsCtrl.js"></script>
-
 		<script type="text/javascript" src="controllers/addStaffCtrl.js"></script>
 		<script type="text/javascript" src="controllers/stafflistCtrl.js"></script>
 
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-utils/0.1.1/angular-ui-utils.min.js"></script>
-		
-
+	
 		<script type="text/javascript" src="controllers/pblmTypeCtrl.js"></script>
 		<script type="text/javascript" src="controllers/storelistCtrl.js"></script>
 		<script type="text/javascript" src="controllers/ProdClassificationListCtrl.js"></script>
 		<script type="text/javascript" src="controllers/addProdsCtrl.js"></script>
 		<script type="text/javascript" src="controllers/getPartsCtrl.js"></script>
+		<script type="text/javascript" src="controllers/searchProdsCtrl.js"></script>
 		<script type="text/javascript" src="controllers/orderhistoryCtrl.js"></script>
-		<!--  <style>
-			body {
-			  padding: 15px;
-			}
-
-			.select2 > .select2-choice.ui-select-match {
-			  /* Because of the inclusion of Bootstrap */
-			  height: 29px;
-			}
-
-			.selectize-control > .selectize-dropdown {
-			  top: 36px;
-			}
-  </style> -->
+		<!-- <script type="text/javascript">
+				$(document).ready(function(){
+					var url = window.location.href;					
+					var urlSplit = url.split('#'); 
+					url = '#'+urlSplit[1];				
+					$("a[href='"+url+"']").parent().addClass('active');
+					$("a[href='"+url+"']").parents('.submenu').addClass('open');
+					
+				});
+			</script> -->
   </head>
   <body data-color="grey" class="flat">
-  	<div id="wrapper">
     <ng-view></ng-view>
 		 
 

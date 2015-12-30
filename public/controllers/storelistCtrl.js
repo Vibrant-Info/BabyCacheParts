@@ -3,7 +3,7 @@ app.controller('storelistCtrl',['$scope','$http','$timeout',function($scope,$htt
 	$scope.currentPage = 1;
 	$scope.valuesnull=false;
 	$scope.errmsgshow=false;
-	
+	$scope.searchst={};
 	var getValues=function(){
 		$http.get('/storelist').success(function(data){
 			$scope.codevalues=data;
@@ -18,15 +18,15 @@ app.controller('storelistCtrl',['$scope','$http','$timeout',function($scope,$htt
 	}
 	
 	$scope.searchValues=function(){
-		console.log($scope.search);
-		if($scope.search == undefined ||  Object.keys($scope.search).length==0 ){
+		console.log($scope.searchst);
+		if($scope.searchst == undefined ||  Object.keys($scope.searchst).length==0 ){
 			$scope.errmsgshow=true;
 			$timeout(function(){
 				$scope.errmsgshow=false;
 			},3000);
 		}
 		else {
-			var a=$scope.search;
+			var a=$scope.searchst;
 				for (var i in a) 
 				{ 
 					if (a[i] === '' || a[i] == undefined ) { 
@@ -36,7 +36,7 @@ app.controller('storelistCtrl',['$scope','$http','$timeout',function($scope,$htt
 			$http.post('/getStoreValues',a).success(function(response){
 				
 				if(Object.keys(response).length==0 ){
-					console.log("response");
+				
 					$scope.valuesshow=false;
 					$scope.valuesnull=true;
 				}
@@ -51,6 +51,7 @@ app.controller('storelistCtrl',['$scope','$http','$timeout',function($scope,$htt
 		$scope.search={};
 		$scope.values={};
 		$scope.errmsgshow=false;
+		$scope.searchst={};
 		destroycode();
 	}
 }]);

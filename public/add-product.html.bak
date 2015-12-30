@@ -1,0 +1,155 @@
+<div ng-include="'header.html'"></div>
+		
+		<style>
+		
+			.uppercase td input{
+				text-transform: uppercase;
+			}
+		</style>
+			<div id="content" ng-controller="addProdsCtrl">
+				<div id="content-header">
+					<h1>Add Product</h1>				
+				</div>
+				<div id="breadcrumb">
+					<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i>Home</a>
+					<a href="">Product</a>
+					<a href="" class="current">Add Product</a>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+				<!-- 		<button class="btn btn-info" ng-click="collapsed=!collapsed">Add Items</button>
+						<button class="btn btn-info" ng-click="collapsed1=!collapsed1">Add Parts</button> -->						
+						<br/>
+						<br/>
+						<div class="alert alert-danger text-center" ng-show="error">
+							<strong>{{pattern}}</strong>
+						</div>
+						<div class="alert alert-success text-center" ng-show="insert">
+							<strong>Insert Successfully !</strong>
+						</div>
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="fa fa-align-justify"></i>									
+								</span>
+								<h5>Add Product</h5>									
+							</div>
+							<div class="widget-content nopadding">							
+								<form class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate">
+									<div class="col-md-12 col-xs-12 col-sm-12">
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+												<tr>												
+													<th>Item Code</th>
+													<th>Name / Description</th>									
+													<th>SKU / SKN</th>									
+													<th>Product</th>									
+													<th>Color</th>									
+													<th>Item</th>									
+													<th>Action</th>									
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="uppercase">
+													<td>
+														<input class="form-control" ng-model="prod.code" required/>
+													</td>
+													<td>
+														<input class="form-control" ng-model="prod.name" required/>
+													</td>
+													<td>
+														<input class="form-control" ng-model="prod.sku" required/>
+													</td>
+													<td>
+														<input class="form-control" ng-model="prod.product" required/>
+													</td>
+													<td>
+														<input class="form-control" ng-model="prod.color" required/>
+													</td>
+													<td>
+														<input class="form-control" ng-model="prod.item" required/>
+													</td>
+													<td align="center">
+														<a class="green" ng-click="addProduct()" ng-disabled="basic_validate.$invalid"><i class="fa fa-plus-circle"></i></a>
+														<!-- <a class="red" ng-click="collapsed = false"><i class="fa fa-times-circle"></i></a> -->
+													</td>
+												</tr>						
+											</tbody>
+										</table>
+									</div>		                       
+                                    </div>                                  
+                                </form>
+							</div>                           
+						</div>	
+					
+						<div class="widget-box" ng-show="collapsed1">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="fa fa-align-justify"></i>									
+								</span>
+								<h5>Add Parts</h5>									
+							</div>
+							<div class="widget-content nopadding">							
+								<form class="form-horizontal"  name="basic_validate" id="partsForm" novalidate="novalidate">
+									<div class="col-md-12 col-xs-12 col-sm-12">
+									<div class="table-responsive">
+										<table class="table table-bordered">
+											<thead>
+												<tr>												
+													<th>Part Code</th>
+													<th>Name / Description</th>						
+													<th>Action</th>									
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<input class="form-control input_capital" ng-model="part.code" required/>
+													</td>
+													<td>
+														<input class="form-control input_capital" ng-model="part.name" required/>
+													</td>													
+													<td align="center">
+														<a class="green" ng-click="addPart()" ng-disabled="partsForm.$invalid"><i class="fa fa-plus-circle"></i></a>
+														<a class="red" ng-click="collapsed1 = false"><i class="fa fa-times-circle"></i></a>
+													</td>
+												</tr>						
+											</tbody>
+										</table>
+									</div>		                       
+                                    </div>                                  
+                                </form>
+							</div>
+                           
+						</div>			
+					</div>
+                    
+				</div>
+				</div>
+				
+		</div>
+		
+		</div>
+            	<div class="row">
+				<div id="footer" class="col-xs-12">
+					2015 © BabyCache. <span class="pull-right" style="padding-right:5px;">Powered by <a href="http://www.vibrant-info.com">Vibrant Info</a></span>
+				</div>	
+			</div> 
+           
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.icheck.min.js"></script>
+            <script src="js/select2.min.js"></script>
+            <script src="js/jquery.validate.js"></script>
+            
+            <script src="js/jquery.nicescroll.min.js"></script>
+            <script src="js/babycache.js"></script>
+						<script>
+					$(document).ready(function(){
+					
+						$("select").select2();
+					
+					});
+			</script>
+	</body>
+</html>

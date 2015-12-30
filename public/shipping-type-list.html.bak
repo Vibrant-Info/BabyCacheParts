@@ -1,0 +1,91 @@
+<div ng-include="'header.html'"></div>
+		
+		
+	<div id="content">
+		<div id="content-header">
+			<h1>Shipping Types</h1>				
+		</div>
+		<div id="breadcrumb">
+			<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i>Home</a>
+			<a href="" class="current">Shipping Types</a>
+		</div>
+			<!--	<div class="row">
+					<div class="col-xs-12">
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="fa fa-align-justify"></i>									
+								</span>
+								<h5>Shipping Type List</h5>
+									
+							</div>
+							
+                    				<div class="table-responsive">
+										<table class="table table-bordered table-striped table-hover">
+										<thead>
+											<tr>
+												<th>
+													 Status
+												</th>
+												<th>
+													 Name
+												</th>
+												
+											</tr>
+										</thead>
+										
+										<tr>
+											<td><button class="btn btn-dark-blue">Enabled</button>
+												
+											</td>
+											<td>N/A
+												 
+											</td>
+											
+										</tr>
+										<tr>
+											<td><button class="btn btn-dark-blue">Enabled</button>
+												
+											</td>
+											<td>UPS 8 DAYS
+												 
+											</td>
+											
+										</tr>
+										<tr>
+											<td><button class="btn btn-dark-blue">Enabled</button>
+												
+											</td>
+											<td>REGULAR 2 WEEK
+												 
+											</td>
+											
+										</tr>
+										
+										</tbody>
+										</table>
+							</div>
+                           
+						</div>			
+					</div>
+                    
+				</div>
+				<div class="row">
+                	
+                </div>
+				
+		</div> -->
+		
+		</div>
+            
+           
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.icheck.min.js"></script>
+            <script src="js/select2.min.js"></script>
+            <script src="js/jquery.validate.js"></script>
+            
+            <script src="js/jquery.nicescroll.min.js"></script>
+            <script src="js/babycache.js"></script>
+            <script src="js/babycache.form_validation.js"></script>
+	</body>
+</html>

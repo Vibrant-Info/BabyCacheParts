@@ -23,7 +23,7 @@ module.exports=function(app,passport,connection,async,forEach){
 			res.send(rows);
 		});
 	});
-	app.put('/chgeSts',function(req,res){		
+	app.put('/chgepartSts',function(req,res){		
 	
 		var q=connection.query("UPDATE `productpart` SET  `enabled` ="+req.body.val+" WHERE `productpartid` = "+req.body.id+"",function(err,result){	
 			console.log(q.sql);
@@ -69,8 +69,10 @@ module.exports=function(app,passport,connection,async,forEach){
 				});
 				
 			}
+		
 			if(partvalues.shipType==undefined){
-				var q=connection.query("SELECT p.shippingtypeid FROM productpart p where "+WHERE,function(err,rows){
+				
+				var q=connection.query("SELECT p.shippingtypeid as 'shippingtypeid' FROM productpart p where "+WHERE,function(err,rows){
 				
 				if(err)
 					return err;
@@ -114,7 +116,7 @@ module.exports=function(app,passport,connection,async,forEach){
 	
 	async.series([
 				function(callback) {
-						console.log("2222222222222");
+						//console.log("2222222222222");
 					connection.query("SELECT p.productid as 'productid' FROM product p where "+WHERE,function(err,rows){
 						if (err) {
 							callback(err);
@@ -131,7 +133,7 @@ module.exports=function(app,passport,connection,async,forEach){
 					
 				},
 				function(callback) {
-					console.log("33333333");
+				//	console.log("33333333");
 					connection.query("SELECT productpartid, productid FROM productandparts  where productid="+productid,function(err,result){
 						if (err) {
 							callback(err);
@@ -160,7 +162,7 @@ module.exports=function(app,passport,connection,async,forEach){
 				if (err) {
 					throw err; //Or pass it on to an outer callback, log it or whatever suits your needs
 				}
-				console.log("sd"+result);
+				//console.log("sd"+result);
 			});
 			function idDone(ids){
 				console.log(ids);
@@ -191,7 +193,7 @@ module.exports=function(app,passport,connection,async,forEach){
 						 
 			 function alldone(temp) {
 				 var j=1;
-					console.log("ssssssssssssssssssss");
+				//	console.log("ssssssssssssssssssss");
 				for(var i=0;i<temp.length;i++){
 					connection.query("SELECT p.productpartid, p.code, p.description, p.enabled, p.name as 'partname', s.name as 'name',s.shippingtypeid FROM productpart p, shippingtype s WHERE p.productpartid ="+temp[i][0].productpartid+" and s.shippingtypeid="+temp[i][0].shippingtypeid,function(err,rows){
 						
@@ -232,8 +234,6 @@ module.exports=function(app,passport,connection,async,forEach){
 	});
 	app.post('/updatePart',function(req,res){
 		
-		console.log(req.body);
-		
 		var partvalues=req.body;
 		var part="";
 		
@@ -241,14 +241,25 @@ module.exports=function(app,passport,connection,async,forEach){
 			part += " , `description` = '" + partvalues.description+"'";
 		if(partvalues.partname != undefined)
 			part += " , `name` = '" + partvalues.partname+"'";
-		
-		connection.query("UPDATE productpart SET code = '" + partvalues.code + "',lastmodified=NOW()" + part + " WHERE productpartid = " + partvalues.productpartid , function(err,result){
-			
+		connection.query("SELECT code FROM productpart WHERE code='" + partvalues.code + "'",function(err,rows){
 			if(err){
 				return err;
 			}
-			res.send(result);
-			
-		})
+			else{
+				if(rows.length>0){
+					res.send("0");
+				}
+				else{
+					connection.query("UPDATE productpart SET code = '" + partvalues.code + "',lastmodified=NOW()" + part + " WHERE productpartid = " + partvalues.productpartid , function(err,result){
+						if(err){
+							return err;
+						}
+						res.send(result);
+					})
+				}
+			}
+		});
+		
+	
 	});
 }

@@ -1,11 +1,23 @@
 <div ng-include="'header.html'"></div>
 		
 		
-		<div id="content" ng-controller="productCtrl">
-			
+		<div id="content" ng-controller="searchProdsCtrl">
+			<div id="content-header">
+					<h1>Products</h1>				
+				</div>
+				<div id="breadcrumb">
+					<a href="#/home" title="" class="tip-bottom" data-original-title="Go to Home"><i class="fa fa-home"></i>Home</a>
+					<a href="">Products</a>
+					<a href="" class="current">Products List</a>
+				</div>			
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="widget-box">
+							<div class="row" ng-show="errmsgshow">
+								<div class="col-md-12">
+									<div class="alert alert-danger text-center" >Please enter any one of the fields</div>
+								</div>
+							</div>
 							<div class="widget-title">
 								<span class="icon">
 									<i class="fa fa-align-justify"></i>									
@@ -14,41 +26,45 @@
 									
 							</div>
 							<div class="widget-content nopadding">
-								<form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">						<div class="col-md-6">
+								<form class="form-horizontal"  name="basic_validate" id="basic_validate" novalidate="novalidate">	
+								<div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">SKN</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                        	<div class="selecting-option" >
-											
-                                            <select class="" id="sel1" ng-model="selectedskn">
-                                                <option ng-repeat="sknvalue in values" value="{{sknvalue.skn}}">{{sknvalue.skn}}</option>
-                                             </select>
-                                              </div>
+                                        	<div class="selecting-option">
+											  <ui-select ng-model="prod.skn" theme="select2"  style="min-width: 100px;">
+													<ui-select-match placeholder="Select part code">{{$select.selected.sku}}</ui-select-match>
+													<ui-select-choices repeat="val in codes | propsFilter: {sku: $select.search}">
+													  <div ng-bind-html="val.sku | highlight: $select.search"></div>
+														</ui-select-choices>
+													 </ui-select>
+												
+											</div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Model #</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
                                         	<div class="selecting-option">
-                                             <select class="" id="sel1">
-                                                <option>10100-WH</option>
-                                                <option>10107-WH</option>
-                                                <option>1410-WH</option>
-                                                <option>1410D-WH</option>
-                                              </select>
+                                              <ui-select ng-model="prod.model" theme="select2"  style="min-width: 100px;">
+													<ui-select-match placeholder="Select part code">{{$select.selected.code}}</ui-select-match>
+													<ui-select-choices repeat="val in codes | propsFilter: {code: $select.search}">
+													  <div ng-bind-html="val.code | highlight: $select.search"></div>
+														</ui-select-choices>
+													 </ui-select>
                                               </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Name Containing</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="date" id="date">
+                                            <input type="text" class="form-control input-sm" ng-model="prod.prname">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 col-md-3 col-lg-3 control-label">Description Containting</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
-                                            <input type="text" class="form-control input-sm" name="url" id="url">
+                                            <input type="text" class="form-control input-sm" ng-model="prod.prdesc">
                                         </div>
                                     </div>
                                     
@@ -57,76 +73,67 @@
                                     
                                     <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">SKN</label>
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Collection\Style</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9 ">
                                         	<div class="selecting-option">
-                                            <select class="" id="sel1">
-                                                <option>HERITAGE</option>
-                                                <option>ROCKPORT</option>
-                                                <option>TAHOE</option>
-                                                <option>BLISS</option>
-                                              </select>
+                                             <ui-select ng-model="prod.stylename" theme="select2"  style="min-width: 100px;">
+													<ui-select-match placeholder="Select Collection/ Style">{{$select.selected.name}}</ui-select-match>
+													<ui-select-choices repeat="val in collection | filter: $select.search">
+													  <div ng-bind-html="val.name | highlight: $select.search"></div>
+														</ui-select-choices>
+													 </ui-select>
                                               </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Model #</label>
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Type</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
                                         		<div class="selecting-option">
-                                                <select class="" id="sel1">
-                                                    <option>MIRROR</option>
-                                                    <option>TWIN BED</option>
-                                                    <option>HUTCH</option>
-                                                    <option>COMBO</option>
-                                                  </select>
+                                                  <ui-select ng-model="prod.typename" theme="select2"  style="min-width: 100px;">
+													<ui-select-match placeholder="Select Product Type">{{$select.selected.name}}</ui-select-match>
+													<ui-select-choices repeat="val in producttype | filter: $select.search">
+													  <div ng-bind-html="val.name | highlight: $select.search"></div>
+														</ui-select-choices>
+													 </ui-select>
                                               </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Model #</label>
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Color</label>
                                         <div class="col-sm-9 col-md-9 col-lg-9">
                                         	<div class="selecting-option">
-                                            <select class="" id="sel1">
-                                                <option>GLAZED WH</option>
-                                                <option>CHESTNUT</option>
-                                                <option>JAVA</option>
-                                                <option>ESPRESSO	</option>
-                                              </select>
+                                             <ui-select ng-model="prod.colorname" theme="select2"  style="min-width: 100px;">
+													<ui-select-match placeholder="Select Color">{{$select.selected.name}}</ui-select-match>
+													<ui-select-choices repeat="val in color | filter: $select.search">
+													  <div ng-bind-html="val.name | highlight: $select.search"></div>
+														</ui-select-choices>
+													 </ui-select>
                                               </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">URL</label>
-                                      <!--   <div class="col-sm-9 col-md-9 col-lg-9 radio-btn-apply">
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                                            </div> Enabled</label>
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);">
-                                            </ins>
-                                            </div> Disabled</label>
-                                            <label class="">
-                                            <div class="iradio_flat-blue " style="position: relative;">
-                                            <input type="radio" name="radios"  style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                                            </div> Both</label>
-                                        </div> -->
-										<div class="v-select-optiongroup">
-											
-											<input type="radio" name="PID376" value="on" id="gwt-uid-34" tabindex="0"><label for="gwt-uid-34">Enabled</label>&nbsp;&nbsp;&nbsp;
-											<input type="radio" name="PID376" value="on" id="gwt-uid-35" tabindex="0"><label for="gwt-uid-35">Disabled</label>&nbsp;&nbsp;&nbsp;
-											<input type="radio" name="PID376" value="on" id="gwt-uid-36" tabindex="0" checked=""><label for="gwt-uid-36">Both</label>&nbsp;&nbsp;&nbsp;
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Status</label>
+                                     	<div class="v-select-optiongroup">											
+											<label class="">
+										
+										<input type="radio" name="radios" value="1" ng-model="prod.check">		
+									Enabled</label>
+										<label class="">
+									
+										<input type="radio" name="radios"  value="0" ng-model="prod.check" >						
+										Disabled</label>
+										<label class="">
+								
+										<input type="radio" name="radios"  value="2" ng-model="prod.check">
+										 Both</label>
 											
 										</div>
                                     </div>
                                     
                                   </div>
                                     <div class="form-actions col-md-12">
-                                        <button class="btn btn-primary" ng-click="search()">Search </button> <button class="btn btn-primary" ng-click="reset">Reset</button>
+                                        <button class="btn btn-primary" ng-click="prodSearch()">Search </button>
+										<button class="btn btn-primary" ng-click="resetProduct()">Reset</button>
                                     </div>
                                 </form>
 							</div>
@@ -138,198 +145,171 @@
 				<div class="row">
                 	<div class="col-lg-12">
                     	<div class="table-responsive">
-										<table class="table table-bordered table-striped table-hover">
-										<thead>
-											<tr>
-												<th>
-													 Status
-												</th>
-												<th>
-													 Name
-												</th>
-												<th>
-													 Description
-												</th>
-                                                <th>
-													 SKN
-												</th>
-												<th>
-													 Code
-												</th>
-												<th>
-													 Collection\Style
-												</th>
-                                                <th>
-													 Product Type
-												</th>
-												<th>
-													 Color
-												</th>
-												
-											</tr>
-										</thead>
-										
-										<tr>
-											<td>Both
-												
-											</td>
-											<td>Name
-												 
-											</td>
-											<td>Container
-												 
-											</td>
-                                            <td>010749
-												
-											</td>
-											<td>1410D-WH
-												 
-											</td>
-											<td>BLISS
-												 
-											</td>
-                                            <td>COMBO
-												
-											</td>
-											<td>ESPRESSO
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>Both
-												
-											</td>
-											<td>Name
-												 
-											</td>
-											<td>Container
-												 
-											</td>
-                                            <td>010749
-												
-											</td>
-											<td>1410D-WH
-												 
-											</td>
-											<td>BLISS
-												 
-											</td>
-                                            <td>COMBO
-												
-											</td>
-											<td>ESPRESSO
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
-										<tr>
-											<td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-                                            <td>&nbsp;
-												
-											</td>
-											<td>&nbsp;
-												 
-											</td>
-											
-                                            
-										</tr>
-										</tbody>
-										</table>
-								</div>
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<tr>										
+										<th>Name</th>
+										<th>Description</th>
+										<th>SKN</th>
+										<th>Code</th>
+										<th>Collection\Style</th>
+										<th>Product Type</th>
+										<th>Color</th>	
+										<th>Status</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="val in product" ng-show="valuesshow">
+										<td>{{val.name}}</td>										
+										<td>{{val.description}}</td>										
+										<td>{{val.skn}}</td>										
+										<td>{{val.code}}</td>										
+										<td>{{val.style}}</td>										
+										<td>{{val.type}}</td>										
+										<td>{{val.color}}</td>										
+										<td class="green" ng-if="val.enabled == 1">Enabled</td>
+										<td class="red" ng-if="val.enabled == 0">Disabled</td>									
+										<td class="green" ng-if="val.enabled == 1" align="center"><a ng-click="changeSts(0,val.productid)" title="Make in active" class="red"><i class="fa fa-times" ></i></a>&nbsp;&nbsp;
+										<a ng-click="editProduct(val)"><i class="fa fa-edit" ></i></a>	</td>
+										<td class="red" ng-if="val.enabled == 0" align="center">
+										<a ng-click="changeSts(1,val.productid)" title="Make in Inactive" class="green"><i class="fa fa-check" ></i></a>&nbsp;&nbsp;
+										<a ng-click="editProduct(val)"><i class="fa fa-edit" ></i></a>							
+										</td>									
+																				
+									</tr>
+									<tr ng-show="valuesnull"><td colspan="12"> No data found</td></tr>
+								</tbody>
+							</table>
+						</div>
                     </div>
                 </div>
 			</div>	
 		</div>
-		</div>
-  
+		</div> 
+			<script type="text/ng-template" id="editProd.html">
+				<div class="modal-header">
+					<h3 class="modal-title">Edit Part</h3>
+				</div>
+				<form class="form-horizontal"  name="updateForm" id="basic_validate" novalidate="novalidate">	
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">
+								<div class="row" ng-show="update">
+									<div class="col-md-12">
+										<div class="alert alert-success text-center" >Product updated successfully</div>
+									</div>
+								</div>
+								<div class="row" ng-show="error">
+									<div class="col-md-12">
+										<div class="alert alert-danger text-center" >{{pattern}}</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">SKU No:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" ng-model="item.skn">
+                                        </div>
+                                    </div>   
+									<div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Code :</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" ng-model="item.code">
+                                        </div>
+                                    </div>   
+									<div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Name:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" ng-model="item.name">
+                                        </div>
+                                    </div>   
+									<!-- <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Description:</label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <input type="text" class="form-control input-sm" ng-model="i.prdesc">
+                                        </div>
+                                    </div>        -->                                                             
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Collection\Style: </label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9 ">
+                                        	<div class="selecting-option">
+											<select ng-model="style" class="form-control">
+												<option ng-repeat="val in collection" value="{{val.name}}" ng-selected="val.name == item.style">{{val.name}}</option>
+											</select>
+                                          <!--    <ui-select ng-model="item.style" theme="select2" style="min-width: 100px;">
+													<ui-select-match placeholder="Select Collection / Style">{{$select.selected.name}}</ui-select-match>
+													<ui-select-choices repeat="val in collection | filter: $select.search">
+													  <div ng-bind-html="val.name | highlight: $select.search"></div>
+														</ui-select-choices>
+													 </ui-select> -->
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Product Type: </label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                        		<div class="selecting-option">
+												<select ng-model="type" class="form-control">
+													<option ng-repeat="val in producttype" value="{{val.name}}" ng-selected="val.name == item.type">{{val.name}}</option>
+												</select>
+                                                  <!-- <ui-select ng-model="item.type" theme="select2"  style="min-width: 100px;">
+													<ui-select-match placeholder="Select Product Type">{{$select.selected.name}}</ui-select-match>
+													<ui-select-choices repeat="val in producttype | filter: $select.search">
+													  <div ng-bind-html="val.name | highlight: $select.search"></div>
+														</ui-select-choices>
+													 </ui-select> -->
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-md-3 col-lg-3 control-label">Color: </label>
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                        	<div class="selecting-option">
+												<select ng-model="colors" class="form-control" >
+													<option ng-repeat="val in color" value="{{val.name}}" ng-selected="val.name == item.color">{{val.name}}</option>
+												</select>
+                                             <!-- <ui-select ng-model="item.color" theme="select2"  style="min-width: 100px;">						
+													<ui-select-match placeholder="Select Color">{{$select.selected.name}}</ui-select-match>
+													<ui-select-choices repeat="val in color | filter: $select.search">
+													  <div ng-bind-html="val.name | highlight: $select.search"></div>
+														</ui-select-choices>
+													 </ui-select> -->
+                                              </div>
+                                        </div>
+                                    </div>
+									<!-- <p>Selected: {{item.selected}}</p>
+									  <ui-select ng-model="item.selected" theme="select2" ng-disabled="disabled" style="min-width: 300px;">
+										<ui-select-match placeholder="Select a item in the list">{{$select.selected.name}}</ui-select-match>
+										<ui-select-choices repeat="item in items | propsFilter: {name: $select.search, age: $select.search}">
+										  <div ng-bind-html="item.Code | highlight: $select.search"></div>
+										</ui-select-choices>
+									  </ui-select>
+									 -->
+								</div>
+									   
+							
+						</div>
+					</div>
+				
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button" ng-click="updateProd(item)" ng-disabled="!updateForm.$valid">Update</button>
+					<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+				</div>
+				</form>	
+			</script>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/jquery.icheck.min.js"></script>
             <script src="js/select2.min.js"></script>
             <script src="js/jquery.validate.js"></script>
             
             <script src="js/jquery.nicescroll.min.js"></script>
-            <script src="js/babycache.js"></script>
-			<script>
-				$(document).ready(function(){
-					$("select").select2();
-				});
-			</script>
-			
+            <script src="js/babycache.js"></script>	
+			<div class="row">
+				<div id="footer" class="col-xs-12">
+					2015 © BabyCache. <span class="pull-right" style="padding-right:5px;">Powered by <a href="http://www.vibrant-info.com">Vibrant Info</a></span>
+				</div>	
+			</div>	
 	</body>
 </html>

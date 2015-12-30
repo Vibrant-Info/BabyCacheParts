@@ -52,7 +52,7 @@ require('./router/staffroute')(app,passport,connection);
 require('./router/Parts')(app,passport,connection,async,_,forEach);
 require('./router/orderparts')(app,passport,connection);
 require('./router/addProduct')(app,passport,connection);
-
+require('./router/orderhistory')(app,passport,connection,async,_,forEach);
 require('./router/classificationList')(app,passport,connection);
 
 

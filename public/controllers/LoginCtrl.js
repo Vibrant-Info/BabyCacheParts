@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', function($scope, $rootScope, $http, $location, md5) {
+app.controller('LoginCtrl', function($scope, $rootScope, $http, $location, md5,userservice) {
   // This object will be filled by the form
   $scope.msgshow1=true;
 
@@ -19,8 +19,10 @@ app.controller('LoginCtrl', function($scope, $rootScope, $http, $location, md5) 
     })
     .success(function(user){
       // No error: authentication OK
-	  
-	 sessionStorage.setItem('user',user.loginname);
+	  userservice.saveuser(user.loginname);
+	  userservice.saveid(user.staffid);
+	 
+	  sessionStorage.setItem('user',user.loginname);
 	 sessionStorage.setItem('id',user.staffid);
 	
       $rootScope.message = 'Authentication successful!';

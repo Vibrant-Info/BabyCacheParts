@@ -7,9 +7,10 @@ app.controller('ProdClassificationListCtrl', function($scope, $http,$timeout) {
 		});
 	}
 	$scope.search = function(){	
+	
 		if($scope.prod.types != undefined || $scope.prod.name != undefined || $scope.prod.check != undefined){
 			$http.post('/searchClassification',$scope.prod).success(function(response){
-				console.log(response);
+			//	console.log(response);
 				$scope.classification = response;						
 			});
 		}else {
@@ -23,7 +24,8 @@ app.controller('ProdClassificationListCtrl', function($scope, $http,$timeout) {
 	$scope.changeSts = function(val,id){		
 		 $scope.value.val = val;
 		$scope.value.id = id; 
-		$http.put('/chgeSts',$scope.value).success(function(response){
+		$http.put('/chgeclassificationSts',$scope.value).success(function(response){
+		
 			if(response.affectedRows == 1)
 				$scope.search();			
 		});
