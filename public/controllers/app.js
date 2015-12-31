@@ -77,7 +77,7 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
         
       })
 	  
-	   .when('/orders-order-parts', {
+	   .when('/order-parts', {
         templateUrl: 'orders-order-parts.html',
 		  resolve: {
           loggedin: checkLoggedin
@@ -155,7 +155,7 @@ var app = angular.module('app', ['ngResource', 'ngRoute','ui.bootstrap','ui.util
 	
     $rootScope.message = '';
 	$rootScope.uname='';
-	  var rootpermission=['/home','/product','/product-part-list','/orders-order-parts','/order-status','/store-list','/add-store','/staff-list','/add-staff','/productclassificationlist','/problemtypelist','/shipping-type-list','/add-product','/add-part'];
+	  var rootpermission=['/home','/product','/product-part-list','/order-parts','/order-status','/store-list','/add-store','/staff-list','/add-staff','/productclassificationlist','/problemtypelist','/shipping-type-list','/add-product','/add-part'];
 		$rootScope.$on('$routeChangeStart',function(){
 			sessionStorage.setItem("page",rootpermission[rootpermission.indexOf($location.path())]);
 		

@@ -23,10 +23,10 @@
 					<li  ng-class="{active:isActive('/home')}"><a href="#/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
                     <!--<li ng-class="{active:isActive('/product')}"><a href="#/product"><i class="fa fa-shopping-basket"></i> <span>Products</span></a></li>
                     <li ng-class="{active:isActive('/product-part-list')}"><a href="#/product-part-list"><i class="fa fa-cubes"></i> <span>Parts</span></a></li>-->
-					<li  class="submenu " ng-class="{open:isOpen('/orders-order-parts','/order-status')}">
+					<li  class="submenu " ng-class="{open:isOpen('/order-parts','/order-status')}">
 						<a ><i class="fa fa-shopping-cart"></i> <span>Orders</span> <i class="arrow fa fa-chevron-right"></i></a>
 						<ul>
-							<li  ng-class="{active:isActive('/orders-order-parts')}"><a href="#/orders-order-parts">Create Orders</a></li>
+							<li  ng-class="{active:isActive('/order-parts')}"><a href="#/order-parts">Create Orders</a></li>
 							<li  ng-class="{active:isActive('/order-status')}"><a href="#/order-status">Order History</a></li>	</ul>
 					</li>
 					<li  ng-if="uid==1" class="submenu " ng-class="{open:isOpen('/add-product','/product')}">

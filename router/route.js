@@ -2,6 +2,30 @@
 module.exports=function(app,passport,connection){
 
 	app.get('/', function(req, res){
+		var nodemailer = require('nodemailer');
+		var transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				user: 'donotreply@gmail.com',
+				pass: ''
+			}
+		});
+	var mailOptions = {
+    from: 'vijaykamalr@gmail.com', // sender address
+    to: 'vijay@vibrant-info.com', // list of receivers
+    subject: 'Email Example', // Subject line
+    text: "helooooooooooooooo" //, // plaintext body
+   
+};
+	transporter.sendMail(mailOptions, function(error, info){
+		if(error){
+			console.log(error);
+			res.json({yo: 'error'});
+		}else{
+			console.log('Message sent: ' + info.response);
+			res.json({yo: info.response});
+		};
+	});
 	  res.render('index', { title: 'Munire_Comply' });
 	});
 

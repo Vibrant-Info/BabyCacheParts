@@ -15,6 +15,7 @@
     "mysql": "^2.9.0",
     "ng-sanitize": "0.0.2",
     "node-async": "0.0.1",
+    "nodemailer": "^1.11.0",
     "passport": "*",
     "passport-local": "*",
     "underscore": "^1.8.3"
